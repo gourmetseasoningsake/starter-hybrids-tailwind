@@ -3,6 +3,10 @@ export default {
     src: '/_dist',
     public: '/',
   },
-  devOptions: {},
-  plugins: [],
+  devOptions: {
+    tailwindConfig: './tailwind.config.js',
+  },
+  plugins: [
+    '@snowpack/plugin-postcss',
+  ],
 }

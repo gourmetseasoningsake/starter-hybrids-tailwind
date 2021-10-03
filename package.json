@@ -24,7 +24,14 @@
     "re:build": "rescript"
   },
   "devDependencies": {
+    "@snowpack/plugin-postcss": "^1.4.3",
+    "autoprefixer": "^10.3.6",
+    "postcss": "^8.3.8",
     "rescript": "^9.1.4",
-    "snowpack": "^3.8.8"
+    "snowpack": "^3.8.8",
+    "tailwindcss": "^2.2.16"
+  },
+  "dependencies": {
+    "hybrids": "^6.1.0"
   }
 }
