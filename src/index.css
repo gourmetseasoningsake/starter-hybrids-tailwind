@@ -8,6 +8,7 @@
   body {
     @apply relative min-h-screen;
   }
+  
   the-app {
     @apply block relative;
   }
