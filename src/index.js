@@ -1,16 +1,12 @@
-import { html, define } from 'hybrids'
+import { html, define } from "hybrids"
 
 
 
-const TheApp = {
-  tag: 'the-app',
+define({
+  tag: "the-app",
   content: () => html`
 
     <h1 class="text-pink-400">hello kitty?</h1>
 
   `
-}
-
-
-
-define(TheApp)
+})

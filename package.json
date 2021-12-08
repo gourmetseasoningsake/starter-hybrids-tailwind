@@ -18,20 +18,20 @@
   "homepage": "https://github.com/gourmetseasoningsake/devenv#readme",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "exit 1",
     "start": "snowpack dev",
     "re:start": "rescript build -w",
     "re:build": "rescript"
   },
   "devDependencies": {
     "@snowpack/plugin-postcss": "^1.4.3",
-    "autoprefixer": "^10.3.6",
-    "postcss": "^8.3.8",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.4",
     "rescript": "^9.1.4",
     "snowpack": "^3.8.8",
-    "tailwindcss": "^2.2.16"
+    "tailwindcss": "^2.2.19"
   },
   "dependencies": {
-    "hybrids": "^6.1.0"
+    "hybrids": "^7.0.0"
   }
 }
