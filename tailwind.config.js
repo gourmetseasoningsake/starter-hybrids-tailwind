@@ -19,10 +19,7 @@ const fromArray =
   
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./public/**/*.html', './src/**/*.js'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./public/**/*.html', './src/**/*.js'],
   theme: {},
-  variants: {},
   plugins: [],
 }
