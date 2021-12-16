@@ -10,7 +10,7 @@ Just two working examples:
 
 ```
 $ gh repo create -p gourmetseasoningsake/devenv --private myproj
-$ gh repo clone myproj
+$ gh repo clone !$
 $ cd !$
 $ pnpm install
 $ pnpm start
