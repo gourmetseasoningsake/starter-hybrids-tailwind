@@ -2,7 +2,21 @@
 
 Not an actual development environment, but rather a super simple setup for a quick start with hybridsjs and tailwindcss. Also installs rescript.
 
-Clone it or just use curl in a new folder:
+## Installation
+
+Just two working examples:
+
+### Using `gh`:
+
+```
+$ gh repo create -p gourmetseasoningsake/devenv --private myproj
+$ gh repo clone myproj
+$ cd !$
+$ pnpm install
+$ pnpm start
+```
+
+### Using `curl`:
 
 ```
 $ mkdir myproj
