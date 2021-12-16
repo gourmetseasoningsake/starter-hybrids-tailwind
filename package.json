@@ -1,14 +1,17 @@
 {
   "name": "devenv",
   "version": "0.1.0",
-  "description": "simple devenv starter",
+  "description": "simple setup for hybridsjs and tailwindcss (and rescript)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gourmetseasoningsake/devenv.git"
   },
   "keywords": [
-    "development",
-    "environment"
+    "hybrids",
+    "tailwind",
+    "rescript",
+    "snowpack",
+    "starter"
   ],
   "author": "gourmetseasoningsake",
   "license": "Apache-2.0",
