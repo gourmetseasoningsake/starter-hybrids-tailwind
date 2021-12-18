@@ -11,7 +11,7 @@ I am using [pnpm](https://pnpm.io/) for this project. If you want to use `npm` o
 Use this procedure if you want to create your own repo at the same time.
 
 ```zsh
-gh repo create -p gourmetseasoningsake/devenv --private myproj
+gh repo create -p gourmetseasoningsake/starter-hybrids-tailwind --private myproj
 gh repo clone !$
 cd !$
 pnpm install
@@ -23,7 +23,7 @@ pnpm start
 ```zsh
 mkdir myproj
 cd !$
-curl -L https://github.com/gourmetseasoningsake/devenv/tarball/lab | tar --strip=1 -x
+curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/lab | tar --strip=1 -x
 pnpm install
 pnpm start
 ```
