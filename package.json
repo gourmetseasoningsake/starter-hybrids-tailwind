@@ -24,7 +24,8 @@
     "test": "exit 1",
     "start": "snowpack dev",
     "re:start": "rescript build -w",
-    "re:build": "rescript"
+    "re:build": "rescript",
+    "build": "pnpm run re:build && snowpack build"
   },
   "devDependencies": {
     "@snowpack/plugin-postcss": "^1.4.3",
@@ -35,6 +36,6 @@
     "tailwindcss": "^3.0.5"
   },
   "dependencies": {
-    "hybrids": "^7.0.2"
+    "hybrids": "^7.0.3"
   }
 }
