@@ -12,9 +12,21 @@ Use this procedure if you want to create your own repo at the same time.
 
 ```zsh
 gh repo create -p gourmetseasoningsake/starter-hybrids-tailwind --private myproj
+```
+
+```zsh
 gh repo clone !$
+```
+
+```zsh
 cd !$
+```
+
+```zsh
 pnpm install
+```
+
+```zsh
 pnpm start
 ```
 
