@@ -4,7 +4,7 @@ A simple setup for a quick start with [hybridsjs](https://hybrids.js.org) and [t
 
 ## Installation
 
-I am using [pnpm](https://pnpm.io/) for this project. If you want to use `npm` or `yarn`, adjust the commands accordingly during installation and in the scripts section of the [package.json](package.json) file. The following procedures are just two working cli examples.
+I am using [pnpm](https://pnpm.io/) for this project. If you want to use `npm` or `yarn`, delete the pnpm-lock.json file and adjust the commands accordingly during installation and in the scripts section of the [package.json](package.json) file. The following procedures are just two working examples.
 
 ### Using [`gh`](https://cli.github.com/):
 
