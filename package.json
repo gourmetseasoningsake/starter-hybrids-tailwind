@@ -1,5 +1,5 @@
 {
-  "name": "devenv",
+  "name": "starter-hybrids-tailwind",
   "version": "0.1.0",
   "description": "simple setup for hybridsjs, tailwindcss and rescript",
   "repository": {
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/gourmetseasoningsake/starter-hybrids-tailwind#readme",
   "main": "index.js",
   "scripts": {
-    "test": "exit 1",
+    "test": "exit 0",
     "start": "snowpack dev",
     "build": "snowpack build",
     "re:start": "rescript build -w",
