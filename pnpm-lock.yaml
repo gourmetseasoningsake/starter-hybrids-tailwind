@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@snowpack/plugin-postcss': ^1.4.3
+  '@snowpack/plugin-run-script': ^2.3.0
   autoprefixer: ^10.4.0
   hybrids: ^7.0.3
   postcss: ^8.4.5
@@ -14,6 +15,7 @@ dependencies:
 
 devDependencies:
   '@snowpack/plugin-postcss': 1.4.3_postcss@8.4.5
+  '@snowpack/plugin-run-script': 2.3.0
   autoprefixer: 10.4.0_postcss@8.4.5
   postcss: 8.4.5
   rescript: 9.1.4
@@ -289,6 +291,13 @@ packages:
       workerpool: 6.1.5
     transitivePeerDependencies:
       - ts-node
+    dev: true
+
+  /@snowpack/plugin-run-script/2.3.0:
+    resolution: {integrity: sha512-rIbD67uzTPkzemMFbw5seUm/hZFrToTSqN/SGGq5XaU45ftX2sCRzp0lqSH+lZYhC5QTSm5RxXW1HcuPOlbPXQ==}
+    dependencies:
+      execa: 5.1.1
+      npm-run-path: 4.0.1
     dev: true
 
   /@szmarczak/http-timer/4.0.6:

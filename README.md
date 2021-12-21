@@ -1,6 +1,6 @@
 # starter-hybrids-tailwind
 
-A simple setup for a quick start with [hybridsjs](https://hybrids.js.org) and [tailwindcss](https://tailwindcss.com). Also installs [rescript](https://rescript-lang.org/).
+A simple setup for a quick start with [hybridsjs](https://hybrids.js.org), [tailwindcss](https://tailwindcss.com) and [rescript](https://rescript-lang.org/).
 
 ## Installation
 
@@ -11,9 +11,7 @@ I am using [pnpm](https://pnpm.io/) for this project. If you want to use `npm` o
 Use this procedure if you want to create your own repo at the same time.
 
 ```zsh
-gh repo create -p gourmetseasoningsake/starter-hybrids-tailwind --private myproj
-```
-```zsh
+gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --private myproj
 gh repo clone !$
 cd !$
 pnpm install
@@ -25,11 +23,7 @@ pnpm start
 ```zsh
 mkdir myproj
 cd !$
-```
-```zsh
 curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/lab | tar --strip=1 -x
-```
-```zsh
 pnpm install
 pnpm start
 ```

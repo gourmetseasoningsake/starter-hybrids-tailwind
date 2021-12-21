@@ -1,10 +1,10 @@
 {
   "name": "devenv",
   "version": "0.1.0",
-  "description": "simple setup for hybridsjs and tailwindcss (and rescript)",
+  "description": "simple setup for hybridsjs, tailwindcss and rescript",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gourmetseasoningsake/devenv.git"
+    "url": "git+https://github.com/gourmetseasoningsake/starter-hybrids-tailwind.git"
   },
   "keywords": [
     "hybrids",
@@ -16,19 +16,20 @@
   "author": "gourmetseasoningsake",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/gourmetseasoningsake/devenv/issues"
+    "url": "https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/issues"
   },
-  "homepage": "https://github.com/gourmetseasoningsake/devenv#readme",
+  "homepage": "https://github.com/gourmetseasoningsake/starter-hybrids-tailwind#readme",
   "main": "index.js",
   "scripts": {
     "test": "exit 1",
     "start": "snowpack dev",
+    "build": "snowpack build",
     "re:start": "rescript build -w",
-    "re:build": "rescript",
-    "build": "pnpm run re:build && snowpack build"
+    "re:build": "rescript"
   },
   "devDependencies": {
     "@snowpack/plugin-postcss": "^1.4.3",
+    "@snowpack/plugin-run-script": "^2.3.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
     "rescript": "^9.1.4",
