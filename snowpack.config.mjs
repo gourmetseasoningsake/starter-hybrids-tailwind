@@ -3,6 +3,13 @@ export default {
     src: "/_dist",
     public: "/",
   },
+  routes: [
+    {
+      match: 'routes',
+      src: '.*',
+      dest: '/index.html',
+    },
+  ],
   devOptions: {
     tailwindConfig: "./tailwind.config.js",
   },
