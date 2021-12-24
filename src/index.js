@@ -1,7 +1,6 @@
 import { define, router, html } from "hybrids"
 
 
-
 /* Main */
 
 import MainHome from "./views/main-home.js"
@@ -26,15 +25,17 @@ define({
 
     <header>
       <nav>
-        <a-link 
+        <a-link
+          class="inline-block"
           href=${router.url(MainHome)}
-          active=${router.active(MainHome, { stack: true })}
-          text="Home">
+          active=${router.active(MainHome, { stack: true })}>
+          Home
         </a-link>
-        <a-link 
+        <a-link
+          class="inline-block"
           href=${router.url(MainOther)}
-          active=${router.active(MainOther, { stack: true })}
-          text="Other">
+          active=${router.active(MainOther, { stack: true })}>
+          Other
         </a-link>
       </nav>
     </header>
@@ -44,4 +45,20 @@ define({
     <footer></footer>
     
   `
-}, ALink)
+})
+
+
+
+export const styled = (
+  href =>
+  href ? {
+    html: (parts, ...args) => html(
+      [
+        '<link rel="stylesheet" type="text/css" href="',
+        '" />' + parts[0],
+        ...(parts.slice(1))
+      ],
+      href, ...args
+    )
+  } : { html }
+)(document.styleSheets[0]?.href)
