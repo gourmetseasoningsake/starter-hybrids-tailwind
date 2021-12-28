@@ -3,7 +3,8 @@
 /build/
 /dist/
 /coverage/
-
+/tools/
+/src/**/_*
 
 
 /lib/

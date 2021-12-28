@@ -25,7 +25,8 @@
     "start": "snowpack dev",
     "build": "snowpack build",
     "re:start": "rescript build -w",
-    "re:build": "rescript"
+    "re:build": "rescript",
+    "add:view": "node ./tools/copy-view-main.mjs"
   },
   "devDependencies": {
     "@snowpack/plugin-postcss": "^1.4.3",

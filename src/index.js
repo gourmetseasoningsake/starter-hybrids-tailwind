@@ -1,7 +1,8 @@
 import { define, router, html } from "hybrids"
 
 
-/* Main */
+
+/* Views */
 
 import MainHome from "./views/main-home.js"
 import MainOther from "./views/main-other.js"
@@ -10,11 +11,16 @@ import MainOther from "./views/main-other.js"
 
 /* Elements */
 
-import ALink from "./elements/a-link.js"
+import "./elements/a-link.js"
 
 
 
 if (import.meta.env.MODE === "development") router.debug()
+
+
+
+/* NB: this is just a placeholder fn for an animation */
+const gsapVomit = (_host, _e) => new Promise(res => setTimeout(res, 2000))
 
 
 
@@ -28,7 +34,8 @@ define({
         <a-link
           class="inline-block"
           href=${router.url(MainHome)}
-          active=${router.active(MainHome, { stack: true })}>
+          active=${router.active(MainHome, { stack: true })}
+          onclick=${beforeNav(gsapVomit)}>
           Home
         </a-link>
         <a-link
@@ -41,8 +48,6 @@ define({
     </header>
 
     <main>${views}</main>
-
-    <footer></footer>
     
   `
 })
@@ -50,15 +55,18 @@ define({
 
 
 export const styled = (
-  href =>
-  href ? {
-    html: (parts, ...args) => html(
-      [
-        '<link rel="stylesheet" type="text/css" href="',
-        '" />' + parts[0],
-        ...(parts.slice(1))
-      ],
-      href, ...args
-    )
-  } : { html }
-)(document.styleSheets[0]?.href)
+  tag =>
+  tag ? {
+    html: 
+      ([first, ...rest], ...args) =>
+      html([tag + first, ...rest], ...args)
+  }
+  : { html }
+)(document.styleSheets[0]?.ownerNode?.outerHTML)
+
+
+
+export const beforeNav = 
+  fn =>
+  (host, e) =>
+  router.resolve(e, fn(host, e))
