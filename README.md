@@ -15,7 +15,7 @@ gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --privat
 gh repo clone !$
 cd !$
 pnpm install
-pnpm start
+pnpm dev
 ```
 
 ### Using `curl`:
@@ -25,5 +25,5 @@ mkdir myproj
 cd !$
 curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/lab | tar --strip=1 -x
 pnpm install
-pnpm start
+pnpm dev
 ```

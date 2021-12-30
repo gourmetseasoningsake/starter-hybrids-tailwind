@@ -10,7 +10,7 @@
     "hybrids",
     "tailwind",
     "rescript",
-    "snowpack",
+    "vite",
     "starter"
   ],
   "author": "gourmetseasoningsake",
@@ -22,20 +22,19 @@
   "main": "index.js",
   "scripts": {
     "test": "exit 0",
-    "start": "snowpack dev",
-    "build": "snowpack build",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "re:start": "rescript build -w",
     "re:build": "rescript",
     "add:view": "node ./tools/copy-view-main.mjs"
   },
   "devDependencies": {
-    "@snowpack/plugin-postcss": "^1.4.3",
-    "@snowpack/plugin-run-script": "^2.3.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
     "rescript": "^9.1.4",
-    "snowpack": "^3.8.8",
-    "tailwindcss": "^3.0.5"
+    "tailwindcss": "^3.0.5",
+    "vite": "^2.7.8"
   },
   "dependencies": {
     "hybrids": "^7.0.3"

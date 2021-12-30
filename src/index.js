@@ -1,4 +1,5 @@
 import { define, router, html } from "hybrids"
+import { beforeNavigate } from "./utils.js"
 
 
 
@@ -15,7 +16,10 @@ import "./elements/a-link.js"
 
 
 
-if (import.meta.env.MODE === "development") router.debug()
+if (import.meta.env.MODE === "development") {
+  import.meta.hot.accept()
+  router.debug()
+}
 
 
 
@@ -35,7 +39,7 @@ define({
           class="inline-block"
           href=${router.url(MainHome)}
           active=${router.active(MainHome, { stack: true })}
-          onclick=${beforeNav(gsapVomit)}>
+          onclick=${beforeNavigate(gsapVomit)}>
           Home
         </a-link>
         <a-link
@@ -51,22 +55,3 @@ define({
     
   `
 })
-
-
-
-export const styled = (
-  tag =>
-  tag ? {
-    html: 
-      ([first, ...rest], ...args) =>
-      html([tag + first, ...rest], ...args)
-  }
-  : { html }
-)(document.styleSheets[0]?.ownerNode?.outerHTML)
-
-
-
-export const beforeNav = 
-  fn =>
-  (host, e) =>
-  router.resolve(e, fn(host, e))

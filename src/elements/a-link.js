@@ -1,5 +1,5 @@
 import { define } from "hybrids"
-import { styled } from "../index.js"
+import { styled } from "../utils.js"
 
 
 
@@ -12,6 +12,7 @@ export default define({
     <a
       href=${href}
       class=${{
+        "text-green-400": true,
         "underline": active
       }}>
       <slot></slot>
