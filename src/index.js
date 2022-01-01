@@ -15,7 +15,6 @@ import MainOther from "./views/main-other.js"
 import "./elements/a-link.js"
 
 
-console.log(env)
 
 if (env.EXP_HMR) import.meta.hot.accept()
 if (env.EXP_ROUTER_DEBUG) router.debug()

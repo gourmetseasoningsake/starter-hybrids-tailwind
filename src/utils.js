@@ -5,11 +5,16 @@ import styles from "./index.css"
 
 export const styled = (
   hasASS => {
-    if (hasASS || import.meta.env.DEV) {
+    if (hasASS) {
+      const stylesheet = new CSSStyleSheet()
+      
+      stylesheet.replaceSync(styles)
+      document.adoptedStyleSheets = [ stylesheet ]
+
       return {
         html: 
           (parts, ...args) =>
-          html(parts, ...args).style(styles)
+          html(parts, ...args).style(stylesheet)
       }
     }
 
@@ -27,7 +32,7 @@ export const styled = (
 
     return { html }
   }
-)("replace" in CSSStyleSheet.prototype)
+)("replaceSync" in CSSStyleSheet.prototype)
 
 
 
