@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 
 
-
+// https://stackoverflow.com/questions/66389043/how-can-i-use-vite-env-variables-in-vite-config-js
 export default defineConfig({
+  envPrefix: "EXP_",
   plugins: [
     { name: "html-transform"
     , transformIndexHtml:

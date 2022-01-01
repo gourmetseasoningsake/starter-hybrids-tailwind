@@ -1,5 +1,5 @@
+import env from './env'
 import { define, router, html } from "hybrids"
-import { beforeNavigate } from "./utils.js"
 
 
 
@@ -15,16 +15,10 @@ import MainOther from "./views/main-other.js"
 import "./elements/a-link.js"
 
 
+console.log(env)
 
-if (import.meta.env.MODE === "development") {
-  import.meta.hot.accept()
-  router.debug()
-}
-
-
-
-/* NB: this is just a placeholder fn for an animation */
-const gsapVomit = (_host, _e) => new Promise(res => setTimeout(res, 2000))
+if (env.EXP_HMR) import.meta.hot.accept()
+if (env.EXP_ROUTER_DEBUG) router.debug()
 
 
 
@@ -38,8 +32,7 @@ define({
         <a-link
           class="inline-block"
           href=${router.url(MainHome)}
-          active=${router.active(MainHome, { stack: true })}
-          onclick=${beforeNavigate(gsapVomit)}>
+          active=${router.active(MainHome, { stack: true })}>
           Home
         </a-link>
         <a-link

@@ -12,7 +12,7 @@ export default define({
     <a
       href=${href}
       class=${{
-        "text-green-400": true,
+        "text-blue-400": true,
         "underline": active
       }}>
       <slot></slot>

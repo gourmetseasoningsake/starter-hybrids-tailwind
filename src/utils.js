@@ -4,8 +4,8 @@ import styles from "./index.css"
 
 
 export const styled = (
-  (hasASS, isDev) => {
-    if (hasASS || isDev) {
+  hasASS => {
+    if (hasASS || import.meta.env.DEV) {
       return {
         html: 
           (parts, ...args) =>
@@ -27,9 +27,7 @@ export const styled = (
 
     return { html }
   }
-)( "replace" in CSSStyleSheet.prototype, 
-   import.meta.env.MODE === "development"
-)
+)("replace" in CSSStyleSheet.prototype)
 
 
 

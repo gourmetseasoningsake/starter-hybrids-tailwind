@@ -23,7 +23,8 @@
   "scripts": {
     "test": "exit 0",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode staging",
+    "build:production": "vite build",
     "preview": "vite preview",
     "re:start": "rescript build -w",
     "re:build": "rescript",
