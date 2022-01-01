@@ -1,4 +1,5 @@
-import env from './env'
+import env from "./env.js"
+import styles from "./index.css"
 import { define, router, html } from "hybrids"
 
 
@@ -18,6 +19,39 @@ import "./elements/a-link.js"
 
 if (env.EXP_HMR) import.meta.hot.accept()
 if (env.EXP_ROUTER_DEBUG) router.debug()
+
+
+
+export const styled = (
+  hasASS => {
+    if (hasASS) {
+      const stylesheet = new CSSStyleSheet()
+      
+      stylesheet.replaceSync(styles)
+      document.adoptedStyleSheets = [ stylesheet ]
+
+      return {
+        html: 
+          (parts, ...args) =>
+          html(parts, ...args).style(stylesheet)
+      }
+    }
+
+    const noscript = document.head.querySelector("#index-css")
+    const tag = noscript?.textContent
+
+    if (tag) {
+      noscript.outerHTML = tag // NB: throws if tag is an invalid html string
+      return {
+        html: 
+          ([first, ...rest], ...args) =>
+          html([tag + first, ...rest], ...args)
+      }
+    }
+
+    return { html }
+  }
+)("replaceSync" in CSSStyleSheet.prototype)
 
 
 
