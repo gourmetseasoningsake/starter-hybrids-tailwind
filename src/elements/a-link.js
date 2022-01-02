@@ -11,7 +11,7 @@ export default define({
   
     <a
       href=${href}
-      class=${{ "underline": active }}>
+      class=${{ "text-blue-400": active }}>
       <slot></slot>
     </a>
 

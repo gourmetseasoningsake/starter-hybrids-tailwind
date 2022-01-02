@@ -1,5 +1,5 @@
 {
-  "name": "devenv",
+  "name": "starter-hybrids-tailwind",
   "sources": [
     {
       "dir": "src",
@@ -12,5 +12,6 @@
       "in-source": true
     }
   ],
-  "suffix": ".bs.js"
+  "suffix": ".bs.js",
+  "bs-dependencies": ["@ryyppy/rescript-promise"]
 }

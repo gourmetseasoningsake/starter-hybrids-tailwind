@@ -1,6 +1,7 @@
 import env from "./env.js"
 import styles from "./index.css"
 import { define, router, html } from "hybrids"
+import { beforeNavigate } from "./Router.bs.js"
 
 
 
@@ -8,17 +9,13 @@ import { define, router, html } from "hybrids"
 
 import MainHome from "./views/main-home.js"
 import MainOther from "./views/main-other.js"
+import MainMore from "./views/main-more.js"
 
 
 
 /* Elements */
 
 import "./elements/a-link.js"
-
-
-
-if (env.EXP_HMR) import.meta.hot.accept()
-if (env.EXP_ROUTER_DEBUG) router.debug()
 
 
 
@@ -55,24 +52,37 @@ export const styled = (
 
 
 
+const historyPush = () => Promise.resolve(history.pushState(history.state, ""))
+
+
+
 define({
   tag: "the-app",
-  views: router([MainHome, MainOther]),
+  views: router([MainHome, MainOther, MainMore]),
   content: ({ views }) => html`
 
     <header>
       <nav>
         <a-link
           class="inline-block"
-          href=${router.url(MainHome)}
-          active=${router.active(MainHome, { stack: true })}>
+          href=${router.url(MainHome, { stack: true })}
+          active=${router.active(MainHome)}
+          onclick=${beforeNavigate(historyPush)}>
           Home
         </a-link>
         <a-link
           class="inline-block"
-          href=${router.url(MainOther)}
-          active=${router.active(MainOther, { stack: true })}>
+          href=${router.url(MainOther, { stack: true })}
+          active=${router.active(MainOther)}
+          onclick=${beforeNavigate(historyPush)}>
           Other
+        </a-link>
+        <a-link
+          class="inline-block"
+          href=${router.url(MainMore, { stack: true })}
+          active=${router.active(MainMore)}
+          onclick=${beforeNavigate(historyPush)}>
+          More
         </a-link>
       </nav>
     </header>
@@ -81,3 +91,8 @@ define({
     
   `
 })
+
+
+
+if (env.EXP_ROUTER_DEBUG) router.debug()
+if (env.EXP_HMR && import.meta.hot) import.meta.hot.accept()
