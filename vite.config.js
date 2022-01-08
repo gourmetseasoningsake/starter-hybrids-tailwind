@@ -7,8 +7,8 @@ export default ({ mode }) => {
 
   let server = {}
 
-  if (env.EXP_BROWSER) {
-    process.env.BROWSER = env.EXP_BROWSER
+  if (env[`${envPrefix}BROWSER`]) {
+    process.env.BROWSER = env[`${envPrefix}BROWSER`]
     server.open = "/index.html"
   }
 
@@ -19,13 +19,14 @@ export default ({ mode }) => {
       { name: "html-transform"
       , transformIndexHtml:
           html => {
+            let newHtml = html.replace(/{{\s*(.*?)\s*}}/g, (m, c) => env[c] ?? m)
             if (mode === "development") {
-              return html.replace(
+              return newHtml.replace(
                 "</head>",
                 `  <noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n</head>`
               )
             }
-            return html.replace(
+            return newHtml.replace(
               /<link(.*?)rel="stylesheet"(.*?)href="(.*?)index\.(.*?)\.css"(.*?)>/,
               `<noscript id="index-css">$&</noscript>`
             )
