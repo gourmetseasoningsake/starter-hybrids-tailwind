@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  body {
+    @apply relative min-h-screen;
+  }
+  
+  the-app {
+    @apply block relative;
+  }
+}

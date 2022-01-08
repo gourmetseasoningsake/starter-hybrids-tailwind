@@ -1,0 +1,10 @@
+# config
+
+*.config.js -linguist-detectable
+*.config.mjs -linguist-detectable
+
+
+
+# tests
+
+*.spec.js -linguist-detectable
