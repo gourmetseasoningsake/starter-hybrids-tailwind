@@ -1,16 +1,20 @@
 import { defineConfig, loadEnv } from 'vite'
 
 
-const envPrefix = "EXP_"
-
-
 export default ({ mode }) => {
- // const env = loadEnv(mode, process.cwd(), envPrefix)
+  const envPrefix = "EXP_"
+  const env = loadEnv(mode, process.cwd(), envPrefix)
+
+  let server = {}
+
+  if (env.EXP_BROWSER) {
+    process.env.BROWSER = env.EXP_BROWSER
+    server.open = "/index.html"
+  }
+
   return defineConfig({
     envPrefix,
-    // server: {
-    //   hmr: env.EXP_HMR === "true"
-    // },
+    server,
     plugins: [
       { name: "html-transform"
       , transformIndexHtml:
@@ -18,7 +22,7 @@ export default ({ mode }) => {
             if (mode === "development") {
               return html.replace(
                 "</head>",
-                `\t<noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n</head>`
+                `  <noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n</head>`
               )
             }
             return html.replace(

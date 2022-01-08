@@ -22,8 +22,7 @@ import "./elements/a-link.js"
 export const styled = (
   hasASS => {
     if (hasASS) {
-      const stylesheet = new CSSStyleSheet()
-      
+      const stylesheet = new CSSStyleSheet()   
       stylesheet.replaceSync(styles)
       document.adoptedStyleSheets = [ stylesheet ]
 
@@ -34,18 +33,20 @@ export const styled = (
       }
     }
 
-    const noscript = document.head.querySelector("#index-css")
-    const tag = noscript?.textContent
+    try {
+      const noscript = document.head.querySelector("#index-css")
+      const tag = noscript?.textContent
+      noscript.outerHTML = tag
 
-    if (tag) {
-      noscript.outerHTML = tag // NB: throws if tag is an invalid html string
       return {
         html: 
           ([first, ...rest], ...args) =>
           html([tag + first, ...rest], ...args)
       }
+    } catch (err) {
+      console.log(err)
     }
-
+    
     return { html }
   }
 )("replaceSync" in CSSStyleSheet.prototype)
@@ -94,5 +95,11 @@ define({
 
 
 
+/* Config */
+
 if (env.EXP_ROUTER_DEBUG) router.debug()
-if (env.EXP_HMR && import.meta.hot) import.meta.hot.accept()
+if (import.meta.hot) {
+  import.meta.hot.accept(_ => {
+    if (env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
+  })
+}
