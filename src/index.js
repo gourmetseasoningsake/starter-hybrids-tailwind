@@ -1,4 +1,3 @@
-import env from "./env.js"
 import styles from "./index.css"
 import { define, router, html } from "hybrids"
 import { beforeNavigate } from "./Router.bs.js"
@@ -34,7 +33,7 @@ export const styled = (
     }
 
     try {
-      const noscript = document.head.querySelector("#index-css")
+      const noscript = document.head.querySelector("noscript#shared-css")
       const tag = noscript?.textContent
       noscript.outerHTML = tag
 
@@ -97,9 +96,9 @@ define({
 
 /* Config */
 
-if (env.EXP_ROUTER_DEBUG) router.debug()
+if (import.meta.env.EXP_ROUTER_DEBUG) router.debug()
 if (import.meta.hot) {
   import.meta.hot.accept(_ => {
-    if (env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
+    if (import.meta.env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
   })
 }

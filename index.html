@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ EXP_LANG ?}}">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="{{ EXP_APP_DESC }}">
+  <meta name="description" content="{{ EXP_DESC ??}}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{{ EXP_APP_TITLE }}</title>
+  <title>{{ EXP_TITLE }}</title>
 
-  <meta name="robots" content="{{ EXP_APP_ROBOTS ??}}">
-  <meta name="rating" content="{{ EXP_APP_RATING ??}}">
+  <meta name="robots" content="{{ EXP_ROBOTS ??}}">
+  <meta name="rating" content="{{ EXP_RATING ??}}">
 
   <link rel="icon" href="/src/favicon.ico" />
+
+  <meta property="og:title" content="{{ EXP_OG_TITLE ??}}">
+  <meta property="og:type" content="{{ EXP_OG_TYPE ??}}">
+  <meta property="og:image" content="{{ EXP_OG_IMAGE ??}}">
+  <meta property="og:url" content="{{ EXP_OG_URL ??}}">
+  <meta property="og:description" content="{{ EXP_OG_DESC ??}}">
+  <meta property="og:site_name" content="{{ EXP_OG_SITE_NAME ??}}">
 
   <script type="module" src="/src/index.js"></script>
 </head>
