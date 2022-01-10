@@ -39,7 +39,7 @@ export default ({ mode }) => {
             }
             
             return newHtml.replace(
-              `<link(.*?)rel="stylesheet"(.*?)href="(.*?)/index\.(.*?)css"(.*?)>`,
+              /<link(.*?)rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css"(.*?)>/,
               `<noscript id="index-css">$&</noscript>`
             )
           }
