@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="{{ EXP_LANG ?}}">
+<html lang="{{ lang }}">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="{{ EXP_DESC ??}}">
+  <meta name="description" content="{{ description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{{ EXP_TITLE }}</title>
+  <title>{{ title }}</title>
 
-  <meta name="robots" content="{{ EXP_ROBOTS ??}}">
-  <meta name="rating" content="{{ EXP_RATING ??}}">
+  {%- if robots -%}<meta name="robots" content="{{ robots }}">{%- endif -%}
+  {%- if rating -%}<meta name="rating" content="{{ rating }}">{%- endif -%}
 
-  <link rel="icon" href="/src/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/src/etc/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/src/etc/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/src/etc/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="/src/etc/favicon.svg">
+  <link rel="manifest" href="/src/etc/site.webmanifest">
+  <link rel="mask-icon" href="/src/etc/safari-pinned-tab.svg" color="#002639">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-config" content="/src/etc/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
 
-  <meta property="og:title" content="{{ EXP_OG_TITLE ??}}">
-  <meta property="og:type" content="{{ EXP_OG_TYPE ??}}">
-  <meta property="og:image" content="{{ EXP_OG_IMAGE ??}}">
-  <meta property="og:url" content="{{ EXP_OG_URL ??}}">
-  <meta property="og:description" content="{{ EXP_OG_DESC ??}}">
-  <meta property="og:site_name" content="{{ EXP_OG_SITE_NAME ??}}">
+  {%- if ogTitle -%}<meta property="og:title" content="{{ ogTitle }}">{%- endif -%}
+  {%- if ogType -%}<meta property="og:type" content="{{ ogType }}">{%- endif -%}
+  {%- if ogImage -%}<meta property="og:image" content="{{ ogImage }}">{%- endif -%}
+  {%- if ogUrl -%}<meta property="og:url" content="{{ ogUrl }}">{%- endif -%}
+  {%- if ogDescription -%}<meta property="og:description" content="{{ ogDescription }}">{%- endif -%}
+  {%- if ogSiteName -%}<meta property="og:site_name" content="{{ ogSiteName }}">{%- endif -%}
 
   <script type="module" src="/src/index.js"></script>
 </head>

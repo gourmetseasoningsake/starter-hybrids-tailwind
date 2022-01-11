@@ -33,7 +33,7 @@ export const styled = (
     }
 
     try {
-      const noscript = document.head.querySelector("noscript#shared-css")
+      const noscript = document.head.querySelector("#index-css")
       const tag = noscript?.textContent
       noscript.outerHTML = tag
 

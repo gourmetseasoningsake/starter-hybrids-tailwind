@@ -1,13 +1,32 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv } from "vite"
+import { Liquid } from "liquidjs"
+import indexConfig from "./index.config.js"
 
 
 
+const liquid = new Liquid()
 const envPrefix = "EXP_"
+
+
+
+const wrapLinkTag =
+  mode =>
+  html =>
+  mode === "development" 
+  ? html.replace(
+      "</head>",
+      `  <noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n$&`
+    )
+  : html.replace(
+      /<link(.*?)rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css"(.*?)>/,
+      `<noscript id="index-css">$&</noscript>`
+    )
 
 
 
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), envPrefix)
+  const data = indexConfig(mode)
 
   let server = {}
 
@@ -21,28 +40,11 @@ export default ({ mode }) => {
     server,
     plugins: [
       { name: "html-transform"
-      , transformIndexHtml:
-          html => {
-            let newHtml =
-              html.replace(/.*({{\s*([^\?\s]*)\s*(\?{0,2})}}).*\n?/g, (ln, tag, key, rm) => {
-                if (env[key]) return ln.replace(tag, env[key])
-                if (rm === "?") return ln.replace(tag, "")
-                if (rm === "??") return ""
-                return ln
-              })
-
-            if (mode === "development") {
-              return newHtml.replace(
-                "</head>",
-                `  <noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n$&`
-              )
-            }
-            
-            return newHtml.replace(
-              /<link(.*?)rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css"(.*?)>/,
-              `<noscript id="index-css">$&</noscript>`
-            )
-          }
+      , transformIndexHtml: 
+          content => 
+          liquid
+          .parseAndRender(content, data)
+          .then(wrapLinkTag(mode))
       }
     ]
   })

@@ -4,6 +4,7 @@ specifiers:
   '@ryyppy/rescript-promise': ^2.1.0
   autoprefixer: ^10.4.0
   hybrids: ^7.0.4
+  liquidjs: ^9.32.0
   postcss: ^8.4.5
   rescript: ^9.1.4
   tailwindcss: ^3.0.5
@@ -15,6 +16,7 @@ dependencies:
 
 devDependencies:
   autoprefixer: 10.4.0_postcss@8.4.5
+  liquidjs: 9.32.0
   postcss: 8.4.5
   rescript: 9.1.4
   tailwindcss: 3.0.7_16a290f6d0e3717bf6d2667234aebd30
@@ -630,6 +632,12 @@ packages:
 
   /lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
+    dev: true
+
+  /liquidjs/9.32.0:
+    resolution: {integrity: sha512-Sy3WfHMZgI3VKQdkwjVOE9JIqe0AujnSbb6OFbH5FnpKruHC/byI7r4SiaVvKV+3CaidU1XudyM/gEEUBXVklg==}
+    engines: {node: '>=4.8.7'}
+    hasBin: true
     dev: true
 
   /merge2/1.4.1:
