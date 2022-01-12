@@ -15,7 +15,7 @@ const wrapLinkTag =
   mode === "development" 
   ? html.replace(
       "</head>",
-      `  <noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n$&`
+      `<noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>$&`
     )
   : html.replace(
       /<link(.*?)rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css"(.*?)>/,
@@ -41,9 +41,9 @@ export default ({ mode }) => {
     plugins: [
       { name: "html-transform"
       , transformIndexHtml: 
-          content => 
+          content =>
           liquid
-          .parseAndRender(content, data)
+          .parseAndRender(content.replace(/\s{1,}/g, " "), data)
           .then(wrapLinkTag(mode))
       }
     ]

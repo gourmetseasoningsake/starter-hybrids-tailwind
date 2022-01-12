@@ -1,5 +1,5 @@
 export default mode => new Proxy({
-
+  mode,
   lang: "en",
   robots: {
     staging: "noindex,nofollow",
