@@ -1,4 +1,5 @@
-import styles from "./index.css"
+import "./index.css"
+import styles from "./index.css?inline"
 import { define, router, html } from "hybrids"
 import { beforeNavigate } from "./Router.bs.js"
 

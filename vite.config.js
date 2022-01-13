@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from "vite"
+import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
 import indexConfig from "./index.config.js"
 
@@ -38,12 +39,17 @@ export default ({ mode }) => {
   return defineConfig({
     envPrefix,
     server,
+    build: {
+      rollupOptions: {
+        plugins: [ minifyHTML() ]
+      }
+    },
     plugins: [
       { name: "html-transform"
       , transformIndexHtml: 
           content =>
           liquid
-          .parseAndRender(content.replace(/\s{1,}/g, " "), data)
+          .parseAndRender(content, data)
           .then(wrapLinkTag(mode))
       }
     ]
