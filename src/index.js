@@ -19,9 +19,29 @@ import "./elements/a-link.js"
 
 
 
-export const styled = (
-  hasASS => {
-    if (hasASS) {
+const maybeStyledFromLink = 
+  () => {
+    try {
+      const noscript = document.head.querySelector("#index-css")
+      const tag = noscript?.textContent
+      if (!import.meta.env.isDev) noscript.outerHTML = tag
+  
+      return {
+        html: 
+          ([first, ...rest], ...args) =>
+          html([tag + first, ...rest], ...args)
+      }
+    } catch (err) {
+      console.log(err)
+      return { html }
+    }
+  }
+
+
+
+const maybeStyledFromASS =
+  () => {
+    if ("replaceSync" in CSSStyleSheet.prototype) {
       const stylesheet = new CSSStyleSheet()   
       stylesheet.replaceSync(styles)
       document.adoptedStyleSheets = [ stylesheet ]
@@ -32,24 +52,15 @@ export const styled = (
           html(parts, ...args).style(stylesheet)
       }
     }
-
-    try {
-      const noscript = document.head.querySelector("#index-css")
-      const tag = noscript?.textContent
-      noscript.outerHTML = tag
-
-      return {
-        html: 
-          ([first, ...rest], ...args) =>
-          html([tag + first, ...rest], ...args)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-    
-    return { html }
+    return maybeStyledFromLink()
   }
-)("replaceSync" in CSSStyleSheet.prototype)
+
+
+
+  export const styled = 
+    import.meta.env.EXP_ASS_DISABLE
+    ? maybeStyledFromLink()
+    : maybeStyledFromASS()
 
 
 

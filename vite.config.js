@@ -5,8 +5,8 @@ import indexConfig from "./index.config.js"
 
 
 
-const liquid = new Liquid()
 const envPrefix = "EXP_"
+const liquid = new Liquid()
 
 
 
@@ -27,12 +27,13 @@ const wrapLinkTag =
 
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), envPrefix)
+  const envar = key => env[`${envPrefix}${key}`]
   const data = indexConfig(mode)
 
   let server = {}
 
-  if (env[`${envPrefix}BROWSER`]) {
-    process.env.BROWSER = env[`${envPrefix}BROWSER`]
+  if (envar("BROWSER")) {
+    process.env.BROWSER = envar("BROWSER")
     server.open = "/"
   }
 
@@ -40,8 +41,11 @@ export default ({ mode }) => {
     envPrefix,
     server,
     build: {
+      minify: !!envar("BUILD_MINIFY"),
       rollupOptions: {
-        plugins: [ minifyHTML() ]
+        plugins: [ 
+          ...(envar("BUILD_MINIFY") ? [ minifyHTML() ] : [])
+        ]
       }
     },
     plugins: [
