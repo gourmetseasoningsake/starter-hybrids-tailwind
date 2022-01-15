@@ -48,8 +48,9 @@ By default `vite` runs in `development` mode and `vite build` in `production` mo
 
 ### Preconfigured custom environment variables
 
-Given<br>
+_Given_<br>
 `envPrefix` is set to `EXP_`,<br>
+_with_<br>
 non-empty is truthy,<br>
 empty is falsy
 
@@ -63,13 +64,13 @@ empty is falsy
 
 ### Templating index.html
 
-You can template the `index.html` file with liquid [tags](https://liquidjs.com/tags/overview.html), outputs and [filters](https://liquidjs.com/filters/overview.html). The data passed to the template can be populated in `index.config.js`. You can set a data item in two ways, directly:
+You can template the `index.html` file with liquid [tags](https://liquidjs.com/tags/overview.html), outputs and [filters](https://liquidjs.com/filters/overview.html). The data passed to the template can be populated in `index.config.js`. You can set a data item value in two ways, as primitive
 ```javascript
 ...
 ogType: "website",
 ...
 ```
-or per mode:
+or as object with properties per mode:
 ```javascript
 ...
 title: {
