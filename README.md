@@ -46,7 +46,7 @@ Custom variables are all of type `string`, unlike some variables provided by Vit
 
 By default `vite` runs in `development` mode and `vite build` in `production` mode.
 
-### Preconfigured environment variables
+### Preconfigured custom environment variables
 
 Given<br>
 `envPrefix` is set to `EXP_`,<br>
@@ -61,11 +61,25 @@ empty is falsy
 | EXP_ROUTER_DEBUG | non-empty or empty | Wether to console-log the current view that was navigated to. | 
 | EXP_BUILD_MINIFY | non-empty or empty | Wether to minify the build output. |
 
-For environment variables set by Vite, see [here](https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes).
-
 ### Templating index.html
 
+You can template the `index.html` file with liquid [tags](https://liquidjs.com/tags/overview.html), outputs and [filters](https://liquidjs.com/filters/overview.html). The data passed to the template can be populated in `index.config.js`. You can set a data item in two ways, directly:
+```javascript
 ...
+ogType: "website",
+...
+```
+or per mode:
+```javascript
+...
+title: {
+  development: "Title (development)",
+  staging: "Title (staging)",
+  production: "Title"
+},
+...
+```
+Accessing `{{ title }}` in the template would render the value according the mode Vite is running in.
 
 ## Usage
 
@@ -74,7 +88,24 @@ For environment variables set by Vite, see [here](https://vitejs.dev/guide/env-a
 ```bash
 pnpm dev
 ```
-...
+
+### Staging build
+
+```bash
+pnpm build
+```
+
+### Production build
+
+```bash
+pnpm build:production
+```
+
+### Preview build
+
+```bash
+pnpm preview
+```
 
 ## References
 
@@ -84,7 +115,7 @@ pnpm dev
 - [tailwindcss](https://tailwindcss.com)
 - [Rescript](https://rescript-lang.org/)
 - [Vite](https://vitejs.dev/)
-
+- [liquidjs](https://liquidjs.com/)
 
 ### Icons
 
