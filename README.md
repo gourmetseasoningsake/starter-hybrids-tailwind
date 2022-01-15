@@ -89,23 +89,34 @@ Accessing `{{ title }}` in the template would render the value according the mod
 pnpm dev
 ```
 
-### Staging build
+mode: `development`<br>
+env: `development`
+
+### Staging
 
 ```bash
 pnpm build
 ```
 
-### Production build
+mode: `staging`<br>
+env: `production`
+
+### Production
 
 ```bash
 pnpm build:production
 ```
 
-### Preview build
+mode: `production`<br>
+env: `production`
+
+### Preview
 
 ```bash
 pnpm preview
 ```
+
+Serves the dist folder.
 
 ## References
 
