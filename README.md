@@ -1,6 +1,6 @@
 # starter-hybrids-tailwind
 
-A simple setup for a quick start with [hybridsjs](https://hybrids.js.org), [tailwindcss](https://tailwindcss.com) and [rescript](https://rescript-lang.org/).
+A setup for a start with [hybrids](https://hybrids.js.org), [tailwindcss](https://tailwindcss.com) and [Rescript](https://rescript-lang.org/).
 
 ## Installation
 
@@ -30,37 +30,42 @@ pnpm install
 
 ### Custom environment variables
 
-Custom environment variables must have the prefix specified in the `envPrefix` constant in `/vite.config.js`.
+Custom environment variables must have the prefix specified in the `envPrefix` constant in `vite.config.js`.
 
-The root folder contains `sample.env.*` files for common environments with predefined effective variables. Remove the `sample` part of the filename so that vite automatically inserts the variables into the `import.meta.env` object by mode.
+```javascript
+// vite.config.js
+...
+const envPrefix = "EXP_"
+...
+```
+This does not only set the `envPrefix` option of [Vite](https://vitejs.dev/). Some variables are used to configure Vite in the `vite.config.js` file.
 
-Note that the custom variables are all of type `string`, unlike some variables provided by vite, e.g. `boolean import.meta.env.DEV`. You will need to parse your own variables yourself if you need types other than `string`.
+The root folder contains `sample.env.*` files for common environments with predefined effective variables. Remove the `sample` part of the filename so that Vite automatically inserts the variables into the `import.meta.env` object by mode.
 
-#### Example
-Given<br>
-`const envPrefix = PUBLIC_` in `/vite.config.js`,<br>
-`PUBLIC_API_URL=https://example.org/api/v2` in `/.env.staging`,<br>
+Custom variables are all of type `string`, unlike some variables provided by Vite. You will need to parse your own variables yourself if you need types other than `string`.
 
-Then CLI command `vite build --mode staging` would make `https://example.org/api/v2` available in `import.meta.env.PUBLIC_API_URL`.
-
-Note that the command `vite` has `--mode development` and the command `vite build` has `--mode production` by default.
-
-
-
+By default `vite` runs in `development` mode and `vite build` in `production` mode.
 
 ### Preconfigured environment variables
 
-Given `envPrefix` is set to `EXP_`.
+Given<br>
+`envPrefix` is set to `EXP_`,<br>
+non-empty is truthy,<br>
+empty is falsy
 
 | Name | Value | Description |
 | ---- | ----- | ----------- |
-| EXP_BROWSER	| `firefox \| google chrome \| edge`<br>_optional_ | Automatically opens the app in the specified browser on development and preview server start. | 
-| EXP_HMR_FORCE_RELOAD | `any`<br>_optional_ | | 
-| EXP_ASS_DISABLE	| `any`<br>_optional_ | | 
-| EXP_ROUTER_DEBUG | `any`<br>_optional_ | | 
-| EXP_BUILD_MINIFY | `any`<br>_optional_ | |
+| EXP_BROWSER	| `firefox \| google chrome \| edge` or empty | What browser to automatically open the app on development server start. | 
+| EXP_HMR_FORCE_RELOAD | non-empty or empty | Wether to force a page reload when modules change. | 
+| EXP_ASS_DISABLE	| non-empty or empty  | Wether to force the use of link nodes to apply styles instead of constructed stylesheets even if the browser supports them. | 
+| EXP_ROUTER_DEBUG | non-empty or empty | Wether to console-log the current view that was navigated to. | 
+| EXP_BUILD_MINIFY | non-empty or empty | Wether to minify the build output. |
 
-### Templating index.html 
+For environment variables set by Vite, see [here](https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes).
+
+### Templating index.html
+
+...
 
 ## Usage
 
@@ -69,8 +74,17 @@ Given `envPrefix` is set to `EXP_`.
 ```bash
 pnpm dev
 ```
+...
 
 ## References
+
+### Tools
+
+- [hybrids](https://hybrids.js.org)
+- [tailwindcss](https://tailwindcss.com)
+- [Rescript](https://rescript-lang.org/)
+- [Vite](https://vitejs.dev/)
+
 
 ### Icons
 
