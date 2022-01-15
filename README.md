@@ -22,7 +22,7 @@ pnpm install
 ```bash
 mkdir myproj
 cd !$
-curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/lab | tar --strip=1 -x
+curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
 pnpm install
 ```
 
