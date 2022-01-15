@@ -1,35 +1,60 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv } from "vite"
+import minifyHTML from "rollup-plugin-minify-html-literals"
+import { Liquid } from "liquidjs"
+import indexConfig from "./index.config.js"
+
+
+
+const envPrefix = "EXP_"
+const liquid = new Liquid()
+
+
+
+const wrapLinkTag =
+  mode =>
+  html =>
+  mode === "development" 
+  ? html.replace(
+      "</head>",
+      `<noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>$&`
+    )
+  : html.replace(
+      /<link(.*?)rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css"(.*?)>/,
+      `<noscript id="index-css">$&</noscript>`
+    )
+
 
 
 export default ({ mode }) => {
-  const envPrefix = "EXP_"
   const env = loadEnv(mode, process.cwd(), envPrefix)
+  const envar = key => env[`${envPrefix}${key}`]
+  const data = indexConfig(mode)
 
   let server = {}
 
-  if (env.EXP_BROWSER) {
-    process.env.BROWSER = env.EXP_BROWSER
-    server.open = "/index.html"
+  if (envar("BROWSER")) {
+    process.env.BROWSER = envar("BROWSER")
+    server.open = "/"
   }
 
   return defineConfig({
     envPrefix,
     server,
+    build: {
+      minify: !!envar("BUILD_MINIFY"),
+      rollupOptions: {
+        plugins: [ 
+          ...(envar("BUILD_MINIFY") ? [ minifyHTML() ] : [])
+        ]
+      }
+    },
     plugins: [
       { name: "html-transform"
-      , transformIndexHtml:
-          html => {
-            if (mode === "development") {
-              return html.replace(
-                "</head>",
-                `  <noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>\n</head>`
-              )
-            }
-            return html.replace(
-              /<link(.*?)rel="stylesheet"(.*?)href="(.*?)index\.(.*?)\.css"(.*?)>/,
-              `<noscript id="index-css">$&</noscript>`
-            )
-          }
+      , transformIndexHtml: 
+          content =>
+          liquid
+          .parseAndRender(content, data)
+          .then(wrapLinkTag(mode))
       }
     ]
   })

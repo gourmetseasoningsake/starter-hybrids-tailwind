@@ -1,5 +1,5 @@
-import env from "./env.js"
-import styles from "./index.css"
+import "./index.css"
+import styles from "./index.css?inline"
 import { define, router, html } from "hybrids"
 import { beforeNavigate } from "./Router.bs.js"
 
@@ -19,9 +19,29 @@ import "./elements/a-link.js"
 
 
 
-export const styled = (
-  hasASS => {
-    if (hasASS) {
+const maybeStyledFromLink = 
+  () => {
+    try {
+      const noscript = document.head.querySelector("#index-css")
+      const tag = noscript?.textContent
+      if (!import.meta.env.isDev) noscript.outerHTML = tag
+  
+      return {
+        html: 
+          ([first, ...rest], ...args) =>
+          html([tag + first, ...rest], ...args)
+      }
+    } catch (err) {
+      console.log(err)
+      return { html }
+    }
+  }
+
+
+
+const maybeStyledFromASS =
+  () => {
+    if ("replaceSync" in CSSStyleSheet.prototype) {
       const stylesheet = new CSSStyleSheet()   
       stylesheet.replaceSync(styles)
       document.adoptedStyleSheets = [ stylesheet ]
@@ -32,24 +52,15 @@ export const styled = (
           html(parts, ...args).style(stylesheet)
       }
     }
-
-    try {
-      const noscript = document.head.querySelector("#index-css")
-      const tag = noscript?.textContent
-      noscript.outerHTML = tag
-
-      return {
-        html: 
-          ([first, ...rest], ...args) =>
-          html([tag + first, ...rest], ...args)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-    
-    return { html }
+    return maybeStyledFromLink()
   }
-)("replaceSync" in CSSStyleSheet.prototype)
+
+
+
+  export const styled = 
+    import.meta.env.EXP_ASS_DISABLE
+    ? maybeStyledFromLink()
+    : maybeStyledFromASS()
 
 
 
@@ -97,9 +108,9 @@ define({
 
 /* Config */
 
-if (env.EXP_ROUTER_DEBUG) router.debug()
+if (import.meta.env.EXP_ROUTER_DEBUG) router.debug()
 if (import.meta.hot) {
   import.meta.hot.accept(_ => {
-    if (env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
+    if (import.meta.env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
   })
 }
