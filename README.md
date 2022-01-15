@@ -22,7 +22,7 @@ pnpm install
 ```bash
 mkdir myproj
 cd !$
-curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/lab | tar --strip=1 -x
+curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
 pnpm install
 ```
 
@@ -48,8 +48,9 @@ By default `vite` runs in `development` mode and `vite build` in `production` mo
 
 ### Preconfigured custom environment variables
 
-Given<br>
+_Given_<br>
 `envPrefix` is set to `EXP_`,<br>
+_with_<br>
 non-empty is truthy,<br>
 empty is falsy
 
@@ -63,13 +64,13 @@ empty is falsy
 
 ### Templating index.html
 
-You can template the `index.html` file with liquid [tags](https://liquidjs.com/tags/overview.html), outputs and [filters](https://liquidjs.com/filters/overview.html). The data passed to the template can be populated in `index.config.js`. You can set a data item in two ways, directly:
+You can template the `index.html` file with liquid [tags](https://liquidjs.com/tags/overview.html), outputs and [filters](https://liquidjs.com/filters/overview.html). The data passed to the template can be populated in `index.config.js`. You can set a data item value in two ways, as primitive
 ```javascript
 ...
 ogType: "website",
 ...
 ```
-or per mode:
+or as object with properties per mode:
 ```javascript
 ...
 title: {
@@ -89,23 +90,34 @@ Accessing `{{ title }}` in the template would render the value according the mod
 pnpm dev
 ```
 
-### Staging build
+mode: `development`<br>
+env: `development`
+
+### Staging
 
 ```bash
 pnpm build
 ```
 
-### Production build
+mode: `staging`<br>
+env: `production`
+
+### Production
 
 ```bash
 pnpm build:production
 ```
 
-### Preview build
+mode: `production`<br>
+env: `production`
+
+### Preview
 
 ```bash
 pnpm preview
 ```
+
+Serves the dist folder.
 
 ## References
 
