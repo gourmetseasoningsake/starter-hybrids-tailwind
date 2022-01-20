@@ -21,19 +21,22 @@ import "./elements/a-link.js"
 
 const maybeStyledFromLink = 
   () => {
-    try {
-      const noscript = document.head.querySelector("#index-css")
-      const tag = noscript?.textContent
-      if (!import.meta.env.isDev) noscript.outerHTML = tag
-  
-      return {
-        html: 
-          ([first, ...rest], ...args) =>
-          html([tag + first, ...rest], ...args)
+    const noscript = document.head.querySelector("#index-css")
+    if (!noscript) return { html }
+    
+    const tag = noscript.textContent
+    if (!import.meta.env.DEV) {
+      try {
+        noscript.outerHTML = tag
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
-      return { html }
+    }
+
+    return {
+      html: 
+        ([first, ...rest], ...args) =>
+        html([tag + first, ...rest], ...args)
     }
   }
 
@@ -57,10 +60,10 @@ const maybeStyledFromASS =
 
 
 
-  export const styled = 
-    import.meta.env.EXP_ASS_DISABLE
-    ? maybeStyledFromLink()
-    : maybeStyledFromASS()
+export const styled = 
+  import.meta.env.EXP_ASS_DISABLE
+  ? maybeStyledFromLink()
+  : maybeStyledFromASS()
 
 
 

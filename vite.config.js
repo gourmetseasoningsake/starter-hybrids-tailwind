@@ -1,11 +1,12 @@
 import { defineConfig, loadEnv } from "vite"
 import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
+import postcssConfig from "./postcss.config.js"
 import indexConfig from "./index.config.js"
 
 
 
-const envPrefix = "EXP_"
+export const envPrefix = "EXP_"
 const liquid = new Liquid()
 
 
@@ -40,6 +41,7 @@ export default ({ mode }) => {
   return defineConfig({
     envPrefix,
     server,
+    css: { postcss: postcssConfig },
     build: {
       minify: !!envar("BUILD_MINIFY"),
       rollupOptions: {

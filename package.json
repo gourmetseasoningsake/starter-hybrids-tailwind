@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/gourmetseasoningsake/starter-hybrids-tailwind#readme",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "exit 0",
+    "test": "ava --config ./ava/config.js",
     "dev": "vite",
     "build": "vite build --mode staging",
     "build:production": "vite build",
@@ -32,6 +33,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
+    "ava": "^4.0.1",
+    "jsdom": "^19.0.0",
     "liquidjs": "^9.32.0",
     "postcss": "^8.4.5",
     "rescript": "^9.1.4",
