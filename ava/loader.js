@@ -11,7 +11,7 @@ import { envPrefix } from "../vite.config.js"
 
 
 
-const envEntries = Object.entries(loadEnv("production", process.cwd(), envPrefix))
+const envEntries = Object.entries(loadEnv("test", process.cwd(), envPrefix))
 const baseURL = pathToFileURL(`${process.cwd()}/`).href
 
 
