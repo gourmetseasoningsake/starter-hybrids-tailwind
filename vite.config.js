@@ -46,7 +46,7 @@ export default ({ mode }) => {
       minify: !!envar("BUILD_MINIFY"),
       rollupOptions: {
         plugins: [ 
-          ...(envar("BUILD_MINIFY") ? [ minifyHTML() ] : [])
+          ...(envar("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
         ]
       }
     },

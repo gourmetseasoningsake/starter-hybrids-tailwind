@@ -11,7 +11,7 @@ test.before(domSetup)
 
 
 
-test.serial("should insert text nodes into unnamed slot", async t => {
+test("should insert a text node into the unnamed slot", async t => {
   // s
   const element = await elementFromImport("../src/elements/a-link.js")
   const value = "Home?"
@@ -22,5 +22,21 @@ test.serial("should insert text nodes into unnamed slot", async t => {
   })
 
   // v
-  t.is(result.slots[0].nodes[0].textContent, value)
+  t.is(result.slot.nodes[0].textContent, value)
+})
+
+
+
+test("should set the active class name", async t => {
+  // s
+  const element = await elementFromImport("../src/elements/a-link.js")
+  const value = "text-pink-400"
+
+  // e
+  const result = await elementRenderWith(element, {
+    active: true
+  })
+
+  // v
+  t.is(result.target.firstElementChild.className, value)
 })

@@ -21,15 +21,15 @@ export const domSetup = () => {
 
 
 
-const elmentPromiseSlotChanges =
-  slots =>
-  Promise.all(slots.map(
+const promiseSlotChanges =
+  target =>
+  Promise.all([...target.querySelectorAll("slot")].map(
     slot =>
     new Promise((res, _) => {
       const resolve = () => {
         slot.removeEventListener("slotchange", resolve)
         res({ 
-          slot,
+          $: slot,
           name: slot.name,
           nodes: slot.assignedNodes(),
           elements: slot.assignedElements()
@@ -38,7 +38,7 @@ const elmentPromiseSlotChanges =
       slot.addEventListener("slotchange", resolve)
       setTimeout(() => {
         slot.removeEventListener("slotchange", resolve)
-        return res({ slot, name: slot.name })
+        return res({ $: slot, name: slot.name })
       }, 10)
     })
   ))
@@ -62,11 +62,13 @@ export const elementRenderWith =
   .map(elementApplyValues(kv))
   .map(elementRender)
   .map(async target => {
-    let slots = await elmentPromiseSlotChanges([...target.querySelectorAll("slot")])
-    let result = { target, slots }
-    slots.forEach(slot => {
-      if (slot.name) result[slot.name] = slot
-    })
+    let slots = await promiseSlotChanges(target)
+    let result = { target }
+    result.slot = slots.filter(slot => {
+      if (!slot.name) return true
+      result[slot.name] = slot
+      return false
+    })[0]
     return result
   })[0]
 

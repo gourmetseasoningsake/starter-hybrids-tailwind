@@ -77,23 +77,20 @@ define({
   content: ({ views }) => html`
 
     <header>
-      <nav>
+      <nav class="flex">
         <a-link
-          class="inline-block"
           href=${router.url(MainHome, { stack: true })}
           active=${router.active(MainHome)}
           onclick=${beforeNavigate(historyPush)}>
           Home
         </a-link>
         <a-link
-          class="inline-block"
           href=${router.url(MainOther, { stack: true })}
           active=${router.active(MainOther)}
           onclick=${beforeNavigate(historyPush)}>
           Other
         </a-link>
         <a-link
-          class="inline-block"
           href=${router.url(MainMore, { stack: true })}
           active=${router.active(MainMore)}
           onclick=${beforeNavigate(historyPush)}>
