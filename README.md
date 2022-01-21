@@ -61,6 +61,7 @@ empty is falsy
 | EXP_ASS_DISABLE	| non-empty or empty  | Wether to force the use of link nodes to apply styles instead of constructed stylesheets even if the browser supports them. | 
 | EXP_ROUTER_DEBUG | non-empty or empty | Wether to console-log the current view that was navigated to. | 
 | EXP_BUILD_MINIFY | non-empty or empty | Wether to minify the build output. |
+| EXP_TEST_VERBOSE | non-empty or empty | Wether stdout for tests should be verbose. (Does not have a significant effect yet.) |
 
 ### Templating index.html
 
@@ -91,7 +92,7 @@ pnpm dev
 ```
 
 mode: `development`<br>
-env: `development`
+node env: `development`
 
 ### Staging
 
@@ -100,7 +101,7 @@ pnpm build
 ```
 
 mode: `staging`<br>
-env: `production`
+node env: `production`
 
 ### Production
 
@@ -109,7 +110,7 @@ pnpm build:production
 ```
 
 mode: `production`<br>
-env: `production`
+node env: `production`
 
 ### Preview
 
@@ -117,7 +118,7 @@ env: `production`
 pnpm preview
 ```
 
-Serves the dist folder.
+Serves build from the dist folder.
 
 ## References
 
