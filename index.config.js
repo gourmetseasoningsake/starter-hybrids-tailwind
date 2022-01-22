@@ -1,39 +1,39 @@
-export default mode => new Proxy({
-  mode,
+const config = {
   lang: "en",
-  robots: {
-    staging: "noindex,nofollow",
+  meta: {
+    viewport: "width=device-width, initial-scale=1.0",
+    description: "Description",
+    robots: {
+      staging: "noindex,nofollow"
+    },
+    rating: null
   },
-  rating: null,
-  title: {
-    development: "Title (development)",
-    staging: "Title (staging)",
-    production: "Title"
-  },
-  description: {
-    development: "Description (development)",
-    staging: "Description (staging)",
-    production: "Description"
-  },
-  ogTitle: {
-    development: "Title (development)",
-    staging: "Title (staging)",
-    production: "Title"
-  },
-  ogType: "website",
-  ogImage: null,
-  ogUrl: null,
-  ogDescription: {
-    development: "Description (development)",
-    staging: "Description (staging)",
-    production: "Description"
-  },
-  ogSiteName: null,
+  title: "Title",
+  og: {
+    title: "Title",
+    type: "website",
+    image: null,
+    url: null,
+    description: "Description",
+    siteName: null,
+  }
+}
 
-}, {
-  get: 
-    (o, prop) =>
-    Boolean(o[prop]?.constructor) && Object.is(o[prop].constructor, Object) 
-    ? o[prop][mode]
-    : o[prop]
-})
+
+
+const proxy =
+  (mode, o) =>
+  new Proxy(o, {
+    get(o, prop) {
+      if (Boolean(o[prop]?.constructor) && Object.is(o[prop].constructor, Object)) {
+        if (mode in o[prop]) return o[prop][mode]
+        if (["development", "staging", "production"].some(mode => mode in o[prop])) return null
+        return proxy(mode, o[prop])
+      }
+      return o[prop]
+    }
+  })
+
+
+
+export default mode => proxy(mode, {mode, ...config})
