@@ -1,25 +1,31 @@
+{%- capture document -%}
+
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="{{ description }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{{ title }}</title>
+  {%- for item in meta -%}
+    {%- if item[1] -%}
 
-  {%- if robots -%}<meta name="robots" content="{{ robots }}">{%- endif -%}
-  {%- if rating -%}<meta name="rating" content="{{ rating }}">{%- endif -%}
+    <meta name="{{ item[0] }}" content="{{ item[1] }}">
+
+    {%- endif -%}
+  {%- endfor -%}
+
+  <title>{%- unless mode == "production" -%}{{ mode | upcase }} {% endunless -%}{{ title -}}</title>
 
   <link rel="icon" href="/src/etc/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/src/etc/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/src/etc/apple-touch-icon.png">
 
-  {%- if ogTitle -%}<meta property="og:title" content="{{ ogTitle }}">{%- endif -%}
-  {%- if ogType -%}<meta property="og:type" content="{{ ogType }}">{%- endif -%}
-  {%- if ogImage -%}<meta property="og:image" content="{{ ogImage }}">{%- endif -%}
-  {%- if ogUrl -%}<meta property="og:url" content="{{ ogUrl }}">{%- endif -%}
-  {%- if ogDescription -%}<meta property="og:description" content="{{ ogDescription }}">{%- endif -%}
-  {%- if ogSiteName -%}<meta property="og:site_name" content="{{ ogSiteName }}">{%- endif -%}
+  {%- for item in og -%}
+    {%- if item[1] -%}
+
+    <meta property="og:{{ item[0] }}" content="{{ item[1] }}">
+
+    {%- endif -%}
+  {%- endfor -%}
 
   <script type="module" src="/src/index.js"></script>
 </head>
@@ -27,3 +33,7 @@
   <the-app></the-app>
 </body>
 </html>
+
+{%- endcapture -%}
+
+{{- document | strip_newlines -}}
