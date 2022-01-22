@@ -17,12 +17,12 @@ test("should insert a text node into the unnamed slot", async t => {
   const value = "Home?"
 
   // e
-  const result = await elementRenderWith(element, {
+  const target = await elementRenderWith(element, {
     textContent: value
   })
 
   // v
-  t.is(result.slot.nodes[0].textContent, value)
+  t.is(target.assigned.unnamed.nodes[0].textContent, value)
 })
 
 
@@ -33,10 +33,10 @@ test("should set the active class name", async t => {
   const value = "text-pink-400"
 
   // e
-  const result = await elementRenderWith(element, {
+  const target = await elementRenderWith(element, {
     active: true
   })
 
   // v
-  t.is(result.target.firstElementChild.className, value)
+  t.is(target.firstElementChild.className, value)
 })

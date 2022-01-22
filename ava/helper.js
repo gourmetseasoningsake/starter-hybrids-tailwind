@@ -21,34 +21,38 @@ export const domSetup = () => {
 
 
 
-const promiseSlotChanges =
+const elementSlotChanges =
   target =>
   Promise.all([...target.querySelectorAll("slot")].map(
     slot =>
     new Promise((res, _) => {
-      const resolve = () => {
+      const slotName = slot.name || undefined
+      const resolve = e => {
         slot.removeEventListener("slotchange", resolve)
         res({ 
-          $: slot,
-          name: slot.name,
+          slot,
+          slotName,
           nodes: slot.assignedNodes(),
-          elements: slot.assignedElements()
+          elements: slot.assignedElements(),
+          ...e
         })
       }
       slot.addEventListener("slotchange", resolve)
       setTimeout(() => {
         slot.removeEventListener("slotchange", resolve)
-        return res({ $: slot, name: slot.name })
+        return res({ slot, slotName })
       }, 10)
     })
   ))
 
 
 
-const elementApplyValues =
+const elementSet =
   kv =>
   element =>
-  (Object.entries(kv).forEach(([k, v]) => element[k] = v), element)
+  ( Object.entries(kv).forEach(([k, v]) => element[k] = v)
+  , element
+  )
 
 
 
@@ -56,21 +60,25 @@ const elementRender = element => element.render()
 
 
 
+const elementSnap = 
+  async target => 
+  ( target.assigned = (await elementSlotChanges(target)).reduce(
+      (a, change) =>
+      ({ [change.slotName ?? "unnamed"]: change, ...a }),
+      {}
+    )
+  , target
+  )
+
+
+
 export const elementRenderWith =
   (element, kv) => 
   element
-  .map(elementApplyValues(kv))
+  .map(elementSet(kv))
   .map(elementRender)
-  .map(async target => {
-    let slots = await promiseSlotChanges(target)
-    let result = { target }
-    result.slot = slots.filter(slot => {
-      if (!slot.name) return true
-      result[slot.name] = slot
-      return false
-    })[0]
-    return result
-  })[0]
+  .map(elementSnap)
+  [0]
 
 
 
