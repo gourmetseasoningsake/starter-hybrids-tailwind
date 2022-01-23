@@ -1,7 +1,7 @@
 import "./index.css"
 import styles from "./index.css?inline"
 import { define, router, html } from "hybrids"
-import { beforeNavigate } from "./Router.bs.js"
+import { beforeNavigate } from "./Navigation.bs.js"
 
 
 
