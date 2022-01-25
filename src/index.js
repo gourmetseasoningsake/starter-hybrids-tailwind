@@ -1,7 +1,8 @@
 import "./index.css"
 import styles from "./index.css?inline"
 import { define, router, html } from "hybrids"
-import { beforeNavigate } from "./Router.bs.js"
+import { historyPush, beforeNavigate } from "./Navigation.bs.js"
+import { maybeStyledFromLink } from "./Styled.bs.js"
 
 
 
@@ -19,26 +20,26 @@ import "./elements/a-link.js"
 
 
 
-const maybeStyledFromLink = 
-  () => {
-    const noscript = document.head.querySelector("#index-css")
-    if (!noscript) return { html }
+// const maybeStyledFromLink = 
+//   () => {
+//     const noscript = document.head.querySelector("#index-css")
+//     if (!noscript) return { html }
     
-    const tag = noscript.textContent
-    if (!import.meta.env.DEV) {
-      try {
-        noscript.outerHTML = tag
-      } catch (err) {
-        console.log(err)
-      }
-    }
+//     const tag = noscript.textContent
+//     if (!import.meta.env.DEV) {
+//       try {
+//         noscript.outerHTML = tag
+//       } catch (err) {
+//         console.log(err)
+//       }
+//     }
 
-    return {
-      html: 
-        ([first, ...rest], ...args) =>
-        html([tag + first, ...rest], ...args)
-    }
-  }
+//     return {
+//       html: 
+//         ([first, ...rest], ...args) =>
+//         html([tag + first, ...rest], ...args)
+//     }
+//   }
 
 
 
@@ -64,10 +65,6 @@ export const styled =
   import.meta.env.EXP_ASS_DISABLE
   ? maybeStyledFromLink()
   : maybeStyledFromASS()
-
-
-
-const historyPush = () => Promise.resolve(history.pushState(history.state, ""))
 
 
 
