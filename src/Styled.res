@@ -6,8 +6,6 @@ type styled<'a> = {
 
 
 
-
-
 @module("hybrids")
 @variadic
 external html
@@ -52,12 +50,10 @@ let maybeStyledFromLink: unit => styled<'a> =
         }
       | _ => ()
       }
-      (. parts, args) => {
-        let first = parts[0]
-        let rest = Js.Array.sliceFrom(1, parts)
-        let newParts = Js.Array2.concat([tag ++ first], rest)
-        html(. newParts, args)
-      }
+      %raw(`
+        ([first, ...rest], ...args) =>
+        Hybrids.html([tag + first, ...rest], ...args)
+      `)
     | None => html
     }
   | None => html

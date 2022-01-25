@@ -20,29 +20,6 @@ import "./elements/a-link.js"
 
 
 
-// const maybeStyledFromLink = 
-//   () => {
-//     const noscript = document.head.querySelector("#index-css")
-//     if (!noscript) return { html }
-    
-//     const tag = noscript.textContent
-//     if (!import.meta.env.DEV) {
-//       try {
-//         noscript.outerHTML = tag
-//       } catch (err) {
-//         console.log(err)
-//       }
-//     }
-
-//     return {
-//       html: 
-//         ([first, ...rest], ...args) =>
-//         html([tag + first, ...rest], ...args)
-//     }
-//   }
-
-
-
 const maybeStyledFromASS =
   () => {
     if ("replaceSync" in CSSStyleSheet.prototype) {
