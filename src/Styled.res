@@ -55,8 +55,8 @@ let maybeStyledFromLink: unit => styled<'a> =
       (. parts, args) => {
         let first = parts[0]
         let rest = Js.Array.sliceFrom(1, parts)
-        let test = Js.Array2.concat([tag ++ first], rest)
-        html(. test, args)
+        let newParts = Js.Array2.concat([tag ++ first], rest)
+        html(. newParts, args)
       }
     | None => html
     }
