@@ -40,7 +40,7 @@ let maybeStyledFromLink: unit => styled<'a> =
     switch textContent(nos) {
     | Some(tag) =>
       switch importMetaEnvDEV {
-      | true =>
+      | false =>
         try {
           outerHTML(nos, tag)
         } catch {
