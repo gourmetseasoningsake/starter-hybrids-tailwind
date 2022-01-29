@@ -27,8 +27,8 @@
     "dev:re": "rescript build -w",
     "build:re": "rescript",
     "dev": "vite",
-    "build": "pnpm build:re && vite build --mode staging",
-    "build:production": "pnpm build:re && vite build",
+    "build": "vite build --mode staging",
+    "build:production": "vite build",
     "preview": "vite preview",
     "add:view": "node ./tools/copy-view-main.mjs"
   },
