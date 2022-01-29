@@ -1,48 +1,29 @@
-type templateFn<'a> = @variadic (. array<string>, array<'a>) => string
-
-type styled<'a> = {
-  html: templateFn<'a>
+type styled = {
+  html: Hybrids.templateFn
 }
 
 
 
-
-
-@module("hybrids")
-@variadic
-external html
-: templateFn<'a> = "html"
-
-@val 
-@return(nullable)
-external querySelector
-: string => option<Dom.element> = "document.querySelector"
-
-@get 
-@return(nullable)
-external textContent
-: Dom.element => option<string> = "textContent"
-
-@set
-external outerHTML
-: Dom.element => string => unit = "outerHTML"
-
-@val 
-external importMetaEnvDEV
-: bool = "import.meta.env.DEV"
+@module("./index.css?inline")
+external styles
+: string = "default"
 
 
 
-let maybeStyledFromLink: unit => styled<'a> =
+open Webapi
+
+
+
+let maybeStyledFromLink: unit => styled =
   () =>
-  switch querySelector("noscript#index-css") {
+  switch Document.querySelector("noscript#index-css") {
   | Some(nos) =>
-    switch textContent(nos) {
+    switch Element.textContent(nos) {
     | Some(tag) =>
-      switch importMetaEnvDEV {
-      | true =>
+      switch ImportMeta.Env.dev {
+      | false =>
         try {
-          outerHTML(nos, tag)
+          Element.outerHTML(nos, tag)
         } catch {
         | Js.Exn.Error(obj) =>
           switch Js.Exn.message(obj) {
@@ -52,24 +33,43 @@ let maybeStyledFromLink: unit => styled<'a> =
         }
       | _ => ()
       }
-      (. parts, args) => {
-        let first = parts[0]
-        let rest = Js.Array.sliceFrom(1, parts)
-        let test = Js.Array2.concat([tag ++ first], rest)
-        html(. test, args)
-      }
-    | None => html
+      %raw(`
+        ([first, ...rest], ...args) =>
+        Hybrids.html([tag + first, ...rest], ...args)
+      `)
+    | None => Hybrids.html
     }
-  | None => html
+  | None => Hybrids.html
   }
   ->fn => { html: fn }
 
 
 
-// const maybeStyledFromASS =
-// ...
+
+let maybeStyledFromASS: unit => styled =
+  () =>
+  switch Reflect.has(CSSStyleSheet.prototype, "replaceSync") {
+  | true => {
+    let stylesheet = CSSStyleSheet.make()
+    CSSStyleSheet.replaceSync(stylesheet, styles)
+    Document.adoptedStyleSheets(Document.document, [ stylesheet ])
+    let fn = %raw(`
+      (parts, ...args) =>
+      Hybrids.html(parts, ...args).style(stylesheet)
+    `)
+    { html: fn }
+  }
+  | _ => maybeStyledFromLink()
+  }
 
 
 
-// export const styled = 
-// ...
+let styled: styled =
+  switch ImportMeta.Env.assDisable {
+  | Some(s) => s != ""
+  | None => false
+  }
+  -> disable => switch disable {
+  | true => maybeStyledFromLink()
+  | false => maybeStyledFromASS()
+  }

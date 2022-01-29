@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from "vite"
+import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
 import postcssConfig from "./postcss.config.js"
@@ -45,7 +46,7 @@ export default ({ mode }) => {
     build: {
       minify: !!envar("BUILD_MINIFY"),
       rollupOptions: {
-        plugins: [ 
+        plugins: [
           ...(envar("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
         ]
       }
@@ -57,7 +58,8 @@ export default ({ mode }) => {
           liquid
           .parseAndRender(content, data)
           .then(wrapLinkTag(mode))
-      }
+      },
+      createReScriptPlugin.default(),
     ]
   })
 }
