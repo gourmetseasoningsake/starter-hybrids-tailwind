@@ -33,6 +33,7 @@
     "add:view": "node ./tools/copy-view-main.mjs"
   },
   "devDependencies": {
+    "@jihchi/vite-plugin-rescript": "^2.0.2",
     "autoprefixer": "^10.4.0",
     "ava": "^4.0.1",
     "c8": "^7.11.0",
