@@ -1,5 +1,5 @@
 type styled = {
-  html: Hybrids.templateFn
+  html: Hybrids.tagFn
 }
 
 

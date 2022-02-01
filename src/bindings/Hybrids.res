@@ -2,14 +2,14 @@ type t
 
 
 
-type templateFn = @variadic (. array<string>, array<t>) => string
+type tagFn = @variadic (. array<string>, array<t>) => string
 
 
 
 @module("hybrids")
 @variadic
 external html
-: templateFn = "html"
+: tagFn = "html"
 
 
 
