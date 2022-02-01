@@ -14,24 +14,22 @@ open Webapi
 
 
 
-let maybeStyledFromLink: unit => styled =
+let tryStylesFromLink: unit => styled =
   () =>
   switch Document.querySelector("noscript#index-css") {
   | Some(nos) =>
     switch Element.textContent(nos) {
     | Some(tag) =>
-      switch ImportMeta.Env.dev {
-      | false =>
+      if !ImportMeta.Env.dev {
         try {
           Element.outerHTML(nos, tag)
         } catch {
         | Js.Exn.Error(obj) =>
           switch Js.Exn.message(obj) {
           | Some(m) => Js.log(m)
-          | None => Js.log("unknown err")
+          | None => Js.log("unknown error")
           }
         }
-      | _ => ()
       }
       %raw(`
         ([first, ...rest], ...args) =>
@@ -46,20 +44,19 @@ let maybeStyledFromLink: unit => styled =
 
 
 
-let maybeStyledFromASS: unit => styled =
+let tryStylesFromAss: unit => styled =
   () =>
   switch Reflect.has(CSSStyleSheet.prototype, "replaceSync") {
   | true => {
     let stylesheet = CSSStyleSheet.make()
     CSSStyleSheet.replaceSync(stylesheet, styles)
     Document.adoptedStyleSheets(Document.document, [ stylesheet ])
-    let fn = %raw(`
+    { html: %raw(`
       (parts, ...args) =>
       Hybrids.html(parts, ...args).style(stylesheet)
-    `)
-    { html: fn }
+    `) }
   }
-  | _ => maybeStyledFromLink()
+  | _ => tryStylesFromLink()
   }
 
 
@@ -69,7 +66,8 @@ let styled: styled =
   | Some(s) => s != ""
   | None => false
   }
-  -> disable => switch disable {
-  | true => maybeStyledFromLink()
-  | false => maybeStyledFromASS()
+  -> disable => if disable {
+    tryStylesFromLink()
+  } else {
+    tryStylesFromAss()
   }
