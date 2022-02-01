@@ -1,3 +1,13 @@
+/*
+Resources:
+https://dev.to/ryyppy/tagged-unions-and-rescript-variants-5e4d
+https://forum.rescript-lang.org/t/how-to-type-object-with-unknown-properties/1316
+https://forum.rescript-lang.org/t/bs-deriving-bs-optional-removed/269/4
+https://rescript-lang.org/docs/manual/latest/generate-converters-accessors#convert-external-into-js-object-creation-function
+*/
+
+
+
 type t
 
 
