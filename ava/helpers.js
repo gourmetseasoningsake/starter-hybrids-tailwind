@@ -1,4 +1,6 @@
 import { JSDOM } from "jsdom"
+import puppeteer from "puppeteer"
+import { preview } from "vite"
 
 
 
@@ -90,3 +92,22 @@ export const elementFromImport =
     ({ default: component }) =>
     [new (customElements.get(component.tag))()]
   )
+  
+
+
+export const withPage = 
+  (t, run) =>
+  puppeteer.launch()
+  .then(browser => Promise.all([
+    browser.newPage(),
+    browser,
+    preview({ preview: { port: 8080 } })
+  ]))
+  .then(async ([page, browser, server]) => {
+    try {
+      await run(t, page, server);
+    } finally {
+      await page.close()
+      await browser.close()
+    }
+  })

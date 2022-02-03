@@ -3,7 +3,7 @@ import {
   domSetup,
   elementFromImport,
   elementRenderWith
-} from '../../ava/helpers.js'
+} from "../../ava/helpers.js"
 
 
 
