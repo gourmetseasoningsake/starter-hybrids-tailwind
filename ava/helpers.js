@@ -92,6 +92,15 @@ export const elementFromImport =
     ({ default: component }) =>
     [new (customElements.get(component.tag))()]
   )
+
+
+
+const resolveURL =
+  ({ address, port }) =>
+  `http://${
+    ["127.0.0.1", "0.0.0.0", "::", undefined]
+    .includes(address) ? "localhost" : address
+  }${ port ? `:${port}` : "" }`
   
 
 
@@ -105,7 +114,7 @@ export const withPage =
   ]))
   .then(async ([page, browser, server]) => {
     try {
-      await run(t, page, server);
+      await run(t, page, resolveURL(server.httpServer.address()))
     } finally {
       await page.close()
       await browser.close()
