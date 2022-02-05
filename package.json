@@ -14,7 +14,7 @@
     "starter"
   ],
   "author": "gourmetseasoningsake",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/issues"
   },
@@ -23,13 +23,15 @@
   "type": "module",
   "scripts": {
     "test": "ava --config ./ava/config.js",
+    "test:page": "ava --config ./ava/config.js ./src/index.spec.js",
     "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
     "dev:re": "rescript build -w",
     "build:re": "rescript",
     "dev": "vite",
     "build": "vite build --mode staging",
-    "build:production": "vite build",
-    "preview": "vite preview",
+    "build:prod": "vite build",
+    "preview": "pnpm build && vite preview",
+    "preview:prod": "pnpm build:prod && vite preview",
     "add:view": "node ./tools/copy-view-main.mjs"
   },
   "devDependencies": {
@@ -40,6 +42,7 @@
     "jsdom": "^19.0.0",
     "liquidjs": "^9.32.0",
     "postcss": "^8.4.5",
+    "puppeteer": "^13.1.3",
     "rescript": "^9.1.4",
     "rollup-plugin-minify-html-literals": "^1.2.6",
     "sinon": "^12.0.1",

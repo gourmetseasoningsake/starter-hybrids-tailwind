@@ -1,14 +1,16 @@
 import { JSDOM } from "jsdom"
+import puppeteer from "puppeteer"
+import { preview } from "vite"
 
 
 
-export const domSetup = () => {
-  const window = (new JSDOM(
-    `<!DOCTYPE html><html><head><noscript id="index-css"></noscript></head></html>`, 
+export const domSetup = _ => {
+  const dom = (new JSDOM(
+    `<!DOCTYPE html><head><noscript id="index-css"></noscript></head>`, 
     { pretendToBeVisual: true }
-  )).window
-
-  globalThis.window = window;
+  ))
+  
+  globalThis.window = dom.window;
   [ "document", 
     "customElements",
     "HTMLElement",
@@ -16,7 +18,7 @@ export const domSetup = () => {
     "requestAnimationFrame",
     "Node",
     "NodeFilter"
-  ].forEach(api => globalThis[api] = window[api])
+  ].forEach(api => globalThis[api] = dom.window[api])
 }
 
 
@@ -26,8 +28,10 @@ const elementSlotChanges =
   Promise.all([...target.querySelectorAll("slot")].map(
     slot =>
     new Promise((res, _) => {
+      let to
       const slotName = slot.name || undefined
       const resolve = e => {
+        clearTimeout(to)
         slot.removeEventListener("slotchange", resolve)
         res({ 
           slot,
@@ -38,7 +42,7 @@ const elementSlotChanges =
         })
       }
       slot.addEventListener("slotchange", resolve)
-      setTimeout(() => {
+      to = setTimeout(() => {
         slot.removeEventListener("slotchange", resolve)
         return res({ slot, slotName })
       }, 10)
@@ -88,3 +92,31 @@ export const elementFromImport =
     ({ default: component }) =>
     [new (customElements.get(component.tag))()]
   )
+
+
+
+const resolveURL =
+  ({ address, port }) =>
+  `http://${
+    ["127.0.0.1", "0.0.0.0", "::", undefined]
+    .includes(address) ? "localhost" : address
+  }${ port ? `:${port}` : "" }`
+  
+
+
+export const withPage = 
+  (t, run) =>
+  puppeteer.launch()
+  .then(browser => Promise.all([
+    browser.newPage(),
+    browser,
+    preview({ preview: { port: 8080 } })
+  ]))
+  .then(async ([page, browser, server]) => {
+    try {
+      await run(t, page, resolveURL(server.httpServer.address()))
+    } finally {
+      await page.close()
+      await browser.close()
+    }
+  })
