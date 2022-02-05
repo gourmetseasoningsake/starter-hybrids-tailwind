@@ -2,11 +2,19 @@
 
 A setup for a start with [hybrids](https://hybrids.js.org), [tailwindcss](https://tailwindcss.com) and [Rescript](https://rescript-lang.org/).
 
-## Installation
+<br><br><br>
+
+## _Installation_
+
+<br>
 
 I use [pnpm](https://pnpm.io/) for this project. If you want to use `npm` or `yarn`, delete the pnpm-lock.json file and adjust the commands accordingly during installation and usage. The following procedures are just two working examples.
 
+<br>
+
 ### Using [`gh`](https://cli.github.com/):
+
+<br>
 
 Use this procedure if you want to create your own repo at the same time.
 
@@ -17,6 +25,8 @@ cd !$
 pnpm install
 ```
 
+<br>
+
 ### Using `curl`:
 
 ```bash
@@ -26,9 +36,15 @@ curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball
 pnpm install
 ```
 
-## Configuration
+<br><br><br>
+
+## _Configuration_
+
+<br>
 
 ### Custom environment variables
+
+<br>
 
 Custom environment variables must have the prefix specified in the `envPrefix` constant in `vite.config.js`.
 
@@ -46,7 +62,11 @@ Custom variables are all of type `string`, unlike some variables provided by Vit
 
 By default `vite` runs in `development` mode and `vite build` in `production` mode.
 
+<br>
+
 ### Preconfigured custom environment variables
+
+<br>
 
 _Given_<br>
 `envPrefix` is set to `EXP_`,<br>
@@ -63,27 +83,67 @@ empty is falsy
 | EXP_BUILD_MINIFY | non-empty or empty | Wether to minify the build output. |
 | EXP_TEST_VERBOSE | non-empty or empty | Wether stdout for tests should be verbose. (Does not have a significant effect yet.) |
 
+<br>
+
 ### Templating index.html
+
+<br>
 
 You can template the `index.html` file with liquid [tags](https://liquidjs.com/tags/overview.html), outputs and [filters](https://liquidjs.com/filters/overview.html). The data passed to the template can be populated in `index.config.js`. You can set a data item value in two ways, as primitive
 ```javascript
 ...
-ogType: "website",
+lang: "en",
 ...
 ```
 or as object with properties per mode:
 ```javascript
 ...
-title: {
-  development: "Title (development)",
-  staging: "Title (staging)",
-  production: "Title"
+robots: {
+  staging: "noindex,nofollow",
+  production: "index,nofollow"
 },
 ...
 ```
-Accessing `{{ title }}` in the template would render the value according the mode Vite is running in.
+Accessing `{{ robots }}` in the template would render the value according the mode Vite is running in.
+If no property matches the mode, the value is `null`.
 
-## Usage
+You can loop through object entries
+
+```javascript
+// index.config.js
+
+const config = {
+  ...
+  og: {
+    title: "Title",
+    type: "website",
+    ...
+  }
+  ...
+}
+```
+
+in your index.html file,
+
+```liquid
+<!-- index.html -->
+...
+{%- for item in og -%}
+  {%- if item[1] -%}
+
+  <meta property="og:{{ item[0] }}" content="{{ item[1] }}">
+
+  {%- endif -%}
+{%- endfor -%}
+```
+
+where `item[0]` is the key and `item[1]` is the value.
+
+<br><br><br>
+
+## _Usage_
+
+<br>
 
 ### Development
 
@@ -94,6 +154,8 @@ pnpm dev
 mode: `development`<br>
 node env: `development`
 
+<br>
+
 ### Staging
 
 ```bash
@@ -102,6 +164,8 @@ pnpm build
 
 mode: `staging`<br>
 node env: `production`
+
+<br>
 
 ### Production
 
@@ -112,24 +176,42 @@ pnpm build:production
 mode: `production`<br>
 node env: `production`
 
+<br>
+
 ### Preview
 
 ```bash
 pnpm preview
 ```
 
+mode: `production`<br>
+node env: `production`
+
 Serves build from the dist folder.
 
-## References
+
+<br><br><br>
+
+## _References_
+
+<br>
 
 ### Tools
+
+<br>
 
 - [hybrids](https://hybrids.js.org)
 - [tailwindcss](https://tailwindcss.com)
 - [Rescript](https://rescript-lang.org/)
 - [Vite](https://vitejs.dev/)
 - [liquidjs](https://liquidjs.com/)
+- [AVA](https://github.com/avajs/ava)
+- [Puppeteer](https://pptr.dev/)
+
+<br>
 
 ### Icons
+
+<br>
 
 - [How to Favicon in 2021: Six files that fit most needs](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs)
