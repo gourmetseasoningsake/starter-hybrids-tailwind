@@ -6,7 +6,7 @@ specifiers:
   autoprefixer: ^10.4.0
   ava: ^4.0.1
   c8: ^7.11.0
-  hybrids: ^7.0.4
+  hybrids: ^7.0.5
   jsdom: ^19.0.0
   liquidjs: ^9.32.0
   postcss: ^8.4.5
@@ -19,7 +19,7 @@ specifiers:
 
 dependencies:
   '@ryyppy/rescript-promise': 2.1.0
-  hybrids: 7.0.4
+  hybrids: 7.0.5
 
 devDependencies:
   '@jihchi/vite-plugin-rescript': 2.0.2_rescript@9.1.4+vite@2.7.13
@@ -1381,8 +1381,8 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /hybrids/7.0.4:
-    resolution: {integrity: sha512-egw2e+IPyhET4kIaY+oKI/SN3CLcTDRwZtXjrI9TH/c6czQTqGG58AkW8EQKhY93um22rRuM6+l2TTzFkpFzwQ==}
+  /hybrids/7.0.5:
+    resolution: {integrity: sha512-uQmRBImwJw8HI55x9R6T3vDKL3FdIm/KKGBfArjd7/rPYLFHpn33XrgBc1bzTZ32yh0jCOZQdzyED5g+2lhf+w==}
     dev: false
 
   /iconv-lite/0.6.3:
