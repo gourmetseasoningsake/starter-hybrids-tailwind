@@ -1,14 +1,19 @@
 import "./index.css"
-import { define, router, html } from "hybrids"
+import { define, router, html, store } from "hybrids"
 import { historyPush, beforeNavigate } from "./Navigation.bs.js"
+
+
+
+/* Models */
+
+import { Menu } from "./views/model-page.js"
 
 
 
 /* Views */
 
-import MainHome from "./views/main-home.js"
-import MainOther from "./views/main-other.js"
-import MainMore from "./views/main-more.js"
+import PageHome from "./views/page-home.js"
+import PageOther from "./views/page-other.js"
 
 
 
@@ -20,34 +25,33 @@ import "./elements/a-link.js"
 
 define({
   tag: "the-app",
-  views: router([MainHome, MainOther, MainMore]),
-  content: ({ views }) => html`
-
+  menu: store(Menu),
+  views: router([PageHome, PageOther], { url: "/" }),
+  content: ({ menu, views }) => html`
     <header>
       <nav class="flex">
         <a-link
-          href=${router.url(MainHome, { stack: true })}
-          active=${router.active(MainHome)}
+          href=${router.url(PageHome, { stack: true, page: 1 })}
+          active=${router.active(PageHome)}
           onclick=${beforeNavigate(historyPush)}>
           Home
         </a-link>
         <a-link
-          href=${router.url(MainOther, { stack: true })}
-          active=${router.active(MainOther)}
+          href=${router.url(PageOther, { stack: true, page: 2, path: "other1" })}
+          active=${router.active(PageOther)}
           onclick=${beforeNavigate(historyPush)}>
-          Other
+          Other1
         </a-link>
         <a-link
-          href=${router.url(MainMore, { stack: true })}
-          active=${router.active(MainMore)}
+          href=${router.url(PageOther, { stack: true, page: 3, path: "other2" })}
+          active=${router.active(PageOther)}
           onclick=${beforeNavigate(historyPush)}>
-          More
+          Other2
         </a-link>
       </nav>
     </header>
 
     <main>${views}</main>
-    
   `
 })
 
