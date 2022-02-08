@@ -23,19 +23,34 @@ import "./elements/a-link.js"
 
 
 
-/* External */
+/* Config */
 
-// const app = document.querySelector("the-app")
-// app.addEventListener("navigate", e => {
-//   console.log(e)
-// })
+if (import.meta.env.EXP_ROUTER_DEBUG) router.debug()
+if (import.meta.hot) {
+  import.meta.hot.accept(_ => {
+    if (import.meta.env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
+  })
+}
 
 
+
+/* Parent */
 
 define({
   tag: "the-app",
   menu: store(Menu),
-  views: router([PageHome, PageOther]),
+  views: combineDescFns(router([PageHome, PageOther]), {
+    observe:
+      (_, val) =>
+      store.resolve(val[0].page).then(page => {
+        document.title =
+          import.meta.env.PROD 
+          ? page.title
+          : `${(import.meta.env.MODE).toUpperCase()} ${page.title}`.trim()
+
+        //... update lang, links, meta content, etc.
+      })
+  }),
   content: ({ menu, views }) => html`
     <header>
       <nav class="flex">
@@ -66,11 +81,19 @@ define({
 
 
 
-/* Config */
 
-if (import.meta.env.EXP_ROUTER_DEBUG) router.debug()
-if (import.meta.hot) {
-  import.meta.hot.accept(_ => {
-    if (import.meta.env.EXP_HMR_FORCE_RELOAD) import.meta.hot.invalidate()
-  })
+/* Helpers */
+
+function combineDescFns (da, db) {
+  return Object.keys(db).reduce(
+    (a, b) =>
+    ({
+      ...a, 
+      [b]: (...args) => (
+        db[b](...args)
+      , da[b] && da[b](...args)
+      )
+    }),
+    da
+  )
 }
