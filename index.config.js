@@ -8,9 +8,9 @@ const config = {
     },
     rating: null
   },
-  title: "Title",
+  title: "...",
   og: {
-    title: "Title",
+    title: "...",
     type: "website",
     image: null,
     url: null,

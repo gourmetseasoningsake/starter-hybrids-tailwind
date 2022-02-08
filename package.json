@@ -22,6 +22,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "db": "json-server --config ./json-server/config.json ./json-server/db.json",
     "test": "ava --config ./ava/config.js",
     "test:page": "ava --config ./ava/config.js ./src/index.spec.js",
     "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
@@ -51,6 +52,9 @@
   },
   "dependencies": {
     "@ryyppy/rescript-promise": "^2.1.0",
-    "hybrids": "^7.0.4"
+    "hybrids": "^7.0.5"
+  },
+  "peerDependencies": {
+    "json-server": "^0.17.0"
   }
 }
