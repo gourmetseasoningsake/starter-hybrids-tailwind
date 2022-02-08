@@ -23,28 +23,37 @@ import "./elements/a-link.js"
 
 
 
+/* External */
+
+// const app = document.querySelector("the-app")
+// app.addEventListener("navigate", e => {
+//   console.log(e)
+// })
+
+
+
 define({
   tag: "the-app",
   menu: store(Menu),
-  views: router([PageHome, PageOther], { url: "/" }),
+  views: router([PageHome, PageOther]),
   content: ({ menu, views }) => html`
     <header>
       <nav class="flex">
         <a-link
-          href=${router.url(PageHome, { stack: true, page: 1 })}
-          active=${router.active(PageHome)}
+          href=${router.url(PageHome)}
+          active=${router.active(PageHome, { stack: true })}
           onclick=${beforeNavigate(historyPush)}>
           Home
         </a-link>
         <a-link
-          href=${router.url(PageOther, { stack: true, page: 2, path: "other1" })}
-          active=${router.active(PageOther)}
+          href=${router.url(PageOther, { slug: "other1" })}
+          active=${router.active(PageOther, { stack: true }) && views[0].slug === "other1"}
           onclick=${beforeNavigate(historyPush)}>
           Other1
         </a-link>
         <a-link
-          href=${router.url(PageOther, { stack: true, page: 3, path: "other2" })}
-          active=${router.active(PageOther)}
+          href=${router.url(PageOther, { slug: "other2" })}
+          active=${router.active(PageOther, { stack: true }) && views[0].slug === "other2"}
           onclick=${beforeNavigate(historyPush)}>
           Other2
         </a-link>

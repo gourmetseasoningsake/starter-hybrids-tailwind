@@ -5,23 +5,39 @@ import  { store } from "hybrids"
 //const Pages = import.meta.globEager('./page-*.js')
 
 
+// NB: feeling lucky
+const get =
+  url =>
+  fetch(url)
+  .then(resp => resp.json())
+  .then(data => data)
+
+
 
 export const Page = {
   id: true,
   title: "",
   [store.connect]: {
-    get: id => fetch(`http://localhost:3001/pages/${id}`).then(data => data.json()).then(data => data),
-    list: () => fetch(`http://localhost:3001/pages`).then(data => data.json()).then(data => data),
+    get: slug => get(`http://localhost:3001/page/${slug}`),
+    list: () => get(`http://localhost:3001/page`),
   }
+}
+
+
+
+const Params = {
+  slug: ""
 }
 
 
 
 export const Menu = {
   id: true,
-  page: 1,
+  text: "",
+  multiple: false,
+  params: Params,
   [store.connect]: {
-    get: id => fetch(`http://localhost:3001/menu/${id}`).then(data => data.json()).then(data => data),
-    list: () => fetch(`http://localhost:3001/menu`).then(data => data.json()).then(data => data),
+    get: id => get(`http://localhost:3001/menu/${id}`),
+    list: () => get(`http://localhost:3001/menu`),
   }
 }

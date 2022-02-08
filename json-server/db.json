@@ -1,12 +1,12 @@
 {
-  "pages": [
-    { "id": 1, "title": "Home" },
-    { "id": 2, "title": "Other1" },
-    { "id": 3, "title": "Other2" }
+  "page": [
+    { "id": "home", "title": "Home" },
+    { "id": "other1", "title": "Other1" },
+    { "id": "other2", "title": "Other2" }
   ],
   "menu": [
-    { "id": 1, "text": "Home", "params": { "page": 1, "stack": true }},
-    { "id": 2, "text": "Other1",  "params": { "page": 2, "stack": true, "path": "other1" }},
-    { "id": 3, "text": "Other2",  "params": { "page": 3, "stack": true, "path": "other2" }}
+    { "id": 1, "text": "Home"},
+    { "id": 2, "text": "Other1",  "params": { "slug": "other1" }},
+    { "id": 3, "text": "Other2",  "params": { "slug": "other2" }}
   ]
 }
