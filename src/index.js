@@ -39,7 +39,7 @@ if (import.meta.hot) {
 define({
   tag: "the-app",
   menu: store(Menu),
-  views: combineDescFns(router([PageHome, PageOther]), {
+  views: descCombine(router([PageHome, PageOther]), {
     observe:
       (_, val) =>
       store.resolve(val[0].page).then(page => {
@@ -80,11 +80,9 @@ define({
 })
 
 
-
-
 /* Helpers */
 
-function combineDescFns (da, db) {
+function descCombine (da, db) {
   return Object.keys(db).reduce(
     (a, b) =>
     ({
