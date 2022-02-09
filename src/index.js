@@ -12,8 +12,7 @@ import { Menu } from "./views/model-page.js"
 
 /* Views */
 
-import PageHome from "./views/page-home.js"
-import PageOther from "./views/page-other.js"
+const Pages = import.meta.globEager('./views/page-*.js')
 
 
 
@@ -38,8 +37,8 @@ if (import.meta.hot) {
 
 define({
   tag: "the-app",
-  menu: store(Menu),
-  views: descCombine(router([PageHome, PageOther]), {
+  menu: store([Menu], { id: () => true }),
+  views: descCombine(router(Object.values(Pages).map(o => o.default)), {
     observe:
       (_, val) =>
       store.resolve(val[0].page).then(page => {
@@ -54,24 +53,14 @@ define({
   content: ({ menu, views }) => html`
     <header>
       <nav class="flex">
-        <a-link
-          href=${router.url(PageHome)}
-          active=${router.active(PageHome, { stack: true })}
-          onclick=${beforeNavigate(historyPush)}>
-          Home
-        </a-link>
-        <a-link
-          href=${router.url(PageOther, { slug: "other1" })}
-          active=${router.active(PageOther, { stack: true }) && views[0].slug === "other1"}
-          onclick=${beforeNavigate(historyPush)}>
-          Other1
-        </a-link>
-        <a-link
-          href=${router.url(PageOther, { slug: "other2" })}
-          active=${router.active(PageOther, { stack: true }) && views[0].slug === "other2"}
-          onclick=${beforeNavigate(historyPush)}>
-          Other2
-        </a-link>
+        ${store.ready(menu) && menu.map(item => html`
+          <a-link
+            href=${router.url(getView(Pages, item.view), (item.params.slug ? item.params : {}))}
+            active=${router.active(getView(Pages, item.view), { stack: true }) && (item.params.slug ? item.params.slug === views[0].slug : true)}
+            onclick=${beforeNavigate(historyPush)}>
+            ${item.text}
+          </a-link>
+        `)}
       </nav>
     </header>
 
@@ -83,16 +72,21 @@ define({
 
 /* Helpers */
 
-function descCombine (da, db) {
-  return Object.keys(db).reduce(
-    (a, b) =>
+function getView (o, basename) {
+  return o[`./views/${basename}.js`].default
+}
+
+
+function descCombine (oa, ob) {
+  return Object.keys(ob).reduce(
+    (a, k) =>
     ({
       ...a, 
-      [b]: (...args) => (
-        db[b](...args)
-      , da[b] && da[b](...args)
+      [k]: (...args) => (
+        ob[k](...args)
+      , oa[k] && oa[k](...args)
       )
     }),
-    da
+    oa
   )
 }
