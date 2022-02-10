@@ -1,6 +1,7 @@
 import "./index.css"
 import { define, router, html, store } from "hybrids"
 import { historyPush, beforeNavigate } from "./Navigation.bs.js"
+import { descCombineWithRouter } from "./Helpers.bs.js"
 
 
 
@@ -38,9 +39,8 @@ if (import.meta.hot) {
 define({
   tag: "the-app",
   menu: store([Menu], { id: () => true }),
-  views: descCombine(router(Object.values(Pages).map(o => o.default)), {
-    observe:
-      (_, val) =>
+  views: descCombineWithRouter(Pages, {
+    observe: (_, val) =>
       store.resolve(val[0].page).then(page => {
         document.title =
           import.meta.env.PROD 
@@ -53,14 +53,21 @@ define({
   content: ({ menu, views }) => html`
     <header>
       <nav class="flex">
-        ${store.ready(menu) && menu.map(item => html`
-          <a-link
-            href=${router.url(getView(Pages, item.view), (item.params.slug ? item.params : {}))}
-            active=${router.active(getView(Pages, item.view), { stack: true }) && (item.params.slug ? item.params.slug === views[0].slug : true)}
-            onclick=${beforeNavigate(historyPush)}>
-            ${item.text}
-          </a-link>
-        `)}
+        ${store.ready(menu) && menu.map(item => {
+          const viewFromModules = getView(Pages, item.view)
+          const paramsFromItem = getPropOr(item, "params", {})
+          return html`
+            <a-link
+              href=${router.url(viewFromModules, paramsFromItem.slug ? paramsFromItem : {})}
+              active=${
+                router.active(viewFromModules, { stack: true }) &&
+                isNotInactiveMultiView(paramsFromItem, views)
+              }
+              onclick=${beforeNavigate(historyPush)}>
+              ${item.text}
+            </a-link>
+          `
+        })}
       </nav>
     </header>
 
@@ -72,21 +79,16 @@ define({
 
 /* Helpers */
 
-function getView (o, basename) {
-  return o[`./views/${basename}.js`].default
+function getView (modules, basename) {
+  return modules[`./views/${basename}.js`].default
 }
 
 
-function descCombine (oa, ob) {
-  return Object.keys(ob).reduce(
-    (a, k) =>
-    ({
-      ...a, 
-      [k]: (...args) => (
-        ob[k](...args)
-      , oa[k] && oa[k](...args)
-      )
-    }),
-    oa
-  )
+function getPropOr (o, k, dv) {
+  return o[k] || dv
+}
+
+
+function isNotInactiveMultiView (params, views) {
+  return params?.slug ? params.slug === views[0]?.slug : true
 }
