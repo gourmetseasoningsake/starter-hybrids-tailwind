@@ -5,8 +5,8 @@
     { "id": "other2", "title": "Other2" }
   ],
   "menu": [
-    { "id": 1, "text": "Home"},
-    { "id": 2, "text": "Other1",  "params": { "slug": "other1" }},
-    { "id": 3, "text": "Other2",  "params": { "slug": "other2" }}
+    { "id": 1, "view": "page-home", "text": "Home"},
+    { "id": 2, "view": "page-other", "text": "Other1",  "params": { "slug": "other1" }},
+    { "id": 3, "view": "page-other", "text": "Other2",  "params": { "slug": "other2" }}
   ]
 }

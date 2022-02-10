@@ -2,9 +2,6 @@ import  { store } from "hybrids"
 
 
 
-//const Pages = import.meta.globEager('./page-*.js')
-
-
 // NB: feeling lucky
 const get =
   url =>
@@ -33,8 +30,8 @@ const Params = {
 
 export const Menu = {
   id: true,
+  view: "",
   text: "",
-  multiple: false,
   params: Params,
   [store.connect]: {
     get: id => get(`http://localhost:3001/menu/${id}`),

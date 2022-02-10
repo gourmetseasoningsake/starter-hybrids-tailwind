@@ -90,3 +90,17 @@ module Element = {
   external outerHTML
   : t => string => unit = "outerHTML"
 }
+
+
+
+module Object = {
+  @scope("Object")
+  @val
+  external values
+  : {..} => array<{..}> = "values"
+
+  @scope("Object")
+  @val
+  external keys
+  : {..} => array<string> = "keys"
+}

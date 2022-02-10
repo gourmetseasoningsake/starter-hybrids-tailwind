@@ -9,20 +9,37 @@ NB: You probably need to wait for this:
 https://forum.rescript-lang.org/t/binding-to-tagged-template-function/1093
 */
 
+type templateKeys
+type taggedFn = @variadic (. array<string>, array<templateKeys>) => string
 
 
-type t
 
+module Descriptor = {
+  type t<'a> = 'a
+  type host<'b> = {..} as 'b
 
-
-type tagFn = @variadic (. array<string>, array<t>) => string
+  @deriving(abstract)
+  type d<'a, 'b> = {
+    @optional value: t<'a>,
+    @optional get: (host<'b>, t<'a>) => t<'a>,
+    @optional set: (host<'b>, t<'a>, t<'a>) => unit,
+    @optional connect: (host<'b>, string) => unit,
+    @optional observe: (host<'b>, t<'a>, t<'a>) => unit
+  }
+}
 
 
 
 @module("hybrids")
 @variadic
 external html
-: tagFn = "html"
+: taggedFn = "html"
+
+
+
+@module("hybrids")
+external router
+: array<{..}> => Descriptor.d<'a, {..}> = "router"
 
 
 

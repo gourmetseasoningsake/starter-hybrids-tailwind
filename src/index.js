@@ -1,6 +1,7 @@
 import "./index.css"
 import { define, router, html, store } from "hybrids"
 import { historyPush, beforeNavigate } from "./Navigation.bs.js"
+import { descCombineWithRouter } from "./Helpers.bs.js"
 
 
 
@@ -12,8 +13,7 @@ import { Menu } from "./views/model-page.js"
 
 /* Views */
 
-import PageHome from "./views/page-home.js"
-import PageOther from "./views/page-other.js"
+const Pages = import.meta.globEager('./views/page-*.js')
 
 
 
@@ -38,10 +38,9 @@ if (import.meta.hot) {
 
 define({
   tag: "the-app",
-  menu: store(Menu),
-  views: descCombine(router([PageHome, PageOther]), {
-    observe:
-      (_, val) =>
+  menu: store([Menu], { id: () => true }),
+  views: descCombineWithRouter(Pages, {
+    observe: (_, val) =>
       store.resolve(val[0].page).then(page => {
         document.title =
           import.meta.env.PROD 
@@ -54,24 +53,21 @@ define({
   content: ({ menu, views }) => html`
     <header>
       <nav class="flex">
-        <a-link
-          href=${router.url(PageHome)}
-          active=${router.active(PageHome, { stack: true })}
-          onclick=${beforeNavigate(historyPush)}>
-          Home
-        </a-link>
-        <a-link
-          href=${router.url(PageOther, { slug: "other1" })}
-          active=${router.active(PageOther, { stack: true }) && views[0].slug === "other1"}
-          onclick=${beforeNavigate(historyPush)}>
-          Other1
-        </a-link>
-        <a-link
-          href=${router.url(PageOther, { slug: "other2" })}
-          active=${router.active(PageOther, { stack: true }) && views[0].slug === "other2"}
-          onclick=${beforeNavigate(historyPush)}>
-          Other2
-        </a-link>
+        ${store.ready(menu) && menu.map(item => {
+          const viewFromModules = getView(Pages, item.view)
+          const paramsFromItem = getPropOr(item, "params", {})
+          return html`
+            <a-link
+              href=${router.url(viewFromModules, paramsFromItem.slug ? paramsFromItem : {})}
+              active=${
+                router.active(viewFromModules, { stack: true }) &&
+                isNotInactiveMultiView(paramsFromItem, views)
+              }
+              onclick=${beforeNavigate(historyPush)}>
+              ${item.text}
+            </a-link>
+          `
+        })}
       </nav>
     </header>
 
@@ -80,18 +76,19 @@ define({
 })
 
 
+
 /* Helpers */
 
-function descCombine (da, db) {
-  return Object.keys(db).reduce(
-    (a, b) =>
-    ({
-      ...a, 
-      [b]: (...args) => (
-        db[b](...args)
-      , da[b] && da[b](...args)
-      )
-    }),
-    da
-  )
+function getView (modules, basename) {
+  return modules[`./views/${basename}.js`].default
+}
+
+
+function getPropOr (o, k, dv) {
+  return o[k] || dv
+}
+
+
+function isNotInactiveMultiView (params, views) {
+  return params?.slug ? params.slug === views[0]?.slug : true
 }
