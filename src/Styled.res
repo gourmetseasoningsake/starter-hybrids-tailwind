@@ -44,8 +44,8 @@ let tryStylesFromLink: unit => styled =
 
 
 
-let tryStylesFromAss: unit => styled =
-  () =>
+let tryStylesFromAss: string => styled =
+  styles =>
   switch Reflect.has(CSSStyleSheet.prototype, "replaceSync") {
   | true => {
     let stylesheet = CSSStyleSheet.make()
@@ -69,5 +69,5 @@ let styled: styled =
   -> disable => if disable {
     tryStylesFromLink()
   } else {
-    tryStylesFromAss()
+    tryStylesFromAss(styles)
   }

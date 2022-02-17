@@ -11,7 +11,8 @@ export default define({
   
     <a
       href=${href}
-      class=${{ "text-pink-400": active }}>
+      class=${{ "text-pink-400": active }}
+      aria-current=${active && "page"}>
       <slot></slot>
     </a>
 

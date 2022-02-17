@@ -31,7 +31,7 @@
     "dev": "vite",
     "build": "vite build --mode staging",
     "build:prod": "vite build",
-    "preview": "pnpm build && vite preview",
+    "preview": "pnpm build && vite preview --mode staging",
     "preview:prod": "pnpm build:prod && vite preview",
     "add:view": "node ./tools/copy-view-main.mjs"
   },

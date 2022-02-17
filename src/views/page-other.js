@@ -4,7 +4,7 @@ import { define, router, store, html } from "hybrids"
 
 /* Models */
 
-import { Page } from "./model-page.js"
+import { Page } from "./Page.js"
 
 
 
