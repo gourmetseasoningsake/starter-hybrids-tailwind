@@ -10,7 +10,7 @@ let unsafeProp: Js.Dict.t<'a> => string => 'a =
 
 
 
-let descCombine: Hybrids.Descriptor.d<'a, {..}> => ({..} => Hybrids.Descriptor.d<'a, {..}>) =
+let descriptorCombine: Hybrids.Descriptor.d<'a, {..} as 'b> => {..} => Hybrids.Descriptor.d<'a, 'b> =
   oa =>
   ob =>
   Object.keys(ob)
@@ -28,10 +28,10 @@ let descCombine: Hybrids.Descriptor.d<'a, {..}> => ({..} => Hybrids.Descriptor.d
 
 
 
-let descCombineWithRouter: {..} => ({..} => Hybrids.Descriptor.d<'a, {..}>) =
+let descriptorCombineWithRouter: {..} => {..} => Hybrids.Descriptor.d<'a, {..}> =
   modules =>
   ob =>
   Object.values(modules)
   ->Js.Array2.map(m => m["default"])
   ->Hybrids.router
-  ->descCombine(ob)
+  ->descriptorCombine(ob)

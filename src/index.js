@@ -1,25 +1,34 @@
 import "./index.css"
 import { define, router, html, store } from "hybrids"
-import { historyPush, beforeNavigate } from "./Navigation.bs.js"
-import { descCombineWithRouter } from "./Helpers.bs.js"
-
-
-
-/* Models */
-
-import { Menu } from "./views/model-page.js"
-
-
-
-/* Views */
-
-const Pages = import.meta.globEager('./views/page-*.js')
+import { descriptorCombineWithRouter } from "./Helpers.bs.js"
 
 
 
 /* Elements */
 
-import "./elements/a-link.js"
+import { TheNav } from "./elements/the-nav.js"
+
+
+
+/* Views */
+
+const pages = import.meta.globEager('./views/page-*.js')
+
+
+
+/* Models */
+
+const Menu = {
+  id: true,
+  items: [{
+    view: "",
+    text: "",
+    params: { slug: "" }
+  }],
+  [store.connect]: {
+    get: id => get(`http://localhost:3001/menu/${id}`)
+  }
+}
 
 
 
@@ -34,44 +43,27 @@ if (import.meta.hot) {
 
 
 
-/* Parent */
-
+define({ ...TheNav, pages: { get: () => pages }})
 define({
   tag: "the-app",
-  menu: store([Menu], { id: () => true }),
-  views: descCombineWithRouter(Pages, {
-    observe: (_, val) =>
-      store.resolve(val[0].page).then(page => {
-        document.title =
-          import.meta.env.PROD 
-          ? page.title
-          : `${(import.meta.env.MODE).toUpperCase()} ${page.title}`.trim()
+  menu: store(Menu, { id: () => 1 }),
+  view: descriptorCombineWithRouter(pages, {
+    observe: (_, value) => store.resolve(value[0].page).then(page => {
+      document.title =
+        !(import.meta.env.MODE === "production")
+        ? `${(import.meta.env.MODE).toUpperCase()} ${page.title}`.trim()
+        : page.title
 
-        //... update lang, links, meta content, etc.
-      })
+      //... update lang, links, meta content, etc.
+    })
   }),
-  content: ({ menu, views }) => html`
-    <header>
-      <nav class="flex">
-        ${store.ready(menu) && menu.map(item => {
-          const viewFromModules = getView(Pages, item.view)
-          const paramsFromItem = getPropOr(item, "params", {})
-          return html`
-            <a-link
-              href=${router.url(viewFromModules, paramsFromItem.slug ? paramsFromItem : {})}
-              active=${
-                router.active(viewFromModules, { stack: true }) &&
-                isNotInactiveMultiView(paramsFromItem, views)
-              }
-              onclick=${beforeNavigate(historyPush)}>
-              ${item.text}
-            </a-link>
-          `
-        })}
-      </nav>
+  content: ({ menu, view }) => html`
+    <header class="flex">
+      ${store.ready(menu) && html`
+        <the-nav menu=${menu.items} currentUrl=${router.currentUrl()}></the-nav>
+      `}
     </header>
-
-    <main>${views}</main>
+    <main>${view}</main>
   `
 })
 
@@ -79,16 +71,7 @@ define({
 
 /* Helpers */
 
-function getView (modules, basename) {
-  return modules[`./views/${basename}.js`].default
-}
-
-
-function getPropOr (o, k, dv) {
-  return o[k] || dv
-}
-
-
-function isNotInactiveMultiView (params, views) {
-  return params?.slug ? params.slug === views[0]?.slug : true
+// NB: feeling lucky
+function get (url) {
+  return fetch(url).then(resp => resp.json()).then(data => data)
 }
