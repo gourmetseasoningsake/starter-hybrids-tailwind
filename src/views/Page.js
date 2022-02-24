@@ -1,4 +1,5 @@
 import  { store } from "hybrids"
+import { getJsonOr } from "../Helpers.bs.js"
 
 
 
@@ -7,15 +8,6 @@ export const Page = {
   id: true,
   title: "",
   [store.connect]: {
-    get: id => get(`http://localhost:3001/page/${id}`)
+    get: id => getJsonOr(`http://localhost:3001/page/${id}`, {})
   }
-}
-
-
-
-/* Helpers */
-
-// NB: feeling lucky
-function get (url) {
-  return fetch(url).then(resp => resp.json()).then(data => data)
 }

@@ -104,3 +104,33 @@ module Object = {
   external keys
   : {..} => array<string> = "keys"
 }
+
+
+
+module Response = {
+  type t<'a>
+  @send external json: t<'a> => Promise.t<'a> = "json"
+}
+
+
+
+module Fetch = {
+  @deriving(abstract)
+  type init = {
+    @optional method: string,
+    @optional mode: string,
+    @optional credentials: string,
+    @optional headers: {.},
+    @optional redirect: string,
+    @optional referrerPolicy: string,
+    @optional body: string
+  }
+
+  @val
+  external fetch
+  : (~input: string, ~init: init=?, unit) => Promise.t<Response.t<'a>> = "fetch"
+}
+
+
+
+
