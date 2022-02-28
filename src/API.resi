@@ -1,0 +1,1 @@
+let getJson: (. string, Js.Json.t) => Promise.t<Js.Json.t>

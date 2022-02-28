@@ -7,6 +7,10 @@ module ImportMeta = {
     @val 
     external assDisable
     : option<string> = "import.meta.env.EXP_ASS_DISABLE"
+
+    @val
+    external apiUrl
+    : string = "import.meta.env.EXP_API_URL"
   }
 }
 

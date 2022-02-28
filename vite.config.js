@@ -3,11 +3,31 @@ import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
 import postcssConfig from "./postcss.config.js"
-import indexConfig from "./index.config.js"
+import indexConfigFrom from "./index.config.js"
 
 
 
-export const envPrefix = "EXP_"
+const envPrefixes = ["EXP_"]
+
+
+
+export const envFrom = 
+  (mode, prefixes = envPrefixes) => {
+    const entries = loadEnv(mode, process.cwd(), prefixes)
+    const fn = p => k => entries[`${p}${k}`]
+
+    return prefixes.reduce((a, b) => {
+      const prefix = 
+        b.toLowerCase()
+        .replace(/_+([a-z0-9])/g, (_, c) => c.toUpperCase())
+        .replace("_", "")
+
+      return {...a, [prefix]: fn(b)}
+    }, { entries, var: fn(prefixes[0]) })
+  }
+
+
+
 const liquid = new Liquid()
 
 
@@ -28,26 +48,25 @@ const wrapLinkTag =
 
 
 export default ({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), envPrefix)
-  const envar = key => env[`${envPrefix}${key}`]
-  const data = indexConfig(mode)
+  const env = envFrom(mode)
+  const indexConfig = indexConfigFrom(mode)
 
   let server = {}
 
-  if (envar("BROWSER")) {
-    process.env.BROWSER = envar("BROWSER")
+  if (env.var("BROWSER")) {
+    process.env.BROWSER = env.var("BROWSER")
     server.open = "/"
   }
 
   return defineConfig({
-    envPrefix,
+    envPrefix: envPrefixes[0],
     server,
     css: { postcss: postcssConfig },
     build: {
-      minify: !!envar("BUILD_MINIFY"),
+      minify: !!env.var("BUILD_MINIFY"),
       rollupOptions: {
         plugins: [
-          ...(envar("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
+          ...(env.var("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
         ]
       }
     },
@@ -56,7 +75,7 @@ export default ({ mode }) => {
       , transformIndexHtml: 
           content =>
           liquid
-          .parseAndRender(content, data)
+          .parseAndRender(content, indexConfig)
           .then(wrapLinkTag(mode))
       },
       createReScriptPlugin.default(),

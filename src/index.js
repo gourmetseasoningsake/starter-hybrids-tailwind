@@ -1,6 +1,7 @@
 import "./index.css"
 import { define, router, html, store } from "hybrids"
-import { getJsonOr, descriptorCombineWithRouter } from "./Helpers.bs.js"
+import { descriptorCombineWithRouter } from "./Helpers.bs.js"
+import { getJson } from "./API.bs.js"
 
 
 
@@ -26,7 +27,7 @@ const Menu = {
     params: { slug: "" }
   }],
   [store.connect]: {
-    get: id => getJsonOr(`http://localhost:3001/menu/${id}`, {})
+    get: id => getJson(`/menu/${id}`, {})
   }
 }
 
