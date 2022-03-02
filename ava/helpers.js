@@ -1,6 +1,5 @@
 import { JSDOM } from "jsdom"
 import puppeteer from "puppeteer"
-import jsonServer from "json-server"
 import { preview } from "vite"
 
 

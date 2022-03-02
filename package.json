@@ -22,10 +22,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "db": "node ./json-server/server.js",
+    "db": "node ./tasks/db.js development",
     "test2": "node ./tasks/test.js test",
     "test": "concurrently 'pnpm db test' 'wait-on tcp:3001 && ava --config ./ava/config.js'",
-    "test:page": "concurrently 'pnpm db test' 'wait-on tcp:3001 && ava --config ./ava/config.js ./src/index.spec.js'",
+    "test:page": "concurrently 'pnpm db test' 'wait-on tcp:3001 && ava --config ./ava/config.js ./src/index.spec-f.js'",
     "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
     "dev:re": "rescript build -w",
     "build:re": "rescript",

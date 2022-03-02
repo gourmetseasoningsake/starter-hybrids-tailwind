@@ -1,5 +1,5 @@
 {
   "clean": true,
   "include": ["src/**/*.js"],
-  "exclude": ["**/*.spec.js", "**/*.config.js"]
+  "exclude": ["**/*.test.js", "**/*.test-*.js", "**/*.config.js"]
 }

@@ -1,3 +1,5 @@
+import { resolve } from "path"
+import { fileURLToPath } from "url"
 import { defineConfig, loadEnv } from "vite"
 import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-minify-html-literals"
@@ -23,8 +25,18 @@ export const envFrom =
         .replace("_", "")
 
       return {...a, [prefix]: fn(b)}
-    }, { entries, var: fn(prefixes[0]) })
+    }, { 
+      mode, 
+      entries, 
+      var: fn(prefixes[0]) 
+    })
   }
+
+
+
+export const isRunningFromCLI = 
+  (nodePath, modulePath) =>
+  resolve(nodePath) === resolve(fileURLToPath(modulePath))
 
 
 
