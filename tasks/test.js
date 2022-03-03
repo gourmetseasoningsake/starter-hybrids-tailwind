@@ -1,20 +1,19 @@
-import { envFrom, isRunningFromCLI } from "../vite.config.js"
-import { db } from "./db.js"
-import { ava } from "./ava.js"
+import { envFrom, isRunningFromCLI } from "../helpers.js"
+import * as db from "./db.js"
+import * as ava from "./ava.js"
 
 
 
-export const test = 
-  (env, group) =>
-  db(env)
-  .then(db => Promise.all([db, ava(env, group)]))
-  .then(([ db ]) => db.close())
+export const run = 
+  env =>
+  db.run(env)
+  .then(db => Promise.all([db, ava.run(env)]))
+  .then(([ db ]) => db.kill())
 
 
 
 if (isRunningFromCLI(process.argv[1], import.meta.url)) {
   const mode = process.argv[2]
-  const env = envFrom(mode)
-  const group = process.argv[3]
-  test(env, group)
+  const env = { ...(envFrom(mode)), group: process.argv[3] }
+  run(env)
 }

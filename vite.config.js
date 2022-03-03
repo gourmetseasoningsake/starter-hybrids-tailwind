@@ -1,42 +1,14 @@
-import { resolve } from "path"
-import { fileURLToPath } from "url"
-import { defineConfig, loadEnv } from "vite"
+import { defineConfig } from "vite"
 import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
+import { envFrom } from "./helpers.js"
 import postcssConfig from "./postcss.config.js"
 import indexConfigFrom from "./index.config.js"
 
 
 
-const envPrefixes = ["EXP_"]
-
-
-
-export const envFrom = 
-  (mode, prefixes = envPrefixes) => {
-    const entries = loadEnv(mode, process.cwd(), prefixes)
-    const fn = p => k => entries[`${p}${k}`]
-
-    return prefixes.reduce((a, b) => {
-      const prefix = 
-        b.toLowerCase()
-        .replace(/_+([a-z0-9])/g, (_, c) => c.toUpperCase())
-        .replace("_", "")
-
-      return {...a, [prefix]: fn(b)}
-    }, { 
-      mode, 
-      entries, 
-      var: fn(prefixes[0]) 
-    })
-  }
-
-
-
-export const isRunningFromCLI = 
-  (nodePath, modulePath) =>
-  resolve(nodePath) === resolve(fileURLToPath(modulePath))
+export const envPrefixes = ["EXP_"]
 
 
 

@@ -1,41 +1,30 @@
-import { execa } from "execa"
-import { envFrom, isRunningFromCLI } from "../vite.config.js"
+import { command, envFrom, isRunningFromCLI } from "../helpers.js"
 
 
 
-export const db = 
-  env => 
-  new Promise(res => {
-    const subprocess = execa(
-      "json-server", 
-      [ env.var("DB_PATH"),
-        "--host", env.var("API_HOST"),
-        "--port", env.var("API_PORT"),
-        ...(env.mode === "development" ? ["--watch"] : [])
-      ],
-      { env: { FORCE_COLOR: "true" }}
-    )
-    return subprocess.stdout.on("data", buffer => {
-      const content = buffer.toString()
-      const matchesApiUrl = content.includes(env.var("API_URL"))
-
-      if (matchesApiUrl 
-      || /(GET|POST|PUT|PATCH|DELETE)/.test(content)) {
-        console.log(content)
-      }
-
-      if (matchesApiUrl) {
-        res({ close: () => subprocess.kill("SIGTERM", { forceKillAfterTimeout: 1000 })})
-      }
-    })
-  })
+export const run = command({
+  cmd: "json-server",
+  args: 
+    env => [
+      env.var("DB_PATH"),
+      "--host", env.var("API_HOST"),
+      "--port", env.var("API_PORT"),
+      ...(env.mode === "development" ? ["--watch"] : [])
+    ],
+  stdout:
+    ({ env, content, resolve, kill }) => {
+      const match = content.includes(env.var("API_URL"))
+      if (match || /(GET|POST|PUT|PATCH|DELETE)/.test(content)) console.log(content)
+      if (match) resolve({ kill })
+    }
+})
 
 
 
 if (isRunningFromCLI(process.argv[1], import.meta.url)) {
   const mode = process.argv[2]
   const env = envFrom(mode)
-  db(env)
+  run(env)
 }
 
 

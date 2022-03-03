@@ -7,7 +7,7 @@ export default {
   files: { 
     u: ["**/*.test.js"], 
     f: ["**/*.test-f.js"] 
-  }[group],
+  }[Boolean(group) ? group : "u"],
   verbose, // NB: has no effect yet. see ava docs
   nodeArguments: [
     "--experimental-loader=./ava/loader.js",

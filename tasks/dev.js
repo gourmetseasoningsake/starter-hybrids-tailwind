@@ -1,20 +1,18 @@
-import { execa } from "execa"
-import { envFrom, isRunningFromCLI } from "../vite.config.js"
-import { db } from "./db.js"
+import { envFrom, isRunningFromCLI } from "../helpers.js"
+import * as db from "./db.js"
+import * as vite from "./vite.js"
 
 
 
-export const dev = 
+export const run = 
   env => 
-  db(env).then(() => execa(
-    "vite",
-    { env: { FORCE_COLOR: "true" }}
-  ).stdout.pipe(process.stdout))
+  db.run(env)
+  .then(() => vite.run(env))
 
 
 
 if (isRunningFromCLI(process.argv[1], import.meta.url)) {
   const mode = process.argv[2]
   const env = envFrom(mode)
-  dev(env)
+  run(env)
 }
