@@ -1,14 +1,13 @@
-import { envFrom } from "../vite.config.js"
-
-
-
-const env = envFrom(process.env.MODE)
-const verbose = !!env.var("AVA_VERBOSE")
+const group = process.env.GROUP
+const verbose = Boolean(process.env.VERBOSE)
 
 
 
 export default {
-  files: ["**/*.test.js"],
+  files: { 
+    u: ["**/*.test.js"], 
+    f: ["**/*.test-f.js"] 
+  }[group],
   verbose, // NB: has no effect yet. see ava docs
   nodeArguments: [
     "--experimental-loader=./ava/loader.js",

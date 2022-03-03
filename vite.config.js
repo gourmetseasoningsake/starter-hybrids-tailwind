@@ -40,10 +40,6 @@ export const isRunningFromCLI =
 
 
 
-const liquid = new Liquid()
-
-
-
 const wrapLinkTag =
   mode =>
   html =>
@@ -62,6 +58,7 @@ const wrapLinkTag =
 export default ({ mode }) => {
   const env = envFrom(mode)
   const indexConfig = indexConfigFrom(mode)
+  const liquid = new Liquid()
 
   let server = {}
 
