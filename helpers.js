@@ -43,8 +43,8 @@ export const isRunningFromCLI =
 
 export const command = 
   ({ cmd, args, stdout, options = {} }) => 
-  env => 
-  new Promise((resolve, reject) => {
+  (env, prevValues = {}) =>
+  new Promise((res, rej) => {
     const args_ = typeof args === "function" ? args(env) : args
     const options_ = typeof options === "function" ? options(env) : options
 
@@ -53,32 +53,36 @@ export const command =
       ...(omitProp(options_, "env"))
     })
 
-    const methods = {
-      kill: 
-        (options = {}) => 
-        !subprocess.killed && subprocess.kill(
-          options.termination || "SIGTERM", 
-          { forceKillAfterTimeout: 3000, 
-            ...(omitProp(options, "termination"))
-          }
-        )
+    const values = {
+      env,
+      subprocess,
+      kill: (options = {}) => !subprocess.killed && subprocess.kill(
+        options.termination || "SIGTERM", 
+        { forceKillAfterTimeout: 3000, ...(omitProp(options, "termination")) }
+      ),
+      ...prevValues
     }
 
     if (typeof stdout === "function") {
       subprocess.stdout.on("data", buffer => stdout({
         content: buffer.toString(),
-        env,
-        resolve,
-        reject,
-        subprocess,
-        ...methods
+        res: (otherValues = {}) => res({ ...values, ...otherValues }),
+        rej,
+        ...values
       }))
 
     } else if (Boolean(stdout)) {
       subprocess.stdout.pipe(process.stdout)
-      resolve(methods)
+      res(values)
 
     } else {
-      resolve(methods)
+      res(values)
     }
   })
+
+
+
+// const __dirname = 
+//   import.meta.url
+//   .split(process.cwd())
+//   .reduce((a, b) => b.includes(":/") ? a : join(".", dirname(b), "db.json"), "")

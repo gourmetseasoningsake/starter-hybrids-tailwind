@@ -7,8 +7,8 @@ import * as ava from "./ava.js"
 export const run = 
   env =>
   db.run(env)
-  .then(db => Promise.all([db, ava.run(env)]))
-  .then(([ db ]) => db.kill())
+  .then(db => ava.run(env, { db }))
+  .then(({ db }) => db.kill())
 
 
 
