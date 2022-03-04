@@ -40,14 +40,10 @@ export const isRunningFromCLI =
   resolve(nodePath) === resolve(fileURLToPath(modulePath))
 
 
-/* 
-TODO: actually wait for the subprocess to finish (option), wtf... 
-right now it just works by chance
-*/
-export const command = 
-  ({ cmd, args, stdout, options = {} }) => 
-  (env, prevValues = {}) =>
-  new Promise((res, rej) => {
+
+export const command =
+  ({ cmd, args, stdout, wait = true, options = {} }) => 
+  (env, prevValues = {}) => {
     const args_ = typeof args === "function" ? args(env) : args
     const options_ = typeof options === "function" ? options(env) : options
 
@@ -66,24 +62,19 @@ export const command =
       ...prevValues
     }
 
-    if (typeof stdout === "function") {
+    if (typeof stdout === "function") return new Promise((res, rej) => {
       subprocess.stdout.on("data", buffer => stdout({
         content: buffer.toString(),
         res: (otherValues = {}) => res({ ...values, ...otherValues }),
         rej,
         ...values
       }))
+    })
 
-    } else if (Boolean(stdout)) {
-      subprocess.stdout.pipe(process.stdout)
-      res(values)
-
-    } else {
-      res(values)
-    }
-  })
-
-
+    if (Boolean(stdout)) subprocess.stdout.pipe(process.stdout)
+    if (wait) return subprocess.then(() => values)
+    return values
+  }
 
 // const __dirname = 
 //   import.meta.url
