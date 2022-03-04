@@ -40,7 +40,10 @@ export const isRunningFromCLI =
   resolve(nodePath) === resolve(fileURLToPath(modulePath))
 
 
-
+/* 
+TODO: actually wait for the subprocess to finish (option), wtf... 
+right no it just works by chance
+*/
 export const command = 
   ({ cmd, args, stdout, options = {} }) => 
   (env, prevValues = {}) =>
