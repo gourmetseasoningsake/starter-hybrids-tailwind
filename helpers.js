@@ -42,7 +42,7 @@ export const isRunningFromCLI =
 
 /* 
 TODO: actually wait for the subprocess to finish (option), wtf... 
-right no it just works by chance
+right now it just works by chance
 */
 export const command = 
   ({ cmd, args, stdout, options = {} }) => 
