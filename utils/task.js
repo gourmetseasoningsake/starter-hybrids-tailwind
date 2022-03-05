@@ -1,6 +1,4 @@
 
-import { resolve } from "path"
-import { fileURLToPath } from "url"
 import { execa } from "execa"
 import { omitProp } from "./object.js"
 
@@ -10,11 +8,6 @@ export const prependTitleToLine =
   (line, title) =>
   line.replace(/.*?\n/g, `${title}$&`)
   
-
-
-export const isRunningFromCLI = 
-  (nodePath, modulePath) =>
-  resolve(nodePath) === resolve(fileURLToPath(modulePath))
 
 
   

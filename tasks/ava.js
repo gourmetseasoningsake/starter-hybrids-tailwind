@@ -1,4 +1,5 @@
-import { command, isRunningFromCLI } from "../utils/task.js"
+import { command } from "../utils/task.js"
+import { isRunningFromCLI } from "../utils/cli.js"
 import { envFrom } from "../utils/env.js"
 
 
