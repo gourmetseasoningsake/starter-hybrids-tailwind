@@ -112,11 +112,12 @@ export const withPage =
     browser,
     preview({ preview: { port: 8080 } })
   ]))
-  .then(async ([page, browser, server]) => {
-    try {
-      await run(t, page, resolveURL(server.httpServer.address()))
-    } finally {
-      await page.close()
-      await browser.close()
-    }
-  })
+  .then(([page, browser, server]) => Promise.all([
+    run(t, page, resolveURL(server.httpServer.address())),
+    page,
+    browser
+  ])
+  .then(([_, page, browser]) => {
+    page.close()
+    browser.close()
+  }))

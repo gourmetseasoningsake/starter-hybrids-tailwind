@@ -1,8 +1,11 @@
-import { command, envFrom, isRunningFromCLI } from "../helpers.js"
+import { command, isRunningFromCLI } from "../utils/task.js"
+import { envFrom } from "../utils/env.js"
+import { prependTitleToLine } from "../utils/task.js"
 
 
 
 export const run = command({
+  title: "db",
   cmd: "json-server",
   args: 
     env => [
@@ -12,9 +15,11 @@ export const run = command({
       ...(env.mode === "development" ? ["--watch"] : [])
     ],
   stdout:
-    ({ env, content, res }) => {
+    ({ env, title, content, log, res }) => {
       const match = content.includes(env.var("API_URL"))
-      if (match || /(GET|POST|PUT|PATCH|DELETE)/.test(content)) console.log(content)
+      if (match || /(GET|POST|PUT|PATCH|DELETE)/.test(content)) {
+        log(prependTitleToLine(content, title))
+      }
       if (match) res()
     }
 })

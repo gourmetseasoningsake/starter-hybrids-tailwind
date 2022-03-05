@@ -1,4 +1,5 @@
-import { envFrom, isRunningFromCLI } from "../helpers.js"
+import { isRunningFromCLI } from "../utils/task.js"
+import { envFrom } from "../utils/env.js"
 import * as db from "./db.js"
 import * as ava from "./ava.js"
 
@@ -9,7 +10,6 @@ export const run =
   db.run(env)
   .then(db => ava.run(env, { db }))
   .then(({ db }) => db.kill())
-  .catch(console.log)
 
 
 

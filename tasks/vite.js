@@ -1,8 +1,10 @@
-import { command, envFrom, isRunningFromCLI } from "../helpers.js"
+import { command, isRunningFromCLI } from "../utils/task.js"
+import { envFrom } from "../utils/env.js"
 
 
 
 export const run = command({
+  title: "vite",
   cmd: "vite",
   stdout: true
 })

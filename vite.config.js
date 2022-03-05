@@ -2,35 +2,20 @@ import { defineConfig } from "vite"
 import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
-import { envFrom } from "./helpers.js"
-import postcssConfig from "./postcss.config.js"
-import indexConfigFrom from "./index.config.js"
+import { transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.js"
 
+import { envFrom } from "./utils/env.js"
+import { configFrom } from "./utils/config.js"
 
-
-export const envPrefixes = ["EXP_"]
-
-
-
-const wrapLinkTag =
-  mode =>
-  html =>
-  mode === "development" 
-  ? html.replace(
-      "</head>",
-      `<noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>$&`
-    )
-  : html.replace(
-      /<link rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css">/,
-      `<noscript id="index-css">$&</noscript>`
-    )
+import { envPrefixes, modes } from "./config.js"
+import { defaults as indexConfigDefaults } from "./index.config.js"
+import { defaults as postcssConfigDefaults } from "./postcss.config.js"
 
 
 
 export default ({ mode }) => {
   const env = envFrom(mode)
-  const indexConfig = indexConfigFrom(mode)
-  const liquid = new Liquid()
+  const indexConfig = configFrom({ mode, modes, config: indexConfigDefaults })
 
   let server = {}
 
@@ -42,7 +27,7 @@ export default ({ mode }) => {
   return defineConfig({
     envPrefix: envPrefixes[0],
     server,
-    css: { postcss: postcssConfig },
+    css: { postcss: postcssConfigDefaults },
     build: {
       minify: !!env.var("BUILD_MINIFY"),
       rollupOptions: {
@@ -52,13 +37,12 @@ export default ({ mode }) => {
       }
     },
     plugins: [
-      { name: "html-transform"
-      , transformIndexHtml: 
-          content =>
-          liquid
-          .parseAndRender(content, indexConfig)
-          .then(wrapLinkTag(mode))
-      },
+      transformHtmlPluginFrom({ 
+        mode,
+        data: indexConfig,
+        engine: new Liquid(), 
+        render: ({ engine, content, data }) => engine.parseAndRender(content, data)
+      }),
       createReScriptPlugin.default(),
     ]
   })
