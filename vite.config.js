@@ -1,64 +1,48 @@
-import { defineConfig, loadEnv } from "vite"
+import { defineConfig } from "vite"
 import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-minify-html-literals"
 import { Liquid } from "liquidjs"
-import postcssConfig from "./postcss.config.js"
-import indexConfig from "./index.config.js"
+import { transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.js"
 
+import { envFrom } from "./utils/env.js"
+import { configFrom } from "./utils/config.js"
 
-
-export const envPrefix = "EXP_"
-const liquid = new Liquid()
-
-
-
-const wrapLinkTag =
-  mode =>
-  html =>
-  mode === "development" 
-  ? html.replace(
-      "</head>",
-      `<noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>$&`
-    )
-  : html.replace(
-      /<link rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css">/,
-      `<noscript id="index-css">$&</noscript>`
-    )
+import { envPrefixes, modes } from "./config.js"
+import { defaults as indexConfigDefaults } from "./index.config.js"
+import { defaults as postcssConfigDefaults } from "./postcss.config.js"
 
 
 
 export default ({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), envPrefix)
-  const envar = key => env[`${envPrefix}${key}`]
-  const data = indexConfig(mode)
+  const env = envFrom(mode)
+  const indexConfig = configFrom({ mode, modes, config: indexConfigDefaults })
 
   let server = {}
 
-  if (envar("BROWSER")) {
-    process.env.BROWSER = envar("BROWSER")
+  if (env.var("BROWSER")) {
+    process.env.BROWSER = env.var("BROWSER")
     server.open = "/"
   }
 
   return defineConfig({
-    envPrefix,
+    envPrefix: envPrefixes[0],
     server,
-    css: { postcss: postcssConfig },
+    css: { postcss: postcssConfigDefaults },
     build: {
-      minify: !!envar("BUILD_MINIFY"),
+      minify: !!env.var("BUILD_MINIFY"),
       rollupOptions: {
         plugins: [
-          ...(envar("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
+          ...(env.var("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
         ]
       }
     },
     plugins: [
-      { name: "html-transform"
-      , transformIndexHtml: 
-          content =>
-          liquid
-          .parseAndRender(content, data)
-          .then(wrapLinkTag(mode))
-      },
+      transformHtmlPluginFrom({ 
+        mode,
+        data: indexConfig,
+        engine: new Liquid(), 
+        render: ({ engine, content, data }) => engine.parseAndRender(content, data)
+      }),
       createReScriptPlugin.default(),
     ]
   })

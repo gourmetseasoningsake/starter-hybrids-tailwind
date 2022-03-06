@@ -11,7 +11,7 @@ test.before(domSetup)
 
 
 
-test("should insert a text node into the unnamed slot", async t => {
+test("a-link: should insert a text node into the unnamed slot", async t => {
   // s
   const element = await elementFromImport("../src/elements/a-link.js")
   const value = "Home?"
@@ -27,7 +27,7 @@ test("should insert a text node into the unnamed slot", async t => {
 
 
 
-test("should set the active class name", async t => {
+test("a-link: should set the active class name", async t => {
   // s
   const element = await elementFromImport("../src/elements/a-link.js")
   const value = "text-pink-400"

@@ -1,6 +1,7 @@
 import "./index.css"
 import { define, router, html, store } from "hybrids"
 import { descriptorCombineWithRouter } from "./Helpers.bs.js"
+import { getJson } from "./API.bs.js"
 
 
 
@@ -26,7 +27,7 @@ const Menu = {
     params: { slug: "" }
   }],
   [store.connect]: {
-    get: id => get(`http://localhost:3001/menu/${id}`)
+    get: id => getJson(`/menu/${id}`, {})
   }
 }
 
@@ -66,12 +67,3 @@ define({
     <main>${view}</main>
   `
 })
-
-
-
-/* Helpers */
-
-// NB: feeling lucky
-function get (url) {
-  return fetch(url).then(resp => resp.json()).then(data => data)
-}

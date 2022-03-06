@@ -4,7 +4,7 @@ import tailwindConfig from './tailwind.config.cjs'
 
 
 
-export default {
+export const defaults = {
   plugins: [ 
     tailwind(tailwindConfig),
     autoprefixer

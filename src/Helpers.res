@@ -2,14 +2,6 @@ open Webapi
 
 
 
-let unsafeProp: Js.Dict.t<'a> => string => 'a =
-  kv =>
-  k =>
-  Js.Dict.unsafeGet(kv, k)
-
-
-
-
 let descriptorCombine: Hybrids.Descriptor.d<'a, {..} as 'b> => {..} => Hybrids.Descriptor.d<'a, 'b> =
   oa =>
   ob =>

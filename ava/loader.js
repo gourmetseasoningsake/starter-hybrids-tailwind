@@ -6,12 +6,12 @@ https://ar.al/2021/05/27/make-anything-a-javascript-module-using-node.js-esm-mod
 import { Buffer } from "buffer"
 import { extname } from "path"
 import { URL, pathToFileURL } from "url"
-import { loadEnv } from "vite"
-import { envPrefix } from "../vite.config.js"
+import { envFrom } from "../utils/env.js"
 
 
 
-const envEntries = Object.entries(loadEnv("test", process.cwd(), envPrefix))
+const mode = "test"
+const envEntries = Object.entries(envFrom(mode).entries)
 const baseURL = pathToFileURL(`${process.cwd()}/`).href
 
 
@@ -51,7 +51,6 @@ export const transformSource = (source, context, defaultGetSource) => {
   }
 
   if (!url.includes("/node_modules/")) {
-
     const contents = 
       envEntries.reduce(
         (a, [k, v]) =>
@@ -61,7 +60,7 @@ export const transformSource = (source, context, defaultGetSource) => {
         /import\.meta\.env\.(MODE|BASE_URL|PROD|DEV)/g, 
         (_, c) =>
         ({
-          MODE: "production",
+          MODE: mode,
           BASE_URL: baseURL,
           PROD: true,
           DEV: false
