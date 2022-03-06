@@ -1,11 +1,13 @@
+/** @type {omitProp} */
 export const omitProp = 
-  (o, k) => {
-    const { [k]: _, ...rest } = o
+  (obj, key) => {
+    const { [key]: _, ...rest } = obj
     return rest
   }
 
 
 
+/** @type {proxyLiteralsByKey} */
 export const proxyLiteralsByKey =
   ({ key, keys, obj }) =>
   new Proxy(obj, {

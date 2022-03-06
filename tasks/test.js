@@ -1,4 +1,4 @@
-import { isRunningFromCLI } from "../utils/cli.js"
+import { isRunningFromCli, parseArgs } from "../utils/cli.js"
 import { envFrom } from "../utils/env.js"
 import * as db from "./db.js"
 import * as ava from "./ava.js"
@@ -13,8 +13,8 @@ export const run =
 
 
 
-if (isRunningFromCLI(process.argv[1], import.meta.url)) {
-  const mode = process.argv[2]
-  const env = { ...(envFrom(mode)), group: process.argv[3] }
+if (isRunningFromCli(process.argv[1], import.meta.url)) {
+  const { mode, group } = parseArgs(process.argv)
+  const env = { ...(envFrom(mode)), group }
   run(env)
 }

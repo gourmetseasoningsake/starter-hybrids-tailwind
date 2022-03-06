@@ -7,10 +7,11 @@ export const loadEnv = viteLoadEnv
 
 
 
+/** @type {envFrom} */
 export const envFrom = 
   (mode, prefixes = envPrefixes) => {
     const entries = loadEnv(mode, process.cwd(), prefixes)
-    const fn = p => k => entries[`${p}${k}`]
+    const fn = p => key => entries[`${p}${key}`]
 
     return prefixes.reduce((a, b) => {
       const prefix = 

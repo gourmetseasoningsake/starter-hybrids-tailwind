@@ -4,13 +4,14 @@ import { omitProp } from "./object.js"
 
 
 
+/** @type {prependTitleToLine} */
 export const prependTitleToLine =
   (line, title) =>
   line.replace(/.*?\n/g, `${title}$&`)
   
 
 
-  
+/** @type {command} */
 export const command =
   ({ cmd, title = cmd, args, stdout, wait = true, options = {} }) => 
   (env, prevValues = {}) => {
@@ -32,6 +33,7 @@ export const command =
       ),
       ...prevValues
     }
+
 
     if (typeof stdout === "function") return new Promise((res, rej) => {
       subprocess.stdout.on("data", buffer => stdout({
