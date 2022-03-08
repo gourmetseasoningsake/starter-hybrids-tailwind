@@ -45,12 +45,12 @@ cd !$
 curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
 pnpm install
 ----
-{spacer-1}
+{spacer-2}
 
 == Configuration
 
 === Custom environment variables
 
-Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[`config.js`,window=_blank].
+Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[config.js].
 
-
+The root folder contains link:sample.env.development[sample.env.*^] files for common environments with predefined effective variables. Remove the `sample` part of the filename so that https://vitejs.dev/[Vite] automatically inserts the variables into the `import.meta.env` object by running mode.
