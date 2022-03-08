@@ -1,5 +1,4 @@
 # starter-hybrids-tailwind
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgourmetseasoningsake%2Fstarter-hybrids-tailwind.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgourmetseasoningsake%2Fstarter-hybrids-tailwind?ref=badge_shield)
 
 
 A setup for a start with [hybrids](https://hybrids.js.org), [tailwindcss](https://tailwindcss.com) and [Rescript](https://rescript-lang.org/).
@@ -217,7 +216,3 @@ Serves build from the dist folder.
 <br>
 
 - [How to Favicon in 2021: Six files that fit most needs](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs)
-
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgourmetseasoningsake%2Fstarter-hybrids-tailwind.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgourmetseasoningsake%2Fstarter-hybrids-tailwind?ref=badge_large)
