@@ -50,33 +50,41 @@ pnpm install
 == Configuration
 {spacer-1}
 
-=== Configure custom environment variables
+=== Define prefixes of custom environment variables
 
-In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[config.js].
+In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[config.js]. The prefix `EXP_` is preconfigured.
+{spacer-2}
+
+=== List the modes
+
+The modes directly correspond to the suffix of the env files, `.env.[this part]`. For now, you need to list the modes in the `modes` array exported from link:config.js[config.js]. This will change soon and won't be necessary anymore.
 {spacer-2}
 
 === Set custom environment variables
 
-The root folder contains link:sample.env.development[sample.env.*] files for common environments with predefined effective variables. Change or extend the variables and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
+The root folder contains sample.env.* files for common environments with predefined effective variables using the preconfigured prefix `EXP_`. Change or extend the variables and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
 
-Commented variables mean they are obsolete for the mode. They are listed for reasons of readability.
+All env files contain all variables used by one or the other mode. Commented variables basically mean that they are irrelevant for the corresponding mode. See for example the link:sample.env.development[sample.env.development] file:
 
 [source,bash]
 ----
-NODE_ENV=
-EXP_BROWSER=
+EXP_BROWSER=google chrome
 EXP_HMR_FORCE_RELOAD=
 EXP_ASS_DISABLE=
-EXP_ROUTER_DEBUG=
-EXP_BUILD_MINIFY=
-EXP_TEST_VERBOSE=
-EXP_DB_PATH=
-EXP_API_PROTOCOL=
-EXP_API_HOST=
-EXP_API_PORT=
+EXP_ROUTER_DEBUG=true
+#EXP_BUILD_MINIFY=
+#EXP_TEST_VERBOSE=
+EXP_DB_PATH=db.json
+EXP_API_PROTOCOL=http
+EXP_API_HOST=localhost
+EXP_API_PORT=3001
 EXP_API_PATH=
 
-# Derived
+# derived
 EXP_API_URL=$EXP_API_PROTOCOL://$EXP_API_HOST:$EXP_API_PORT$EXP_API_PATH
+
+# behavior
+NODE_ENV=development
 ----
+
 
