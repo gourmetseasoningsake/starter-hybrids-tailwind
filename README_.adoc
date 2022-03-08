@@ -1,4 +1,4 @@
-:spacer-1: {sp} +
+:spacer-1: {sp} + \
 
 :spacer-2: {sp} + \
 {sp} +
@@ -7,15 +7,21 @@
 {sp} + \
 {sp} +
 
+:spacer-4: {sp} + \
+{sp} + \
+{sp} + \
+{sp} +
+
+
 = starter-hybrids-tailwind
 
 A setup for https://hybrids.js.org[hybrids], https://tailwindcss.com[tailwindcss] and https://rescript-lang.org/[Rescript].
-{spacer-3}
+{spacer-4}
 
 == Installation
 
-Where I https://pnpm.io[pnpm] you can `npm` or `yarn`.
-{spacer-2}
+Where I https://pnpm.io[`pnpm`] you can `npm` or `yarn`.
+{spacer-3}
 
 === Using https://cli.github.com[gh]
 
@@ -26,6 +32,15 @@ Use this procedure if you want to create your own repo at the same time.
 gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --private my-project-name
 gh repo clone !$
 cd !$
+----
+{spacer-1}
+
+=== Using curl
+
+[source,bash]
+----
+mkdir my-project-name
+cd !$
+curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
 pnpm install
 ----
-
