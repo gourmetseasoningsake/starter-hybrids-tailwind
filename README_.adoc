@@ -19,7 +19,7 @@ A setup for https://hybrids.js.org[hybrids], https://tailwindcss.com[tailwindcss
 
 == Installation
 
-Where I https://pnpm.io[`pnpm`] you can also `npm` or `yarn`. 
+Where it https://pnpm.io[`pnpm`]s you can also `npm` or `yarn`. 
 {spacer-3}
 
 === Using https://cli.github.com[gh]
@@ -48,9 +48,35 @@ pnpm install
 {spacer-2}
 
 == Configuration
+{spacer-1}
 
-=== Custom environment variables
+=== Configure custom environment variables
 
-Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[config.js].
+In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[config.js].
+{spacer-2}
 
-The root folder contains link:sample.env.development[sample.env.*^] files for common environments with predefined effective variables. Remove the `sample` part of the filename so that https://vitejs.dev/[Vite] automatically inserts the variables into the `import.meta.env` object by running mode.
+=== Set custom environment variables
+
+The root folder contains link:sample.env.development[sample.env.*] files for common environments with predefined effective variables. Change or extend the variables and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
+
+Commented variables mean they are obsolete for the mode. They are listed for reasons of readability.
+
+[source,bash]
+----
+NODE_ENV=
+EXP_BROWSER=
+EXP_HMR_FORCE_RELOAD=
+EXP_ASS_DISABLE=
+EXP_ROUTER_DEBUG=
+EXP_BUILD_MINIFY=
+EXP_TEST_VERBOSE=
+EXP_DB_PATH=
+EXP_API_PROTOCOL=
+EXP_API_HOST=
+EXP_API_PORT=
+EXP_API_PATH=
+
+# Derived
+EXP_API_URL=$EXP_API_PROTOCOL://$EXP_API_HOST:$EXP_API_PORT$EXP_API_PATH
+----
+
