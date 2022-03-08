@@ -36,7 +36,7 @@ pnpm install
 {spacer-1}
 
 === Using curl
-This procedure simply downloads the files from the main branch.
+This procedure simply downloads the files and folders from the main branch.
 
 [source,bash]
 ----
@@ -51,6 +51,6 @@ pnpm install
 
 === Custom environment variables
 
-Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[`config.js`^].
+Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[`config.js`,window=_blank].
 
 
