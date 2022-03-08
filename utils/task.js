@@ -1,17 +1,42 @@
-
+/** @typedef {import('./object.js').pojo} pojo */
+/** @typedef {import('./env.js').env} env */
 import { execa } from "execa"
 import { omitProp } from "./object.js"
 
 
 
-/** @type {prependTitleToLine} */
+
+/** @type {(line: string, title: string) => string} */
 export const prependTitleToLine =
   (line, title) =>
   line.replace(/.*?\n/g, `${title}$&`)
-  
 
 
-/** @type {command} */
+
+/** 
+@typedef {(_: {
+  title?: string,
+  content?: string,
+  log?: (content: string, cb?: (err?: Error) => void) => void,
+  res?: (otherValues?: pojo) => void,
+  rej?: (reason?: *) => void
+} & {
+  values: values
+}) => PromiseLike<pojo>} commandStdoutFn
+*/
+
+
+
+/** 
+@type {(_: {
+  cmd: string,
+  title?: string,
+  args?: string[] | ((env?: env) => string[])
+  stdout?: boolean | commandStdoutFn,
+  wait?: boolean,
+  options?: pojo | ((env?: env) => pojo)
+}) => (env: env, prevValues: pojo) => Promise<pojo>} 
+*/
 export const command =
   ({ cmd, title = cmd, args, stdout, wait = true, options = {} }) => 
   (env, prevValues = {}) => {
@@ -24,6 +49,13 @@ export const command =
       ...(omitProp(options_, "env"))
     })
 
+    /**
+    @type {{
+      env: env,
+      subprocess: ExecaChildProcess<string>,
+      kill: ((_: { termination?: number | NodeJS.Signals, forceKillAfterTimeout?: number | boolean }) => void)   
+    } & {prevValues: prevValues}}
+    */
     const values = {
       env,
       subprocess,
@@ -34,12 +66,11 @@ export const command =
       ...prevValues
     }
 
-
     if (typeof stdout === "function") return new Promise((res, rej) => {
       subprocess.stdout.on("data", buffer => stdout({
         title: title_,
         content: buffer.toString(),
-        log: content => process.stdout.write(content),
+        log: (content, cb) => process.stdout.write(content, cb),
         res: (otherValues = {}) => res({ ...values, ...otherValues }),
         rej,
         ...values

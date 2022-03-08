@@ -1,4 +1,8 @@
-/** @type {omitProp} */
+/** @typedef {{[key: string]: any}} pojo */
+
+
+
+/** @type {(obj: pojo, key: string) => pojo} */
 export const omitProp = 
   (obj, key) => {
     const { [key]: _, ...rest } = obj
@@ -7,7 +11,7 @@ export const omitProp =
 
 
 
-/** @type {proxyLiteralsByKey} */
+/** @type {(_: {key: string, keys: string[], obj: pojo}) => pojo} */
 export const proxyLiteralsByKey =
   ({ key, keys, obj }) =>
   new Proxy(obj, {
