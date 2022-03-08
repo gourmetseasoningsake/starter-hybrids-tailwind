@@ -1,23 +1,21 @@
-:spacer-1: {sp} + \
+:spacer-1: {empty} + \
 
-:spacer-2: {sp} + \
-{sp} +
+:spacer-2: {empty} + \
+{empty} +
 
-:spacer-3: {sp} + \
-{sp} + \
-{sp} +
+:spacer-3: {empty} + \
+{empty} + \
+{empty} +
 
-:spacer-4: {sp} + \
-{sp} + \
-{sp} + \
-{sp} +
+:spacer-4: {empty} + \
+{empty} + \
+{empty} + \
+{empty} +
 
 = starter-hybrids-tailwind
 
 A setup for https://hybrids.js.org[hybrids], https://tailwindcss.com[tailwindcss] and https://rescript-lang.org/[Rescript].
 {spacer-4}
-
----
 
 == Installation
 
@@ -53,6 +51,6 @@ pnpm install
 
 === Custom environment variables
 
-Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[`config.js`].
+Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[`config.js`^].
 
 
