@@ -1,3 +1,4 @@
+/** @typedef {import('./object.js').pojo} pojo */
 import { loadEnv as viteLoadEnv } from "vite"
 import { envPrefixes } from "../config.js"
 
@@ -7,7 +8,19 @@ export const loadEnv = viteLoadEnv
 
 
 
-/** @type {envFrom} */
+/** 
+@typedef {{
+  mode: string,
+  entries: { [key: string]: string | boolean },
+  var: ((key: string) => string | boolean )
+} & {
+  [key: string] : ((key: string) => string | boolean )
+}} env 
+*/
+
+
+
+/** @type {(mode: string, prefixes: string[]) => env} */
 export const envFrom = 
   (mode, prefixes = envPrefixes) => {
     const entries = loadEnv(mode, process.cwd(), prefixes)
