@@ -12,15 +12,16 @@
 {sp} + \
 {sp} +
 
-
 = starter-hybrids-tailwind
 
 A setup for https://hybrids.js.org[hybrids], https://tailwindcss.com[tailwindcss] and https://rescript-lang.org/[Rescript].
 {spacer-4}
 
+---
+
 == Installation
 
-Where I https://pnpm.io[`pnpm`] you can `npm` or `yarn`.
+Where I https://pnpm.io[`pnpm`] you can also `npm` or `yarn`. 
 {spacer-3}
 
 === Using https://cli.github.com[gh]
@@ -32,10 +33,12 @@ Use this procedure if you want to create your own repo at the same time.
 gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --private my-project-name
 gh repo clone !$
 cd !$
+pnpm install
 ----
 {spacer-1}
 
 === Using curl
+This procedure simply downloads the files from the main branch.
 
 [source,bash]
 ----
@@ -44,3 +47,12 @@ cd !$
 curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
 pnpm install
 ----
+{spacer-1}
+
+== Configuration
+
+=== Custom environment variables
+
+Custom environment variables must have one of the prefixes specified in the `envPrefixes` array exported from link:config.js[`config.js`].
+
+
