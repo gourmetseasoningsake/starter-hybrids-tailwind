@@ -52,7 +52,7 @@ pnpm install
 The most important files and folders:
 
 * link:index.html[index.html] The entry point to your application with references to source files. https://vitejs.dev/guide/#index-html-and-project-root[&#8505;]
-* link:src[src/] The source files of an example application. You can completely replace the entire folder with your own. Just adjust the references in your index.html, e.g. ```<script src="/a/file.js">```.
+* link:src[src/] The source files of an example application. You can completely replace the entire folder with your own. Just adjust the references in your index.html, e.g. `<script src="/a/file.js">`.
 * ...
 
 {spacer-2}
