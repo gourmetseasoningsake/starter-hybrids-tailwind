@@ -45,7 +45,30 @@ cd !$
 curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
 pnpm install
 ----
+{spacer-1}
+
+=== Directory structure
+
+The most important files and folders:
+
+* link:index.html[index.html] The entry point to your application with references to source files. https://vitejs.dev/guide/#index-html-and-project-root[&#8505;]
+* link:src[src/] The source files of an example application. You can completely replace the entire folder with your own. Just adjust the references in your index.html, e.g. ```<script src="/a/file.js">```.
+* ...
+
 {spacer-2}
+
+== Start
+
+If the installation went successful, you should be able to start working.
+
+=== Development
+
+[source,bash]
+----
+pnpm dev
+----
+
+This command starts the https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite] dev server
 
 == Configuration
 {spacer-1}
