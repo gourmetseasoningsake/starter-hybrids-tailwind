@@ -47,7 +47,7 @@ pnpm install
 ----
 {spacer-1}
 
-=== Directory structure
+== Directory structure
 
 The most important files and folders:
 
