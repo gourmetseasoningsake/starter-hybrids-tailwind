@@ -66,7 +66,7 @@ The root folder contains sample.env.* files for the preconfigured modes with pre
 
 All env files contain all variables used by one or the other mode. Variables irrelevant for the corresponding mode are commented-out. See For example the link:sample.env.development[sample.env.development] file.
 
-Change or extend the variables and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
+Change the values, extend the variables with your own and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
 {spacer-2}
 
 
