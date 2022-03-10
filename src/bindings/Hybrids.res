@@ -49,3 +49,12 @@ module Router = {
   external resolve
   : (Dom.event, Promise.t<'a>) => Promise.t<'a> = "resolve"
 }
+
+
+
+module Store = {
+  @module("hybrids")
+  @scope("store")
+  external resolve
+  : 'a => Promise.t<'a> = "resolve"
+}

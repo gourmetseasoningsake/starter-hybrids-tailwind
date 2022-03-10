@@ -1,0 +1,158 @@
+:spacer-1: {empty} + \
+
+:spacer-2: {empty} + \
+{empty} +
+
+:spacer-3: {empty} + \
+{empty} + \
+{empty} +
+
+:spacer-4: {empty} + \
+{empty} + \
+{empty} + \
+{empty} +
+
+:link-config-js: link:config.js[config.js]
+:link-index-config-js: link:index.config.js[index.config.js]
+:link-index-html: link:index.html[index.html]
+
+= starter-hybrids-tailwind
+
+A setup for https://hybrids.js.org[hybrids], https://tailwindcss.com[tailwindcss] and https://rescript-lang.org/[Rescript].
+{spacer-4}
+
+== Installation
+
+Where it https://pnpm.io[`pnpm`]s you can also `npm` or `yarn`. 
+{spacer-3}
+
+=== Using https://cli.github.com[gh]
+
+Use this procedure if you want to create your own repo at the same time.
+
+[source,bash]
+----
+gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --private my-project-name
+gh repo clone !$
+cd !$
+pnpm install
+----
+{spacer-1}
+
+=== Using curl
+This procedure simply downloads the files and folders from the main branch.
+
+[source,bash]
+----
+mkdir my-project-name
+cd !$
+curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
+pnpm install
+----
+{spacer-2}
+
+== Directory structure
+
+The most important files and folders:
+
+* {link-index-html} The entry point to your application with references to source files. https://vitejs.dev/guide/#index-html-and-project-root[&#8505;]
+* link:src[src/] The source files of an example application. You can completely replace the entire folder with your own. Just adjust the references in your index.html, e.g. `<script src="/a/file.js">`.
+* TODO
+
+{spacer-2}
+
+== Start
+
+TODO
+
+{spacer-2}
+
+== Configuration
+{spacer-1}
+
+=== Define prefixes of custom environment variables
+
+In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from {link-config-js}. The prefix `EXP_` is preconfigured.
+
+TODO
+{spacer-2}
+
+=== List the modes
+
+The modes directly correspond to the suffix of the env files, `.env.[this part]`. For now, you need to list the modes in the `modes` array exported from {link-config-js}. This will soon change and won't be necessary anymore. The modes `development`, `production`, `staging` and `test` are preconfigured.
+{spacer-2}
+
+=== Set custom environment variables
+
+The root folder contains sample.env.* files for the preconfigured modes with predefined effective variables. 
+
+All env files contain all variables used by one or the other mode. Variables irrelevant for the corresponding mode are commented-out. See For example the link:sample.env.development[sample.env.development] file.
+
+Change the values, extend the variables with your own and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
+{spacer-2}
+
+=== Templating the index.html file
+
+You can template the {link-index-html} file with https://liquidjs.com/tutorials/intro-to-liquid.html[liquid] https://liquidjs.com/tags/overview.html[tags], outputs and https://liquidjs.com/filters/overview.html[filters]. The data passed to the template is located in the {link-index-config-js} file. You can set a data item value in two ways, as primitive:
+
+[source,javascript]
+----
+lang: "en"
+----
+
+or as object with properties per mode:
+
+[source,javascript]
+----
+robots: {
+  staging: "noindex,nofollow",
+  production: "index,nofollow"
+}
+----
+
+Accessing `{{ robots }}` in the template would render the value according the mode https://vitejs.dev/guide/env-and-mode.html#modes[Vite] is running in.
+If no property matches the mode, the value is `null` and the https://liquidjs.com/tutorials/intro-to-liquid.html[liquid] template engine silently ignores it.
+
+You can loop through object entries
+
+[source,javascript]
+----
+og: {
+  title: "...",
+  type: "website",
+  image: null,
+  url: null,
+  description: "Description",
+  siteName: null,
+}
+----
+
+in your index.html file,
+
+[source,liquid]
+----
+{%- for item in og -%}
+  {%- if item[1] -%}
+
+  <meta property="og:{{ item[0] }}" content="{{ item[1] }}">
+
+  {%- endif -%}
+{%- endfor -%}
+----
+
+where `item[0]` is the key and `item[1]` is the value.
+
+{spacer-2}
+
+== Usage
+
+TODO
+
+{spacer-2}
+
+== References
+
+TODO
+
+
+

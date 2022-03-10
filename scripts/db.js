@@ -18,7 +18,7 @@ export const run = command({
   stdout:
     ({ env, title, content, log, res }) => {
       const match = content.includes(env.var("API_URL"))
-      if (match || /(GET|POST|PUT|PATCH|DELETE)/.test(content)) {
+      if (match || /(GET|POST|PUT|PATCH|DELETE|Error)/.test(content)) {
         log(prependTitleToLine(content, title))
       }
       if (match) res()
