@@ -1,5 +1,5 @@
 import  { store } from "hybrids"
-import { getJson } from "../API.bs.js"
+import { getJson } from "../common/API.bs.js"
 
 
 

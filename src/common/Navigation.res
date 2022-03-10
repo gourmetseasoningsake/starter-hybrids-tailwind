@@ -1,11 +1,12 @@
 open Webapi
+open Hybrids
 
 
 
 let beforeNavigate: ((. Dom.element, Dom.event) => Promise.t<'a>) => (. Dom.element, Dom.event) => Promise.t<'a> =
   fn =>
   (. host, e) =>
-  Hybrids.Router.resolve(e, fn(. host, e))
+  Router.resolve(e, fn(. host, e))
 
 
 

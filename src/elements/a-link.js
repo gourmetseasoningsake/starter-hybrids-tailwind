@@ -1,5 +1,5 @@
 import { define } from "hybrids"
-import { styled } from "../Styled.bs.js"
+import { styled } from "../common/Styled.bs.js"
 
 
 

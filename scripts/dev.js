@@ -6,9 +6,10 @@ import * as vite from "./vite.js"
 
 
 export const run = 
-  env => 
+  env =>
   db.run(env)
   .then(() => vite.run(env))
+  .catch(console.log)
 
 
 

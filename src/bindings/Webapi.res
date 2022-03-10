@@ -106,7 +106,7 @@ module Object = {
   @scope("Object")
   @val
   external keys
-  : {..} => array<string> = "keys"
+  : 'a => array<string> = "keys"
 }
 
 

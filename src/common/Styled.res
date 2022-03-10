@@ -4,7 +4,7 @@ type styled = {
 
 
 
-@module("./index.css?inline")
+@module("../index.css?inline")
 external styles
 : string = "default"
 
