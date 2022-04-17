@@ -25,7 +25,7 @@ export default ({ mode }) => {
   }
 
   return defineConfig({
-    envPrefix: envPrefixes[0],
+    envPrefix: envPrefixes,
     server,
     css: { postcss: postcssConfigDefaults },
     build: {
