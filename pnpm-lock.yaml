@@ -2,7 +2,6 @@ lockfileVersion: 5.3
 
 specifiers:
   '@jihchi/vite-plugin-rescript': ^2.0.2
-  '@ryyppy/rescript-promise': ^2.1.0
   autoprefixer: ^10.4.4
   ava: ^4.2.0
   c8: ^7.11.0
@@ -20,7 +19,6 @@ specifiers:
   vite: ^2.9.5
 
 dependencies:
-  '@ryyppy/rescript-promise': 2.1.0
   hybrids: 7.0.6
 
 devDependencies:
@@ -85,10 +83,6 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
-
-  /@ryyppy/rescript-promise/2.1.0:
-    resolution: {integrity: sha512-+dW6msBrj2Lr2hbEMX+HoWCvN89qVjl94RwbYWJgHQuj8jm/izdPC0YzxgpGoEFdeAEW2sOozoLcYHxT6o5WXQ==}
-    dev: false
 
   /@sindresorhus/is/0.14.0:
     resolution: {integrity: sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==}
