@@ -23,7 +23,7 @@ export const domSetup = _ => {
 
 
 
-const elementSlotChanges =
+const componentSlotChanges =
   target =>
   Promise.all([...target.querySelectorAll("slot")].map(
     slot =>
@@ -51,22 +51,22 @@ const elementSlotChanges =
 
 
 
-const elementSet =
+const componentSet =
   kv =>
-  element =>
-  ( Object.entries(kv).forEach(([k, v]) => element[k] = v)
-  , element
+  component =>
+  ( Object.entries(kv).forEach(([k, v]) => component[k] = v)
+  , component
   )
 
 
 
-const elementRender = element => element.render()
+const componentRender = component => component.render()
 
 
 
-const elementSnap = 
+const componentSnap = 
   async target => 
-  ( target.assigned = (await elementSlotChanges(target)).reduce(
+  ( target.assigned = (await componentSlotChanges(target)).reduce(
       (a, change) =>
       ({ [change.slotName ?? "unnamed"]: change, ...a }),
       {}
@@ -76,17 +76,17 @@ const elementSnap =
 
 
 
-export const elementRenderWith =
-  (element, kv) => 
-  element
-  .map(elementSet(kv))
-  .map(elementRender)
-  .map(elementSnap)
+export const componentRenderWith =
+  (component, kv) => 
+  component
+  .map(componentSet(kv))
+  .map(componentRender)
+  .map(componentSnap)
   [0]
 
 
 
-export const elementFromImport =
+export const componentFromImport =
   path =>
   import(path).then(
     ({ default: component }) =>

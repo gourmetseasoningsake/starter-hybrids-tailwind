@@ -5,9 +5,9 @@ import { getJson } from "./common/API.bs.js"
 
 
 
-/* Elements */
+/* Components */
 
-import { TheNav } from "./elements/the-nav.js"
+import { TheNav } from "./components/the-nav.js"
 
 
 

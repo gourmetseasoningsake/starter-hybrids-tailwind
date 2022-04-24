@@ -4,7 +4,7 @@ import { historyPush, beforeNavigate } from "../common/Navigation.bs.js"
 
 
 
-/* Elements */
+/* Components */
 
 import "./a-link.js"
 

@@ -1,8 +1,8 @@
 import test from "ava"
 import { 
   domSetup,
-  elementFromImport,
-  elementRenderWith
+  componentFromImport,
+  componentRenderWith
 } from "../../ava/helpers.js"
 
 
@@ -13,11 +13,11 @@ test.before(domSetup)
 
 test("a-link: should insert a text node into the unnamed slot", async t => {
   // s
-  const element = await elementFromImport("../src/elements/a-link.js")
+  const component = await componentFromImport("../src/components/a-link.js")
   const value = "Home?"
 
   // e
-  const target = await elementRenderWith(element, {
+  const target = await componentRenderWith(component, {
     textContent: value
   })
 
@@ -29,11 +29,11 @@ test("a-link: should insert a text node into the unnamed slot", async t => {
 
 test("a-link: should set the active class name", async t => {
   // s
-  const element = await elementFromImport("../src/elements/a-link.js")
+  const component = await componentFromImport("../src/components/a-link.js")
   const value = "text-pink-400"
 
   // e
-  const target = await elementRenderWith(element, {
+  const target = await componentRenderWith(component, {
     active: true
   })
 
