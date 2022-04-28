@@ -57,4 +57,9 @@ module Store = {
   @scope("store")
   external resolve
   : 'a => Promise.t<'a> = "resolve"
+
+  // @module("hybrids")
+  // @scope("store")
+  // external connect
+  // : Js.Types.symbol = "connect"
 }

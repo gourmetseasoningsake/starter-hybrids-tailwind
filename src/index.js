@@ -15,7 +15,7 @@ import { TheNav } from "./components/the-nav.js"
 
 const pages = import.meta.globEager('./views/page-*.js')
 
-console.log(pages)
+
 
 /* Models */
 
