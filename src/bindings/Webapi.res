@@ -1,18 +1,5 @@
-module ImportMeta = {
-  module Env = {
-    @val
-    external dev
-    : bool = "import.meta.env.DEV"
-    
-    @val 
-    external assDisable
-    : option<string> = "import.meta.env.EXP_ASS_DISABLE"
-
-    @val
-    external apiUrl
-    : string = "import.meta.env.EXP_API_URL"
-  }
-}
+@val
+external importmeta: {..} = "import.meta"
 
 
 
@@ -112,29 +99,33 @@ module Object = {
 
 
 module Response = {
-  type t<'a>
-  @send external json: t<'a> => Promise.t<'a> = "json"
+  type t
+
+  @send 
+  external text
+  : t => string = "text"
+
+  @send 
+  external json
+  : t => Js.Json.t = "json"
 }
 
 
 
 module Fetch = {
-  @deriving(abstract)
+  @deriving({abstract: light})
   type init = {
     @optional method: string,
     @optional mode: string,
+    @optional cache: string,
     @optional credentials: string,
     @optional headers: {.},
     @optional redirect: string,
     @optional referrerPolicy: string,
-    @optional body: string
+    @optional body: Js.Nullable.t<string>
   }
 
   @val
   external fetch
-  : (~input: string, ~init: init=?, unit) => Promise.t<Response.t<'a>> = "fetch"
+  : (~input: string, ~init: init=?, unit) => Promise.t<Response.t> = "fetch"
 }
-
-
-
-
