@@ -7,8 +7,7 @@ import { transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.j
 import { envFrom } from "./utils/env.js"
 import { configFrom } from "./utils/config.js"
 
-import { envPrefixes, modes } from "./config.js"
-import { defaults as indexConfigDefaults } from "./index.config.js"
+import { envPrefixes, modes, indexConfigDefaults } from "./config.js"
 import { defaults as postcssConfigDefaults } from "./postcss.config.js"
 
 
