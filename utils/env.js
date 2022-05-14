@@ -1,10 +1,20 @@
 /** @typedef {import('./object.js').pojo} pojo */
+import fs from "fs"
 import { loadEnv as viteLoadEnv } from "vite"
 import { envPrefixes } from "../config.js"
 
 
 
 export const loadEnv = viteLoadEnv
+
+
+
+/** @type string[] */
+export const modes = 
+  fs.readdirSync("./")
+  .filter(x => x.startsWith(".env.") && !x.endsWith(".local"))
+  .map(x => x.substring(5))
+  .filter(x => x)
 
 
 
