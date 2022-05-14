@@ -91,7 +91,7 @@ Sensitive environment variables such as API-keys and passwords should be defined
 
 === Templating the index.html file
 
-You can template the {link-index-html} file with https://liquidjs.com/tutorials/intro-to-liquid.html[liquid] https://liquidjs.com/tags/overview.html[tags], outputs and https://liquidjs.com/filters/overview.html[filters]. The data passed to the template is located in the {link-index-config-js} file. You can set a data item value in two ways, as primitive:
+You can template the {link-index-html} file with https://liquidjs.com/tutorials/intro-to-liquid.html[liquid] https://liquidjs.com/tags/overview.html[tags], outputs and https://liquidjs.com/filters/overview.html[filters]. The data passed to the template is located in link:config.js#L5-L24[config.js]. You can set a data item value in two ways, as primitive:
 
 [source,javascript]
 ----
