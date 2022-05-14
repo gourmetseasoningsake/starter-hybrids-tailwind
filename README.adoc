@@ -46,13 +46,6 @@ cd !$
 ----
 pnpm install
 ----
-
-[source,bash]
-----
-gh repo clone !$
-cd !$
-pnpm install
-----
 {spacer-1}
 
 === Using curl
