@@ -1,8 +1,7 @@
 import { defineConfig } from "vite"
 import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-html-literals"
-import { Liquid } from "liquidjs"
-import { transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.js"
+import { createEngineLiquid, transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.js"
 
 import { envFrom, modes } from "./utils/env.js"
 import { configFrom } from "./utils/config.js"
@@ -39,7 +38,9 @@ export default ({ mode }) => {
       transformHtmlPluginFrom({ 
         mode,
         data: indexConfig,
-        engine: new Liquid(), 
+        engine: createEngineLiquid({
+          subst: { placeholder: "%" }
+        }), 
         render: ({ engine, content, data }) => engine.parseAndRender(content, data)
       }),
       createReScriptPlugin.default(),

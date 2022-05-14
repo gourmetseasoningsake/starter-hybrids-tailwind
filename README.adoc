@@ -91,7 +91,7 @@ Sensitive environment variables such as API-keys and passwords should be defined
 
 === Templating the index.html file
 
-You can template the {link-index-html} file with https://liquidjs.com/tutorials/intro-to-liquid.html[liquid] https://liquidjs.com/tags/overview.html[tags], outputs and https://liquidjs.com/filters/overview.html[filters]. The data passed to the template is located in the {link-index-config-js} file. You can set a data item value in two ways, as primitive:
+You can template the {link-index-html} file with https://liquidjs.com/tutorials/intro-to-liquid.html[liquid] https://liquidjs.com/tags/overview.html[tags], outputs and https://liquidjs.com/filters/overview.html[filters]. The data passed to the template is located in link:config.js#L5-L24[config.js]. You can set a data item value in two ways, as primitive:
 
 [source,javascript]
 ----
@@ -129,16 +129,18 @@ in your index.html file,
 
 [source,liquid]
 ----
-{%- for item in og -%}
-  {%- if item[1] -%}
-
-  <meta property="og:{{ item[0] }}" content="{{ item[1] }}">
-
-  {%- endif -%}
-{%- endfor -%}
+{%- liquid 
+  for item in og
+    if item[1]
+      echo '<meta property="og:%" content="%">' | subst: item[0], item[1]
+    endif
+  endfor 
+-%}
 ----
 
 where `item[0]` is the key and `item[1]` is the value.
+
+NOTE: The `subst` filter is not standard liquidjs. It is a little extension defined in link:plugins/html.js#L25-L29[plugins/html.js].
 
 {spacer-2}
 
