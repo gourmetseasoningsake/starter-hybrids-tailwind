@@ -7,25 +7,21 @@
 /src/**/_*
 
 
-
 /lib/
 /src/**/*.bs.js
 .bsb.lock
 .merlin
 
 
+# env
+*.local
 
-.env*
 
-
-
+# os specific
 .DS_Store
 
 
-
-
 favicon.config.json
-
 
 
 # temp

@@ -23,6 +23,7 @@
   "type": "module",
   "types": "types/index.d.ts",
   "scripts": {
+    "postinstall": "echo postinstall",
     "db": "node ./scripts/db.js --mode development",
     "test": "node ./scripts/test.js --mode test",
     "test:f": "node ./scripts/test.js --mode test --group f",
@@ -54,6 +55,6 @@
     "vite": "^2.9.5"
   },
   "dependencies": {
-    "hybrids": "^7.1.0"
+    "hybrids": "^8.0.3"
   }
 }
