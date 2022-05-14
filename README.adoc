@@ -44,10 +44,10 @@ This procedure simply downloads the files and folders from the main branch.
 
 [source,bash]
 ----
-mkdir my-project-name
-cd !$
-curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
-pnpm install
+    mkdir my-project-name
+    cd !$
+    curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
+    pnpm install
 ----
 {spacer-2}
 
