@@ -5,27 +5,34 @@
 <head>
   <meta charset="utf-8">
 
-  {%- for item in meta -%}
-    {%- if item[1] -%}
+  {%- liquid 
+    for item in meta
+      if item[1]
+        echo '<meta name="%" content="%">' | subst: item[0], item[1]
+      endif
+    endfor 
+  -%}
 
-    <meta name="{{ item[0] }}" content="{{ item[1] }}">
-
-    {%- endif -%}
-  {%- endfor -%}
-
-  <title>{%- unless mode == "production" -%}{{ mode | upcase }} {% endunless -%}{{ title -}}</title>
+  <title>
+    {%- liquid 
+      unless mode == "production"
+        echo mode | upcase | append: " "
+      endunless
+      echo title 
+    -%}
+  </title>
 
   <link rel="icon" href="/src/etc/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/src/etc/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/src/etc/apple-touch-icon.png">
 
-  {%- for item in og -%}
-    {%- if item[1] -%}
-
-    <meta property="og:{{ item[0] }}" content="{{ item[1] }}">
-
-    {%- endif -%}
-  {%- endfor -%}
+  {%- liquid 
+    for item in og
+      if item[1]
+        echo '<meta property="og:%" content="%">' | subst: item[0], item[1]
+      endif
+    endfor 
+  -%}
 
   <script type="module" src="/src/index.js"></script>
 </head>
