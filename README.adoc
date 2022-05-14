@@ -33,6 +33,10 @@ Use this procedure if you want to create your own repo at the same time.
 [source,bash]
 ----
 gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --private my-project-name
+----
+
+[source,bash]
+----
 gh repo clone !$
 cd !$
 pnpm install
