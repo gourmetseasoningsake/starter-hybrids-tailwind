@@ -1,7 +1,3 @@
-open Hybrids
-
-
-
 /**
   `beforeNavigate(fn)`
   ...

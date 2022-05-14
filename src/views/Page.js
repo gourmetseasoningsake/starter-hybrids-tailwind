@@ -1,5 +1,5 @@
 import  { store } from "hybrids"
-import { getJson } from "../common/API.bs.js"
+import { getPage } from "../services/CmsService.bs.js"
 
 
 
@@ -7,7 +7,10 @@ import { getJson } from "../common/API.bs.js"
 export const Page = {
   id: true,
   title: "",
-  [store.connect]: {
-    get: id => getJson(`/page/${id}`, {})
+  [store.connect]: { 
+    get: id => 
+      getPage(id)
+      .then(resp => resp.json())
+      .catch(console.log)
   }
 }

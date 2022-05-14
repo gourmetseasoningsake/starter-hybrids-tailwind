@@ -13,8 +13,8 @@
 {empty} +
 
 :link-config-js: link:config.js[config.js]
-:link-index-config-js: link:index.config.js[index.config.js]
 :link-index-html: link:index.html[index.html]
+:link-gitignore: link:.gitignore[.gitignore]
 
 = starter-hybrids-tailwind
 
@@ -70,25 +70,23 @@ TODO
 == Configuration
 {spacer-1}
 
-=== Define prefixes of custom environment variables
+=== Define prefixes of exposed custom environment variables
 
-In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from {link-config-js}. The prefix `EXP_` is preconfigured.
+In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from {link-config-js}. The prefix `EXP_` is preconfigured and used in some files of the sample app.
 
-TODO
+If you plan to keep the sample app and want to change `EXP_` to something else, do a project-wide search to see where they are used.
 {spacer-2}
 
-=== List the modes
+=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[ℹ️]
 
-The modes directly correspond to the suffix of the env files, `.env.[this part]`. For now, you need to list the modes in the `modes` array exported from {link-config-js}. This will soon change and won't be necessary anymore. The modes `development`, `production`, `staging` and `test` are preconfigured.
+Besides the modes `development`, `production` used by vite, two other modes exist for the sample application: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
+
+All env files contain all variables used by one or the other mode. Variables that are irrelevant to the particular mode are commented out. For example, see the link:.env.development[.env.development] file. Change the values, extend the variables with your own.
 {spacer-2}
 
-=== Set custom environment variables
+=== Set sensitive environment variables
 
-The root folder contains sample.env.* files for the preconfigured modes with predefined effective variables. 
-
-All env files contain all variables used by one or the other mode. Variables irrelevant for the corresponding mode are commented-out. See For example the link:sample.env.development[sample.env.development] file.
-
-Change the values, extend the variables with your own and finally remove the "sample" part of the filename to reveal them to https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[Vite].
+Sensitive environment variables such as API-keys and passwords should be defined in .env files ending with `.local`. The provided {link-gitignore} file already ignores *.local files.
 {spacer-2}
 
 === Templating the index.html file

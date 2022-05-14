@@ -21,7 +21,6 @@
   "homepage": "https://github.com/gourmetseasoningsake/starter-hybrids-tailwind#readme",
   "main": "index.js",
   "type": "module",
-  "types": "types/index.d.ts",
   "scripts": {
     "db": "node ./scripts/db.js --mode development",
     "test": "node ./scripts/test.js --mode test",
@@ -30,30 +29,31 @@
     "dev:re": "rescript build -w",
     "build:re": "rescript",
     "dev": "node ./scripts/dev.js --mode development",
-    "build": "vite build --mode test",
+    "build:test": "vite build --mode test",
     "build:staging": "vite build --mode staging",
-    "build:prod": "vite build",
-    "preview": "pnpm build:staging && vite preview --mode staging",
-    "preview:prod": "pnpm build:prod && vite preview"
+    "build": "vite build",
+    "preview:test": "pnpm build:test && node ./scripts/dbVitePreview.js --mode test",
+    "preview:staging": "pnpm build:staging && vite preview --mode staging",
+    "preview": "pnpm build:prod && vite preview"
   },
   "devDependencies": {
-    "@jihchi/vite-plugin-rescript": "^2.0.2",
-    "autoprefixer": "^10.4.4",
+    "@jihchi/vite-plugin-rescript": "^2.1.0",
+    "autoprefixer": "^10.4.7",
     "ava": "^4.2.0",
     "c8": "^7.11.0",
     "execa": "^6.1.0",
     "jsdom": "^19.0.0",
     "json-server": "^0.17.0",
     "liquidjs": "^9.36.0",
-    "postcss": "^8.4.12",
-    "puppeteer": "^13.5.2",
+    "postcss": "^8.4.13",
+    "puppeteer": "^14.1.0",
     "rescript": "^9.1.4",
-    "rollup-plugin-minify-html-literals": "^1.2.6",
-    "sinon": "^13.0.2",
+    "rollup-plugin-html-literals": "github:gourmetseasoningsake/rollup-plugin-html-literals",
+    "sinon": "^14.0.0",
     "tailwindcss": "^3.0.24",
-    "vite": "^2.9.5"
+    "vite": "^2.9.9"
   },
   "dependencies": {
-    "hybrids": "^7.0.6"
+    "hybrids": "^8.0.3"
   }
 }

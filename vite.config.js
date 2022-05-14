@@ -1,14 +1,13 @@
 import { defineConfig } from "vite"
 import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
-import minifyHTML from "rollup-plugin-minify-html-literals"
+import minifyHTML from "rollup-plugin-html-literals"
 import { Liquid } from "liquidjs"
 import { transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.js"
 
-import { envFrom } from "./utils/env.js"
+import { envFrom, modes } from "./utils/env.js"
 import { configFrom } from "./utils/config.js"
 
-import { envPrefixes, modes } from "./config.js"
-import { defaults as indexConfigDefaults } from "./index.config.js"
+import { envPrefixes, indexConfigDefaults } from "./config.js"
 import { defaults as postcssConfigDefaults } from "./postcss.config.js"
 
 
@@ -32,7 +31,7 @@ export default ({ mode }) => {
       minify: !!env.var("BUILD_MINIFY"),
       rollupOptions: {
         plugins: [
-          ...(env.var("BUILD_MINIFY") ? [ minifyHTML.default() ] : [])
+          ...(env.var("BUILD_MINIFY") ? [ minifyHTML() ] : [])
         ]
       }
     },

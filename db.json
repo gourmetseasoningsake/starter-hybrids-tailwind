@@ -2,9 +2,7 @@
   "page": [
     { "id": "home", "title": "Home" },
     { "id": "page1", "title": "Page1" },
-    { "id": "page2", "title": "Page2" },
-    { "id": "page3", "title": "Page3" },
-    { "id": "page4", "title": "Page4" }
+    { "id": "page2", "title": "Page2" }
   ],
   "menu": [
     { 
@@ -13,14 +11,6 @@
         { "view": "page-home", "text": "Home", "params": {}},
         { "view": "page-other", "text": "Page1",  "params": { "slug": "page1" }},
         { "view": "page-other", "text": "Page2",  "params": { "slug": "page2" }}
-      ]
-    },
-    { 
-      "id": 2,
-      "items": [
-        { "view": "page-home", "text": "Home", "params": {}},
-        { "view": "page-other", "text": "Page3",  "params": { "slug": "page3" }},
-        { "view": "page-other", "text": "Page4",  "params": { "slug": "page4" }}
       ]
     }
   ]

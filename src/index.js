@@ -1,13 +1,13 @@
 import "./index.css"
 import { define, router, html, store } from "hybrids"
 import { view } from "./common/HybridsDescriptor.bs.js"
-import { getJson } from "./common/API.bs.js"
+import { getMenu } from "./services/CmsService.bs.js"
 
 
 
-/* Elements */
+/* Components */
 
-import { TheNav } from "./elements/the-nav.js"
+import { TheNav } from "./components/the-nav.js"
 
 
 
@@ -26,8 +26,11 @@ const Menu = {
     text: "",
     params: { slug: "" }
   }],
-  [store.connect]: {
-    get: id => getJson(`/menu/${id}`, {})
+  [store.connect]: { 
+    get: id => 
+      getMenu(id)
+      .then(resp => resp.json())
+      .catch(console.log)
   }
 }
 

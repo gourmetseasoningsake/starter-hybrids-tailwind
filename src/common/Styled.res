@@ -1,3 +1,7 @@
+open Webapi
+
+
+
 type styled = {
   html: Hybrids.taggedFn
 }
@@ -10,17 +14,13 @@ external styles
 
 
 
-open Webapi
-
-
-
 let tryStylesFromLink: unit => styled =
   () =>
   switch Document.querySelector("noscript#index-css") {
   | Some(nos) =>
     switch Element.textContent(nos) {
     | Some(tag) =>
-      if !ImportMeta.Env.dev {
+      if !importmeta["env"]["DEV"] {
         try {
           Element.outerHTML(nos, tag)
         } catch {
@@ -62,7 +62,7 @@ let tryStylesFromAss: string => styled =
 
 
 let styled: styled =
-  switch ImportMeta.Env.assDisable {
+  switch importmeta["env"]["EXP_ASS_DISABLE"] {
   | Some(s) => s != ""
   | None => false
   }

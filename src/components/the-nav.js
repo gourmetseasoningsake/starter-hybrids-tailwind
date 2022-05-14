@@ -1,10 +1,11 @@
 import { router, html } from "hybrids"
 import { styled } from "../common/Styled.bs.js"
 import { historyPush, beforeNavigate } from "../common/Navigation.bs.js"
+import { omitProp } from "../../utils/object.js"
 
 
 
-/* Elements */
+/* Components */
 
 import "./a-link.js"
 
@@ -47,13 +48,4 @@ export const TheNav = {
       `)}
     </ul>
   `
-}
-
-
-
-/* Helpers */
-
-function omitProp (o, k) {
-  const { [k]: _, ...rest } = o
-  return rest
 }
