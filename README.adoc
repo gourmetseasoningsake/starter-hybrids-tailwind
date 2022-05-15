@@ -18,7 +18,7 @@
 :link-db-json: link:db.json[db.json]
 :link-bsconfig-json: link:bsconfig.json[bsconfig.json]
 :link-c8-config-json: link:c8.config.json[c8.config.json]
-:link-ava-config-js: link:src[ava/config.js]
+:link-ava-config-js: link:ava/config.js[ava/config.js]
 :link-scripts-dir: link:scripts[scripts/]
 :link-src-dir: link:src[src/]
 :link-package-json: link:package.json[package.json]
