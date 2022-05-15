@@ -15,6 +15,15 @@
 :link-config-js: link:config.js[config.js]
 :link-index-html: link:index.html[index.html]
 :link-gitignore: link:.gitignore[.gitignore]
+:link-db-json: link:db.json[db.json]
+:link-bsconfig-json: link:bsconfig.json[bsconfig.json]
+:link-c8-config-json: link:c8.config.json[c8.config.json]
+:link-ava-config-js: link:src[ava/config.js]
+:link-scripts-dir: link:scripts[scripts/]
+:link-src-dir: link:src[src/]
+:link-package-json: link:package.json[package.json]
+:link-tailwind-config-cjs: link:tailwind.config.cjs[tailwind.config.cjs]
+:link-vite-config-js: link:vite.config.js[vite.config.js]
 
 = starter-hybrids-tailwind
 
@@ -71,11 +80,45 @@ pnpm install
 
 == Directory structure
 
-The most important files and folders:
+[source,bash]
+----
+|-- ava
+|   |-- config.js
+|   `-- ...
+|-- bsconfig.json
+|-- c8.config.json
+|-- .env.development
+|-- .env.production
+|-- .env.staging
+|-- .env.test
+|-- ...
+|-- config.js
+|-- ...
+|-- db.json
+|-- ...
+|-- index.html
+|-- ...
+|-- package.json
+|-- ...
+|-- postcss.config.js
+|-- scripts/
+|-- src/
+|-- tailwind.config.cjs
+|-- ...
+`-- vite.config.js
+----
 
-* {link-index-html} The entry point to your application with references to source files. https://vitejs.dev/guide/#index-html-and-project-root[&#8505;]
-* link:src[src/] The source files of an example application. You can completely replace the entire folder with your own. Just adjust the references in your index.html, e.g. `<script src="/a/file.js">`.
-* TODO
+* {link-ava-config-js} https://github.com/avajs/ava/blob/main/docs/06-configuration.md[📒]
+* {link-bsconfig-json} https://rescript-lang.org/docs/manual/latest/build-configuration[📒]
+* {link-c8-config-json} https://github.com/bcoe/c8#cli-options--configuration[📒]
+* The .env.* files <<section-configuration-set-exp-vars, 📒>>
+* {link-config-js} Some configurations specific to this starter project.
+* {link-db-json} A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}. https://github.com/typicode/json-server#getting-started[📒]
+* {link-index-html} The entry point to the app with references to source files in {link-src-dir}. https://vitejs.dev/guide/#index-html-and-project-root[📒]
+* {link-scripts-dir} Script files used in the {link-package-json} file.
+* {link-src-dir} The source files. It contains a sample app that can be deleted completely.
+* {link-tailwind-config-cjs} https://tailwindcss.com/docs/configuration[📒]
+* {link-vite-config-js} The configurations for Vite. https://vitejs.dev/config/[📒]
 
 {spacer-2}
 
@@ -95,9 +138,9 @@ In order to expose custom environment variables, they must have one of the prefi
 If you plan to keep the sample app and want to change `EXP_` to something else, do a project-wide search to see where they are used.
 {spacer-2}
 
-=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[ℹ️]
+=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[📒] [[section-configuration-set-exp-vars]]
 
-Besides the modes `development`, `production` used by vite, two other modes exist for the sample application: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
+Besides the modes `development`, `production` used by vite, two other modes exist for the sample app: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
 
 All env files contain all variables used by one or the other mode. Variables that are irrelevant to the particular mode are commented out. For example, see the link:.env.development[.env.development] file. Change the values, extend the variables with your own.
 {spacer-2}
