@@ -80,45 +80,68 @@ pnpm install
 
 == Directory structure
 
-[source,bash]
-----
-|-- ava
-|   |-- config.js
-|   `-- ...
-|-- bsconfig.json
-|-- c8.config.json
-|-- .env.development
-|-- .env.production
-|-- .env.staging
-|-- .env.test
-|-- ...
-|-- config.js
-|-- ...
-|-- db.json
-|-- ...
-|-- index.html
-|-- ...
-|-- package.json
-|-- ...
-|-- postcss.config.js
-|-- scripts/
-|-- src/
-|-- tailwind.config.cjs
-|-- ...
-`-- vite.config.js
-----
+++++
+<style>
+.flex { display: flex }
+</style>
+<div class="flex">
+++++
 
-* {link-ava-config-js} https://github.com/avajs/ava/blob/main/docs/06-configuration.md[📒]
-* {link-bsconfig-json} https://rescript-lang.org/docs/manual/latest/build-configuration[📒]
-* {link-c8-config-json} https://github.com/bcoe/c8#cli-options--configuration[📒]
-* The .env.* files <<section-configuration-set-exp-vars, 📒>>
-* {link-config-js} Some configurations specific to this starter project.
-* {link-db-json} A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}. https://github.com/typicode/json-server#getting-started[📒]
-* {link-index-html} The entry point to the app with references to source files in {link-src-dir}. https://vitejs.dev/guide/#index-html-and-project-root[📒]
-* {link-scripts-dir} Script files used in the {link-package-json} file.
-* {link-src-dir} The source files. It contains a sample app that can be deleted completely.
-* {link-tailwind-config-cjs} https://tailwindcss.com/docs/configuration[📒]
-* {link-vite-config-js} The configurations for Vite. https://vitejs.dev/config/[📒]
+[%header,cols="2,4,1"]
+|===
+|File / Directory
+|Note
+|Docs
+
+|{link-ava-config-js}
+|
+|https://github.com/avajs/ava/blob/main/docs/06-configuration.md[🔭]
+
+|{link-bsconfig-json}
+|
+|https://rescript-lang.org/docs/manual/latest/build-configuration[🔭]
+
+|{link-c8-config-json}
+|
+|https://github.com/bcoe/c8#cli-options--configuration[🔭]
+
+|The .env.* files
+|
+|<<section-configuration-set-exp-vars, 🔬>>
+
+|{link-config-js}
+|Some configurations specific to this starter project.
+|
+
+|{link-db-json}
+|A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}.
+|https://github.com/typicode/json-server#getting-started[🔭]
+
+|{link-index-html}
+|The entry point to the app with references to source files in {link-src-dir}.
+|https://vitejs.dev/guide/#index-html-and-project-root[🔭]
+
+|{link-scripts-dir}
+|Script files used in the {link-package-json} file.
+|
+
+|{link-src-dir}
+|The source files. It contains a sample app that can be deleted completely.
+|
+
+|{link-tailwind-config-cjs}
+|
+|https://tailwindcss.com/docs/configuration[🔭]
+
+|{link-vite-config-js}
+|
+|https://vitejs.dev/config/[🔭]
+
+|===
+
+++++
+</div>
+++++
 
 {spacer-2}
 
@@ -138,7 +161,7 @@ In order to expose custom environment variables, they must have one of the prefi
 If you plan to keep the sample app and want to change `EXP_` to something else, do a project-wide search to see where they are used.
 {spacer-2}
 
-=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[📒] [[section-configuration-set-exp-vars]]
+=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[🔭] [[section-configuration-set-exp-vars]]
 
 Besides the modes `development`, `production` used by vite, two other modes exist for the sample app: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
 
