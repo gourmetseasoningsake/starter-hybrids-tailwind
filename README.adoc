@@ -80,13 +80,6 @@ pnpm install
 
 == Directory structure
 
-++++
-<style>
-.flex { display: flex }
-</style>
-<div class="flex">
-++++
-
 [%header,cols="2,4,1"]
 |===
 |File / Directory
@@ -138,10 +131,6 @@ pnpm install
 |https://vitejs.dev/config/[🔭]
 
 |===
-
-++++
-</div>
-++++
 
 {spacer-2}
 
