@@ -15,6 +15,15 @@
 :link-config-js: link:config.js[config.js]
 :link-index-html: link:index.html[index.html]
 :link-gitignore: link:.gitignore[.gitignore]
+:link-db-json: link:db.json[db.json]
+:link-bsconfig-json: link:bsconfig.json[bsconfig.json]
+:link-c8-config-json: link:c8.config.json[c8.config.json]
+:link-ava-config-js: link:ava/config.js[ava/config.js]
+:link-scripts-dir: link:scripts[scripts/]
+:link-src-dir: link:src[src/]
+:link-package-json: link:package.json[package.json]
+:link-tailwind-config-cjs: link:tailwind.config.cjs[tailwind.config.cjs]
+:link-vite-config-js: link:vite.config.js[vite.config.js]
 
 = starter-hybrids-tailwind
 
@@ -33,8 +42,17 @@ Use this procedure if you want to create your own repo at the same time.
 [source,bash]
 ----
 gh repo create --template gourmetseasoningsake/starter-hybrids-tailwind --private my-project-name
+----
+[source,bash]
+----
 gh repo clone !$
+----
+[source,bash]
+----
 cd !$
+----
+[source,bash]
+----
 pnpm install
 ----
 {spacer-1}
@@ -45,26 +63,19 @@ This procedure simply downloads the files and folders from the main branch.
 [source,bash]
 ----
 mkdir my-project-name
+----
+[source,bash]
+----
 cd !$
+----
+[source,bash]
+----
 curl -L https://github.com/gourmetseasoningsake/starter-hybrids-tailwind/tarball/main | tar --strip=1 -x
+----
+[source,bash]
+----
 pnpm install
 ----
-{spacer-2}
-
-== Directory structure
-
-The most important files and folders:
-
-* {link-index-html} The entry point to your application with references to source files. https://vitejs.dev/guide/#index-html-and-project-root[&#8505;]
-* link:src[src/] The source files of an example application. You can completely replace the entire folder with your own. Just adjust the references in your index.html, e.g. `<script src="/a/file.js">`.
-* TODO
-
-{spacer-2}
-
-== Start
-
-TODO
-
 {spacer-2}
 
 == Configuration
@@ -77,9 +88,9 @@ In order to expose custom environment variables, they must have one of the prefi
 If you plan to keep the sample app and want to change `EXP_` to something else, do a project-wide search to see where they are used.
 {spacer-2}
 
-=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[ℹ️]
+=== Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[🔭] [[section-configuration-set-exp-vars]]
 
-Besides the modes `development`, `production` used by vite, two other modes exist for the sample application: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
+Besides the modes `development`, `production` used by vite, two other modes exist for the sample app: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
 
 All env files contain all variables used by one or the other mode. Variables that are irrelevant to the particular mode are commented out. For example, see the link:.env.development[.env.development] file. Change the values, extend the variables with your own.
 {spacer-2}
@@ -145,14 +156,121 @@ NOTE: The `subst` filter is not standard liquidjs. It is a little extension defi
 {spacer-2}
 
 == Usage
+{spacer-1}
+
+=== Development
+
+[source,bash]
+----
+pnpm dev
+----
+
+Starts the JSON server and Vite in development mode.
+{spacer-2}
+
+[source,bash]
+----
+pnpm dev:re
+----
+
+Starts Rescript in its own development mode.
+{spacer-2}
+
+=== Test
 
 TODO
+{spacer-2}
+
+=== Preview
+
+TODO
+{spacer-2}
+
+=== Stage
+
+TODO
+{spacer-2}
+
+=== Production
+
+TODO
+{spacer-2}
+
+// [source,json]
+// ----
+// "db": "node ./scripts/db.js --mode development",
+// "test": "node ./scripts/test.js --mode test",
+// "test:f": "node ./scripts/test.js --mode test --group f",
+// "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
+// "dev:re": "rescript build -w",
+// "build:re": "rescript",
+// "dev": "node ./scripts/dev.js --mode development",
+// "build:test": "vite build --mode test",
+// "build:staging": "vite build --mode staging",
+// "build": "vite build",
+// "preview:test": "pnpm build:test && node ./scripts/dbVitePreview.js --mode test",
+// "preview:staging": "pnpm build:staging && vite preview --mode staging",
+// "preview": "pnpm build:prod && vite preview"
+// ----
 
 {spacer-2}
 
 == References
+{spacer-1}
 
-TODO
+=== Directory structure
+
+[%header,cols="2,4,1"]
+|===
+|File / Directory
+|Note
+|Docs
+
+|{link-ava-config-js}
+|
+|https://github.com/avajs/ava/blob/main/docs/06-configuration.md[🔭]
+
+|{link-bsconfig-json}
+|
+|https://rescript-lang.org/docs/manual/latest/build-configuration[🔭]
+
+|{link-c8-config-json}
+|
+|https://github.com/bcoe/c8#cli-options--configuration[🔭]
+
+|The .env.* files
+|
+|<<section-configuration-set-exp-vars, 🔬>>
+
+|{link-config-js}
+|Some configurations specific to this starter project.
+|
+
+|{link-db-json}
+|A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}.
+|https://github.com/typicode/json-server#getting-started[🔭]
+
+|{link-index-html}
+|The entry point to the app with references to source files in {link-src-dir}.
+|https://vitejs.dev/guide/#index-html-and-project-root[🔭]
+
+|{link-scripts-dir}
+|Script files used in the {link-package-json} file.
+|
+
+|{link-src-dir}
+|The source files. It contains a sample app that can be deleted completely.
+|
+
+|{link-tailwind-config-cjs}
+|
+|https://tailwindcss.com/docs/configuration[🔭]
+
+|{link-vite-config-js}
+|
+|https://vitejs.dev/config/[🔭]
+
+|===
 
 
 
