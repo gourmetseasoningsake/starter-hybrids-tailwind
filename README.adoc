@@ -78,12 +78,6 @@ pnpm install
 ----
 {spacer-2}
 
-== Start
-
-TODO
-
-{spacer-2}
-
 == Configuration
 {spacer-1}
 
