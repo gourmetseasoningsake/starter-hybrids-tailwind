@@ -159,7 +159,6 @@ NOTE: The `subst` filter is not standard liquidjs. It is a little extension defi
 {spacer-1}
 
 === Development
-{spacer-1}
 
 [source,bash]
 ----
@@ -178,25 +177,21 @@ Starts Rescript in its own development mode.
 {spacer-2}
 
 === Test
-{spacer-1}
 
 TODO
 {spacer-2}
 
 === Preview
-{spacer-1}
 
 TODO
 {spacer-2}
 
 === Stage
-{spacer-1}
 
 TODO
 {spacer-2}
 
 === Production
-{spacer-1}
 
 TODO
 {spacer-2}
