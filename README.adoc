@@ -78,62 +78,6 @@ pnpm install
 ----
 {spacer-2}
 
-== Directory structure
-
-[%header,cols="2,4,1"]
-|===
-|File / Directory
-|Note
-|Docs
-
-|{link-ava-config-js}
-|
-|https://github.com/avajs/ava/blob/main/docs/06-configuration.md[🔭]
-
-|{link-bsconfig-json}
-|
-|https://rescript-lang.org/docs/manual/latest/build-configuration[🔭]
-
-|{link-c8-config-json}
-|
-|https://github.com/bcoe/c8#cli-options--configuration[🔭]
-
-|The .env.* files
-|
-|<<section-configuration-set-exp-vars, 🔬>>
-
-|{link-config-js}
-|Some configurations specific to this starter project.
-|
-
-|{link-db-json}
-|A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}.
-|https://github.com/typicode/json-server#getting-started[🔭]
-
-|{link-index-html}
-|The entry point to the app with references to source files in {link-src-dir}.
-|https://vitejs.dev/guide/#index-html-and-project-root[🔭]
-
-|{link-scripts-dir}
-|Script files used in the {link-package-json} file.
-|
-
-|{link-src-dir}
-|The source files. It contains a sample app that can be deleted completely.
-|
-
-|{link-tailwind-config-cjs}
-|
-|https://tailwindcss.com/docs/configuration[🔭]
-
-|{link-vite-config-js}
-|
-|https://vitejs.dev/config/[🔭]
-
-|===
-
-{spacer-2}
-
 == Start
 
 TODO
@@ -224,8 +168,61 @@ TODO
 {spacer-2}
 
 == References
+{spacer-1}
 
-TODO
+=== Directory structure
+
+[%header,cols="2,4,1"]
+|===
+|File / Directory
+|Note
+|Docs
+
+|{link-ava-config-js}
+|
+|https://github.com/avajs/ava/blob/main/docs/06-configuration.md[🔭]
+
+|{link-bsconfig-json}
+|
+|https://rescript-lang.org/docs/manual/latest/build-configuration[🔭]
+
+|{link-c8-config-json}
+|
+|https://github.com/bcoe/c8#cli-options--configuration[🔭]
+
+|The .env.* files
+|
+|<<section-configuration-set-exp-vars, 🔬>>
+
+|{link-config-js}
+|Some configurations specific to this starter project.
+|
+
+|{link-db-json}
+|A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}.
+|https://github.com/typicode/json-server#getting-started[🔭]
+
+|{link-index-html}
+|The entry point to the app with references to source files in {link-src-dir}.
+|https://vitejs.dev/guide/#index-html-and-project-root[🔭]
+
+|{link-scripts-dir}
+|Script files used in the {link-package-json} file.
+|
+
+|{link-src-dir}
+|The source files. It contains a sample app that can be deleted completely.
+|
+
+|{link-tailwind-config-cjs}
+|
+|https://tailwindcss.com/docs/configuration[🔭]
+
+|{link-vite-config-js}
+|
+|https://vitejs.dev/config/[🔭]
+
+|===
 
 
 
