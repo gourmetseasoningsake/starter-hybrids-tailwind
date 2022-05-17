@@ -173,12 +173,33 @@ Starts the JSON server and Vite in development mode.
 pnpm dev:re
 ----
 
-Starts Rescript in its own development mode.
+Starts Rescript watch mode.
 {spacer-2}
 
 === Test
 
-TODO
+[source,bash]
+----
+pnpm test
+----
+
+Runs tests in *.test.js files, the default test group.
+{spacer-2}
+
+[source,bash]
+----
+pnpm test:f
+----
+
+Runs tests in *.test-f.js files. The _-f_ in the filename describes a test group. You can create your own in link:ava/config.js#L7-L10[ava/config.js] and add a script in link:package.json[package.json] analogously.
+{spacer-2}
+
+[source,bash]
+----
+pnpm test:cov
+----
+
+Runs the code coverage tool.
 {spacer-2}
 
 === Preview
