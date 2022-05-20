@@ -90,14 +90,14 @@ If you plan to keep the sample app and want to change `EXP_` to something else, 
 
 === Set exposed custom environment variables https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes[🔭] [[section-configuration-set-exp-vars]]
 
-Besides the modes `development`, `production` used by vite, two other modes exist for the sample app: `staging` and `test`. The root folder contains .env.* files for each of these preconfigured modes with predefined effective variables. 
+Besides the modes `development`, `production` used by vite, two other modes exist for the sample app: `staging` and `test`. The root folder contains `.env.*` files for each of these preconfigured modes with predefined effective variables. 
 
 All env files contain all variables used by one or the other mode. Variables that are irrelevant to the particular mode are commented out. For example, see the link:.env.development[.env.development] file. Change the values, extend the variables with your own.
 {spacer-2}
 
 === Set sensitive environment variables
 
-Sensitive environment variables such as API-keys and passwords should be defined in .env files ending with `.local`. The provided {link-gitignore} file already ignores *.local files.
+Sensitive environment variables such as API-keys and passwords should be defined in `.env.*` files ending with `.local`. The provided {link-gitignore} file already ignores `*.local` files.
 {spacer-2}
 
 === Templating the index.html file
@@ -165,7 +165,7 @@ NOTE: The `subst` filter is not standard liquidjs. It is a little extension defi
 pnpm dev
 ----
 
-Starts the JSON server and Vite in development mode.
+Runs `vite` in `development` mode using `db.json` as data source. `NODE_ENV` is set to `development` by default.
 {spacer-2}
 
 [source,bash]
@@ -173,7 +173,7 @@ Starts the JSON server and Vite in development mode.
 pnpm dev:re
 ----
 
-Starts Rescript watch mode.
+Runs Rescript watch mode.
 {spacer-2}
 
 === Test
@@ -183,7 +183,7 @@ Starts Rescript watch mode.
 pnpm test
 ----
 
-Runs tests in *.test.js files, the default test group.
+Runs tests in `*.test.js` files, the default test group. `NODE_ENV` is set to `production` in link:.env.test[.env.test].
 {spacer-2}
 
 [source,bash]
@@ -191,7 +191,7 @@ Runs tests in *.test.js files, the default test group.
 pnpm test:f
 ----
 
-Runs tests in *.test-f.js files. The _-f_ in the filename describes a test group. You can create your own in link:ava/config.js#L7-L10[ava/config.js] and add a script in link:package.json[package.json] analogously.
+Runs tests in `*.test-f.js` files. The _-f_ in the filename describes a test group. You can create your own in link:ava/config.js#L7-L10[ava/config.js] and add a script in link:package.json[package.json] analogously. `NODE_ENV` is set to `production` in link:.env.test[.env.test].
 {spacer-2}
 
 [source,bash]
@@ -199,41 +199,59 @@ Runs tests in *.test-f.js files. The _-f_ in the filename describes a test group
 pnpm test:cov
 ----
 
-Runs the code coverage tool.
+Runs code coverage.
 {spacer-2}
 
 === Preview
 
-TODO
+[source,bash]
+----
+pnpm preview
+----
+
+Serves production build.
 {spacer-2}
 
-=== Stage
+[source,bash]
+----
+pnpm preview:staging
+----
 
-TODO
+Serves staging build.
 {spacer-2}
 
-=== Production
+[source,bash]
+----
+pnpm preview:test
+----
 
-TODO
+Serves test build using `db.json` as data source.
 {spacer-2}
 
-// [source,json]
-// ----
-// "db": "node ./scripts/db.js --mode development",
-// "test": "node ./scripts/test.js --mode test",
-// "test:f": "node ./scripts/test.js --mode test --group f",
-// "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
-// "dev:re": "rescript build -w",
-// "build:re": "rescript",
-// "dev": "node ./scripts/dev.js --mode development",
-// "build:test": "vite build --mode test",
-// "build:staging": "vite build --mode staging",
-// "build": "vite build",
-// "preview:test": "pnpm build:test && node ./scripts/dbVitePreview.js --mode test",
-// "preview:staging": "pnpm build:staging && vite preview --mode staging",
-// "preview": "pnpm build:prod && vite preview"
-// ----
+=== Build
 
+[source,bash]
+----
+pnpm build
+----
+
+Runs `vite build` in `production` mode. `NODE_ENV` is set to `production` by default.
+{spacer-2}
+
+[source,bash]
+----
+pnpm build:staging
+----
+
+Runs `vite build` in `staging` mode. `NODE_ENV` is set to `production` in link:.env.test[.env.staging].
+{spacer-2}
+
+[source,bash]
+----
+pnpm build:test
+----
+
+Runs `vite build` in `test` mode. `NODE_ENV` is set to `production` in link:.env.test[.env.test].
 {spacer-2}
 
 == References
@@ -259,7 +277,7 @@ TODO
 |
 |https://github.com/bcoe/c8#cli-options--configuration[🔭]
 
-|The .env.* files
+|The `.env.*` files
 |
 |<<section-configuration-set-exp-vars, 🔬>>
 
