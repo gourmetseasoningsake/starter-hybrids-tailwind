@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply relative min-h-screen;
+    @apply min-h-screen;
   }
   
   the-app {

@@ -27,16 +27,16 @@ test("a-link: should insert a text node into the unnamed slot", async t => {
 
 
 
-test("a-link: should set the active class name", async t => {
-  // s
-  const component = await componentFromImport("../src/components/a-link.js")
-  const value = "text-pink-400"
+// test("a-link: should set the active class name", async t => {
+//   // s
+//   const component = await componentFromImport("../src/components/a-link.js")
+//   const value = "text-pink-400"
 
-  // e
-  const target = await componentRenderWith(component, {
-    active: true
-  })
+//   // e
+//   const target = await componentRenderWith(component, {
+//     active: true
+//   })
 
-  // v
-  t.is(target.firstElementChild.className, value)
-})
+//   // v
+//   t.is(target.firstElementChild.className, value)
+// })

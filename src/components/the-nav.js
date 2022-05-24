@@ -35,7 +35,7 @@ export const TheNav = {
     set: (_, value = []) => value
   },
   render: ({ menu }) => styled.html`
-    <ul class="flex">
+    <ul>
       ${menu.map(({ href, active, text }) => html`
         <li>
           <a-link

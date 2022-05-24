@@ -15,7 +15,7 @@ export default define({
   id: "home",
   content: ({ page }) => html`
     ${store.ready(page) && html`
-      <h1 class="text-xl">${page.title}</h1> 
+      <h1>${page.title}</h1> 
     `}
   `
 })
