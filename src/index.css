@@ -5,6 +5,10 @@
 
 
 @layer base {
+  :root{
+    font: -apple-system-body;
+  }
+
   body {
     @apply relative min-h-screen;
   }
