@@ -5,9 +5,52 @@
 
 
 @layer base {
-  :root{
-    font: -apple-system-body;
+  /* First, declare your dark mode colors */
+  :root {
+    --system-bg: #fbfbfb;
+    --system-fg: #1d1d1f;
   }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --system-bg: #303030;
+      --system-fg: #fff;
+    }
+  }
+
+  /* For browsers that don’t support `color-scheme` and therefore
+    don't handle system dark mode for you automatically 
+    (Firefox), handle it for them. */
+  @supports not (color-scheme: light dark) {
+    html {
+      background: var(--system-bg);
+      color: var(--system-fg);
+    }
+  }
+
+  /* For browsers that support automatic dark/light mode
+    As well as system colors, set those */
+  @supports (color-scheme: light dark)
+    and (background-color: canvas)
+    and (color: canvastext) {
+    :root {
+      --system-bg: canvas;
+      --system-fg: canvastext;
+    }
+  }
+
+  /* For Safari on iOS. Hacky, but it works. */
+  @supports (background-color: -apple-system-control-background)
+    and (color: text) {
+    :root {
+      --system-bg: -apple-system-control-background;
+      --system-fg: text;
+    }
+  }
+
+  /* :root{
+    font: -apple-system-body;
+  } */
 
   body {
     @apply min-h-screen;
