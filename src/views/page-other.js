@@ -4,7 +4,7 @@ import { define, router, store, html } from "hybrids"
 
 /* Models */
 
-import { Page } from "./Page.js"
+import { Page, contentFrom } from "./Page.js"
 
 
 
@@ -15,7 +15,8 @@ export default define({
   slug: "",
   content: ({ page }) => html`
     ${store.ready(page) && html`
-      <h1>${page.title}</h1> 
+      <h1 class="font-extrabold uppercase text-6xl leading-none mb-8">${page.title}</h1>
+      ${page.contents && page.contents.map(contentFrom)}
     `}
   `
 })

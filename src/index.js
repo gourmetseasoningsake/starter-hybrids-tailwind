@@ -38,6 +38,7 @@ const Menu = {
 
 const TheApp = {
   tag: "the-app",
+  class: "block flex min-h-screen p-8",
   menu: store(Menu, { id: () => 1 }),
   view: view(pages, { onChange: page => {
     document.title =
@@ -48,12 +49,19 @@ const TheApp = {
     // adjust other head content here...
   }}),
   content: ({ menu, view }) => html`
-    <header class="flex">
+    <header class="w-1/4 flex justify-end py-16 pr-8">
       ${store.ready(menu) && html`
-        <the-nav menu=${menu.items} currentUrl=${router.currentUrl()}></the-nav>
+        <the-nav
+          class="self-start sticky top-9 text-right" 
+          menu=${menu.items} 
+          currentUrl=${router.currentUrl()}>
+        </the-nav>
       `}
     </header>
-    <main>${view}</main>
+    <div class="block border-r border-system-fg opacity-5"></div>
+    <main class="w-3/4 py-16 pl-8">
+      <div class="max-w-xl">${view}</div>
+    </main>
   `
 }
 

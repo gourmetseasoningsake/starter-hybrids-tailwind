@@ -37,7 +37,7 @@ export const TheNav = {
   render: ({ menu }) => styled.html`
     <ul>
       ${menu.map(({ href, active, text }) => html`
-        <li>
+        <li class="py-1">
           <a-link
             href=${href}
             active=${active}

@@ -5,12 +5,13 @@
 
 
 @layer base {
-  /* First, declare your dark mode colors */
+  /* light mode */
   :root {
     --system-bg: #fbfbfb;
     --system-fg: #1d1d1f;
   }
 
+  /* dark mode */
   @media (prefers-color-scheme: dark) {
     :root {
       --system-bg: #303030;
@@ -18,9 +19,7 @@
     }
   }
 
-  /* For browsers that don’t support `color-scheme` and therefore
-    don't handle system dark mode for you automatically 
-    (Firefox), handle it for them. */
+  /* browsers without `color-scheme` support */
   @supports not (color-scheme: light dark) {
     html {
       background: var(--system-bg);
@@ -28,8 +27,7 @@
     }
   }
 
-  /* For browsers that support automatic dark/light mode
-    As well as system colors, set those */
+  /* browsers with `color-scheme` and system colors support */
   @supports (color-scheme: light dark)
     and (background-color: canvas)
     and (color: canvastext) {
@@ -39,7 +37,7 @@
     }
   }
 
-  /* For Safari on iOS. Hacky, but it works. */
+  /* ios safari hack */
   @supports (background-color: -apple-system-control-background)
     and (color: text) {
     :root {
@@ -51,12 +49,4 @@
   /* :root{
     font: -apple-system-body;
   } */
-
-  body {
-    @apply min-h-screen;
-  }
-  
-  the-app {
-    @apply block relative;
-  }
 }

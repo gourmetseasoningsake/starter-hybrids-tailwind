@@ -1,16 +1,60 @@
 {
   "page": [
-    { "id": "home", "title": "Home" },
-    { "id": "page1", "title": "Page1" },
-    { "id": "page2", "title": "Page2" }
+    { 
+      "id": "home",
+      "title": "Charles Bukowski",
+      "contents": [
+        {
+          "kind": "image",
+          "content": "https://static.shtill.com/images/gourmetsake/charles.jpeg",
+          "width": 288,
+          "height": 333
+        },
+        { 
+          "kind": "paragraph",
+          "content": "Charles Bukowski [1920-1994] was one of the most famous of the American poets of his time. He was first published in his 20s., but gave up serious writing for the world of work and bars. He spent a lot of time roaming from job to job living in rooming houses from the East coast to the West coast before joining the United States Postal Service in Los Angeles. His life at that time bordered on insanity and death, two prevalent themes in his writing."
+        }
+      ]
+    },
+    { 
+      "id": "the-history-of-one-tough-mother****", 
+      "title": "The History Of One Tough Mother****",
+      "contents": [
+        { 
+          "kind": "paragraph",
+          "content": "he came to the door one night wet thin beaten and<br>terrorized<br>a white cross-eyed tailless cat<br>I took him in and fed him and he stayed<br>grew to trust me until a friend drove up the driveway<br>and ran him over<br>I took what was left to a vet who said,\"not much<br>chance…give him these pills…his backbone<br>is crushed, but is was crushed before and somehow<br>mended, if he lives he'll never walk, look at<br>these x-rays, he's been shot, look here, the pellets<br>are still there…also, he once had a tail, somebody<br>cut it off…\"<br>I took the cat back, it was a hot summer, one of the<br>hottest in decades, I put him on the bathroom<br>floor, gave him water and pills, he wouldn't eat, he<br>wouldn't touch the water, I dipped my finger into it<br>and wet his mouth and I talked to him, I didn't go any-<br>where, I put in a lot of bathroom time and talked to<br>him and gently touched him and he looked back at<br>me with those pale blue crossed eyes and as the days went<br>by he made his first move<br>dragging himself forward by his front legs<br>(the rear ones wouldn't work)<br>he made it to the litter box<br>crawled over and in,<br>it was like the trumpet of possible victory<br>blowing in that bathroom and into the city, I<br>related to that cat-I'd had it bad, not that<br>bad but bad enough<br>one morning he got up, stood up, fell back down and<br>just looked at me.<br>\"you can make it,\" I said to him.<br>he kept trying, getting up falling down, finally<br>he walked a few steps, he was like a drunk, the<br>rear legs just didn't want to do it and he fell again, rested,<br>then got up.<br>you know the rest: now he's better than ever, cross-eyed<br>almost toothless, but the grace is back, and that look in<br>his eyes never left…<br>and now sometimes I'm interviewed, they want to hear about<br>life and literature and I get drunk and hold up my cross-eyed,<br>shot, runover de-tailed cat and I say,\"look, look<br>at this!\"<br>but they don't understand, they say something like,\"you<br>say you've been influenced by Celine?\"<br>\"no,\" I hold the cat up,\"by what happens, by<br>things like this, by this, by this!\"<br>I shake the cat, hold him up in<br>the smoky and drunken light, he's relaxed he knows…<br>it's then that the interviews end<br>although I am proud sometimes when I see the pictures<br>later and there I am and there is the cat and we are photo-<br>graphed together.<br>he too knows it's bullshit but that somehow it all helps."
+        }
+      ]
+    },
+    { 
+      "id": "yes-yes", 
+      "title": "Yes Yes",
+      "contents": [
+        { 
+          "kind": "paragraph",
+          "content": "when God created love he didn't help most<br>when God created dogs He didn't help dogs<br>when God created plants that was average<br>when God created hate we had a standard utility<br>when God created me He created me<br>when God created the monkey He was asleep<br>when He created the giraffe He was drunk<br>when He created narcotics He was high<br>and when He created suicide He was low<br><br>when He created you lying in bed<br>He knew what He was doing<br>He was drunk and He was high<br>and He created the mountains and the sea and fire at the same time<br><br>He made some mistakes<br>but when He created you lying in bed<br>He came all over His Blessed Universe."
+        }
+      ]
+    },
+    { 
+      "id": "so-you-want-to-be-a-writer", 
+      "title": "So You Want To Be A Writer",
+      "contents": [
+        { 
+          "kind": "paragraph",
+          "content": "if it doesn't come bursting out of you<br>in spite of everything,<br>don't do it.<br>unless it comes unasked out of your<br>heart and your mind and your mouth<br>and your gut,<br>don't do it.<br>if you have to sit for hours<br>staring at your computer screen<br>or hunched over your<br>typewriter<br>searching for words,<br>don't do it.<br>if you're doing it for money or<br>fame,<br>don't do it.<br>if you're doing it because you want<br>women in your bed,<br>don't do it.<br>if you have to sit there and<br>rewrite it again and again,<br>don't do it.<br>if it's hard work just thinking about doing it,<br>don't do it.<br>if you're trying to write like somebody<br>else,<br>forget about it.<br>if you have to wait for it to roar out of<br>you,<br>then wait patiently.<br>if it never does roar out of you,<br>do something else.<br><br>if you first have to read it to your wife<br>or your girlfriend or your boyfriend<br>or your parents or to anybody at all,<br>you're not ready.<br><br>don't be like so many writers,<br>don't be like so many thousands of<br>people who call themselves writers,<br>don't be dull and boring and<br>pretentious, don't be consumed with self-<br>love.<br>the libraries of the world have<br>yawned themselves to<br>sleep<br>over your kind.<br>don't add to that.<br>don't do it.<br>unless it comes out of<br>your soul like a rocket,<br>unless being still would<br>drive you to madness or<br>suicide or murder,<br>don't do it.<br>unless the sun inside you is<br>burning your gut,<br>don't do it.<br><br>when it is truly time,<br>and if you have been chosen,<br>it will do it by<br>itself and it will keep on doing it<br>until you die or it dies in you.<br><br>there is no other way.<br><br>and there never was."
+        }
+      ]
+    }
   ],
   "menu": [
     { 
       "id": 1,
       "items": [
-        { "view": "page-home", "text": "Home", "params": {}},
-        { "view": "page-other", "text": "Page1",  "params": { "slug": "page1" }},
-        { "view": "page-other", "text": "Page2",  "params": { "slug": "page2" }}
+        { "view": "page-home", "text": "Charles Bukowski", "params": {}},
+        { "view": "page-other", "text": "The History Of One Tough Mother****",  "params": { "slug": "the-history-of-one-tough-mother****" }},
+        { "view": "page-other", "text": "Yes Yes",  "params": { "slug": "yes-yes" }},
+        { "view": "page-other", "text": "So You Want To Be A Writer",  "params": { "slug": "so-you-want-to-be-a-writer" }}
       ]
     }
   ]
