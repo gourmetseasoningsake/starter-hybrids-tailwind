@@ -3,7 +3,7 @@ open Hybrids
 
 
 
-type viewOptions<'a> = { onChange: (. 'a) => unit }
+type viewOptions<'b, 'a> = { onChange: (. Descriptor.host<'b>, 'a) => unit }
 
 
 
@@ -25,16 +25,16 @@ let combine: Descriptor.d<'a, {..} as 'b> => Descriptor.d<'a, {..}> => Descripto
 
 
 
-let view: (. {..}, viewOptions<'a>) => Descriptor.d<array<{.."page": 'a}>, {..}> =
+let view: (. {..}, viewOptions<'b, 'a>) => Descriptor.d<array<{.."page": 'a}>, {..}> =
   (. modules, options) =>
   Object.values(modules)
   ->Js.Array2.map(m => m["default"])
   ->router
   ->combine(Descriptor.d(
-      ~observe=(_host, value, _lastValue) => {
+      ~observe=(host, value, _lastValue) => {
         Store.resolve(value[0]["page"])
         ->Promise.then(page => {
-            options.onChange(. page)
+            options.onChange(. host, page)
             Promise.resolve()
           })
         ->ignore

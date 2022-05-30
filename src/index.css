@@ -5,11 +5,61 @@
 
 
 @layer base {
-  body {
-    @apply relative min-h-screen;
+  /* light mode */
+  :root {
+    --system-bg: #fbfbfb;
+    --system-fg: #1d1d1f;
   }
-  
-  the-app {
-    @apply block relative;
+
+  /* dark mode */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --system-bg: #303030;
+      --system-fg: #fff;
+    }
+  }
+
+  /* browsers without `color-scheme` support */
+  @supports not (color-scheme: light dark) {
+    html {
+      background: var(--system-bg);
+      color: var(--system-fg);
+    }
+  }
+
+  /* browsers with `color-scheme` and system colors support */
+  @supports (color-scheme: light dark)
+    and (background-color: canvas)
+    and (color: canvastext) {
+    :root {
+      --system-bg: canvas;
+      --system-fg: canvastext;
+    }
+  }
+
+  /* ios safari hack */
+  @supports (background-color: -apple-system-control-background)
+    and (color: text) {
+    :root {
+      --system-bg: -apple-system-control-background;
+      --system-fg: text;
+    }
+  }
+
+  /* :root{
+    font: -apple-system-body;
+  } */
+}
+
+
+
+
+@layer utilities {
+  .scrollbar-hidden {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
   }
 }

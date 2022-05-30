@@ -1,4 +1,4 @@
-import { router, html } from "hybrids"
+import { define, router, html } from "hybrids"
 import { styled } from "../common/Styled.bs.js"
 import { historyPush, beforeNavigate } from "../common/Navigation.bs.js"
 import { omitProp } from "../../utils/object.js"
@@ -11,15 +11,12 @@ import "./a-link.js"
 
 
 
-export const TheNav = {
+export default define({
   tag: "the-nav",
   role: "navigation",
   ariaLabel: "Main",
   pages: undefined,
-  currentUrl: {
-    get: (_, value = { pathname: undefined }) => value,
-    set: (_, value = { pathname: undefined }) => value
-  },
+  currentUrl: undefined,
   menu: {
     get: (host, value = []) => value.map(item => {
       const url = router.url(
@@ -35,11 +32,12 @@ export const TheNav = {
     set: (_, value = []) => value
   },
   render: ({ menu }) => styled.html`
-    <ul class="flex">
-      ${menu.map(({ href, active, text }) => html`
-        <li>
+    <ul class="sticky top-0">
+      ${menu.map(({ href, title, active, text }) => html`
+        <li class="py-1">
           <a-link
             href=${href}
+            title=${title}
             active=${active}
             onclick=${beforeNavigate(historyPush)}>
             ${text}
@@ -48,4 +46,16 @@ export const TheNav = {
       `)}
     </ul>
   `
+})
+
+
+
+/* Config */
+
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    if (import.meta.env.EXP_HMR_FORCE_RELOAD) {
+      import.meta.hot.invalidate()
+    }
+  })
 }
