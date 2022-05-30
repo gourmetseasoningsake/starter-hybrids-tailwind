@@ -51,10 +51,30 @@
     { 
       "id": 1,
       "items": [
-        { "view": "page-home", "text": "Charles Bukowski", "params": {}},
-        { "view": "page-other", "text": "The History Of One Tough Mother****",  "params": { "slug": "the-history-of-one-tough-mother****" }},
-        { "view": "page-other", "text": "Yes Yes",  "params": { "slug": "yes-yes" }},
-        { "view": "page-other", "text": "So You Want To Be A Writer",  "params": { "slug": "so-you-want-to-be-a-writer" }}
+        { 
+          "view": "page-home",
+          "text": "Charles Bukowski",
+          "title": "Who is Charles Bukowski",
+          "params": { "slug": "" }
+        },
+        { 
+          "view": "page-other",
+          "text": "The History Of One Tough Mother****", 
+          "title": "Read \"The History Of One Tough Mother****\"",
+          "params": { "slug": "the-history-of-one-tough-mother****" }
+        },
+        { 
+          "view": "page-other",
+          "text": "Yes Yes",
+          "title": "Read \"Yes Yes\"",
+          "params": { "slug": "yes-yes" }
+        },
+        { 
+          "view": "page-other",
+          "text": "So You Want To Be A Writer", 
+          "title": "Read \"So You Want To Be A Writer\"",
+          "params": { "slug": "so-you-want-to-be-a-writer" }
+        }
       ]
     }
   ]

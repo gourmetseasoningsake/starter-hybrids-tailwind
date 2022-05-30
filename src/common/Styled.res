@@ -71,3 +71,13 @@ let styled: styled =
   } else {
     tryStylesFromAss(styles)
   }
+
+
+
+if importmeta["hot"] {
+  importmeta["hot"]["accept"](. () => {
+    if importmeta["env"]["EXP_HMR_FORCE_RELOAD"] {
+      importmeta["hot"]["invalidate"](.)
+    }
+  })
+}

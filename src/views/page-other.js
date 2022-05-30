@@ -4,7 +4,7 @@ import { define, router, store, html } from "hybrids"
 
 /* Models */
 
-import { Page, contentFrom } from "./Page.js"
+import { Page, contentFrom } from "../models/Page.js"
 
 
 
@@ -20,3 +20,15 @@ export default define({
     `}
   `
 })
+
+
+
+/* Config */
+
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    if (import.meta.env.EXP_HMR_FORCE_RELOAD) {
+      import.meta.hot.invalidate()
+    }
+  })
+}

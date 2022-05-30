@@ -5,6 +5,9 @@ module.exports = {
       colors: {
         "system-bg": "var(--system-bg)",
         "system-fg": "var(--system-fg)",
+      },
+      minHeight: {
+        "scroll": "calc(100% + 1px)"
       }
     }
   },

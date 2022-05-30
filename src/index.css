@@ -50,3 +50,16 @@
     font: -apple-system-body;
   } */
 }
+
+
+
+
+@layer utilities {
+  .scrollbar-hidden {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
