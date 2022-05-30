@@ -62,11 +62,7 @@ let tryStylesFromAss: string => styled =
 
 
 let styled: styled =
-  switch importmeta["env"]["EXP_ASS_DISABLE"] {
-  | Some(s) => s != ""
-  | None => false
-  }
-  -> disable => if disable {
+  if importmeta["env"]["EXP_ASS_DISABLE"] {
     tryStylesFromLink()
   } else {
     tryStylesFromAss(styles)
