@@ -24,8 +24,8 @@ export const domSetup = _ => {
 
 
 const componentSlotChanges =
-  target =>
-  Promise.all([...target.querySelectorAll("slot")].map(
+  slots =>
+  Promise.all(slots.map(
     slot =>
     new Promise((res, _) => {
       let to
@@ -51,37 +51,49 @@ const componentSlotChanges =
 
 
 
-const componentSet =
-  kv =>
+const componentSetPropsFn =
+  props =>
+  props
+  ? component => {
+      Object.entries(props).forEach(([k, v]) => component[k] = v)
+      return component
+    }
+  : x => x
+
+
+
+const componentRender = 
   component =>
-  ( Object.entries(kv).forEach(([k, v]) => component[k] = v)
-  , component
-  )
+  component.content
+  ? component.content()
+  : component.render()
 
 
 
-const componentRender = component => component.render()
+const componentSnapSlotsFn =
+  component =>
+  component.content
+  ? x => x
+  : async target => {
+      const slots = target.querySelectorAll("slot")
+      if (slots) {
+        target.assigned = (await componentSlotChanges([...slots])).reduce(
+          (a, change) =>
+          ({ [change.slotName ?? "unnamed"]: change, ...a }),
+          {}
+        )
+      }
+      return target    
+    }
 
 
 
-const componentSnap = 
-  async target => 
-  ( target.assigned = (await componentSlotChanges(target)).reduce(
-      (a, change) =>
-      ({ [change.slotName ?? "unnamed"]: change, ...a }),
-      {}
-    )
-  , target
-  )
-
-
-
-export const componentRenderWith =
-  (component, kv) => 
+export const componentCharge =
+  ({ component, props }) =>
   component
-  .map(componentSet(kv))
+  .map(componentSetPropsFn(props))
   .map(componentRender)
-  .map(componentSnap)
+  .map(componentSnapSlotsFn(component))
   [0]
 
 

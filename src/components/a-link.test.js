@@ -2,7 +2,7 @@ import test from "ava"
 import { 
   domSetup,
   componentFromImport,
-  componentRenderWith
+  componentCharge
 } from "../../ava/helpers.js"
 
 
@@ -17,8 +17,11 @@ test("a-link: should insert a text node into the unnamed slot", async t => {
   const value = "Home?"
 
   // e
-  const target = await componentRenderWith(component, {
-    textContent: value
+  const target = await componentCharge({ 
+    component,
+    props: {
+      textContent: value
+    }
   })
 
   // v
