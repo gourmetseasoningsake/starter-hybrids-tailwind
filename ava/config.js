@@ -6,7 +6,7 @@ const verbose = Boolean(process.env.VERBOSE)
 export default {
   files: { 
     u: ["**/*.test.js"], 
-    f: ["**/*.test-f.js"] 
+    f: ["**/*.test-f.js"]
   }[Boolean(group) ? group : "u"],
   verbose, // NB: has no effect yet. see ava docs
   nodeArguments: [

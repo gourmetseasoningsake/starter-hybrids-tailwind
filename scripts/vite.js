@@ -6,6 +6,7 @@ import { envFrom } from "../utils/env.js"
 
 export const run = command({
   title: "vite",
+  color: "yellow",
   cmd: "vite",
   stdout: true
 })

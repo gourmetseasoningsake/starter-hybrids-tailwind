@@ -10,6 +10,9 @@ export const run =
   db.run(env)
   .then(db => ava.run(env, { db }))
   .then(({ db }) => db.kill())
+  .catch(_err => {
+    process.exit(1)
+  })
 
 
 

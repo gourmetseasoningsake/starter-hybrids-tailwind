@@ -5,11 +5,26 @@ import { omitProp } from "./object.js"
 
 
 
+const colors = 
+  color =>
+  ({
+    reset: "\u001b[0m",
+    black: "\u001b[30m",
+    white: "\u001b[37m",
+    red: "\u001b[31m",
+    green: "\u001b[32m",
+    yellow: "\u001b[33m",
+    blue: "\u001b[34m",
+    magenta: "\u001b[35m",
+    cyan: "\u001b[36m"
+  }[color] || "reset") 
+
+
+
 
 /** @type {(line: string, title: string) => string} */
 export const prependTitleToLine =
-  (line, title) =>
-  line.replace(/.*?\n/g, `${title}$&`)
+  (line, title) => line.replace(/.*?\n/g, `${title}$&`)
 
 
 
@@ -31,6 +46,7 @@ export const prependTitleToLine =
 @type {(_: {
   cmd: string,
   title?: string,
+  color?: string,
   args?: string[] | ((env?: env) => string[])
   stdout?: boolean | commandStdoutFn,
   wait?: boolean,
@@ -38,11 +54,11 @@ export const prependTitleToLine =
 }) => (env: env, prevValues: pojo) => Promise<pojo>} 
 */
 export const command =
-  ({ cmd, title = cmd, args, stdout, wait = true, options = {} }) => 
+  ({ cmd, title = cmd, color = "reset", args, stdout, wait = true, options = {} }) => 
   (env, prevValues = {}) => {
     const args_ = typeof args === "function" ? args(env) : args
     const options_ = typeof options === "function" ? options(env) : options
-    const title_ = `[${title}]${" ".repeat(Math.max(2, 8 - title.length))}`
+    const title_ = `${colors(color)}[${title}]\u001b[0m${" ".repeat(Math.max(2, 8 - title.length))}`
 
     const subprocess = execa(cmd, args_, {
       env: { FORCE_COLOR: true, ...options_.env },

@@ -7,6 +7,7 @@ import { prependTitleToLine } from "../utils/task.js"
 
 export const run = command({
   title: "db",
+  color: "blue",
   cmd: "json-server",
   args: 
     env => [

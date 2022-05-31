@@ -6,6 +6,7 @@ import { envFrom } from "../utils/env.js"
 
 export const run = command({
   title: "ava",
+  color: "magenta",
   cmd: "ava",
   args: [ "--config", "./ava/config.js" ],
   stdout: true,
