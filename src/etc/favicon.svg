@@ -3,12 +3,12 @@
   xmlns="http://www.w3.org/2000/svg">
   <style>
     @media (prefers-color-scheme: light) { 
-      #favicon-circle { fill: #f6237a }
-      #favicon-whale { fill: #002639 }
+      #favicon-circle { fill: #1d1d1f }
+      #favicon-whale { fill: #ccc }
     }
     @media (prefers-color-scheme: dark) { 
-      #favicon-circle { fill: #f6237a }
-      #favicon-whale { fill: #fff }
+      #favicon-circle { fill: #1d1d1f }
+      #favicon-whale { fill: #ccc }
     }
   </style>
   <circle
