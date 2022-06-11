@@ -27,7 +27,10 @@
     }
   }
 
-  /* browsers with `color-scheme` and system colors support */
+  /* browsers with `color-scheme` and system colors support 
+     NB: Firefox must be set to "System theme" for this to auto-switch based
+     on os system preferences
+  */
   @supports (color-scheme: light dark)
     and (background-color: canvas)
     and (color: canvastext) {
