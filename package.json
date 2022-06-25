@@ -29,6 +29,7 @@
     "dev:re": "rescript build -w",
     "build:re": "rescript",
     "dev": "node ./scripts/dev.js --mode development",
+    "dev:clean": "node ./scripts/dev.js --mode development --force",
     "build:test": "vite build --mode test",
     "build:staging": "vite build --mode staging",
     "build": "vite build",
