@@ -14,7 +14,7 @@ export const run =
 
 
 if (isRunningFromCli(process.argv[1], import.meta.url)) {
-  const { mode } = parseArgs(process.argv)
-  const env = envFrom(mode)
+  const { mode, force } = parseArgs(process.argv)
+  const env = { ...(envFrom(mode)), force }
   run(env)
 }
