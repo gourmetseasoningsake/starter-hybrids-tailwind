@@ -43,7 +43,7 @@ export default ({ mode }) => {
         }), 
         render: ({ engine, content, data }) => engine.parseAndRender(content, data)
       }),
-      createReScriptPlugin.default(),
+      createReScriptPlugin(),
     ]
   })
 }

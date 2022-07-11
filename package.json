@@ -38,23 +38,23 @@
     "preview": "pnpm build && vite preview"
   },
   "devDependencies": {
-    "@jihchi/vite-plugin-rescript": "^2.1.0",
+    "@jihchi/vite-plugin-rescript": "^3.0.0",
     "autoprefixer": "^10.4.7",
-    "ava": "^4.2.0",
-    "c8": "^7.11.0",
+    "ava": "^4.3.1",
+    "c8": "^7.11.3",
     "execa": "^6.1.0",
-    "jsdom": "^19.0.0",
+    "jsdom": "^20.0.0",
     "json-server": "^0.17.0",
-    "liquidjs": "^9.36.0",
-    "postcss": "^8.4.13",
-    "puppeteer": "^14.1.0",
-    "rescript": "^9.1.4",
+    "liquidjs": "^9.39.0",
+    "postcss": "^8.4.14",
+    "puppeteer": "^15.3.2",
+    "rescript": "10.0.0-beta.2",
     "rollup-plugin-html-literals": "github:gourmetseasoningsake/rollup-plugin-html-literals",
     "sinon": "^14.0.0",
-    "tailwindcss": "^3.0.24",
-    "vite": "^2.9.9"
+    "tailwindcss": "^3.1.5",
+    "vite": "^2.9.14"
   },
   "dependencies": {
-    "hybrids": "^8.0.3"
+    "hybrids": "^8.0.9"
   }
 }
