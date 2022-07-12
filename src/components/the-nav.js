@@ -1,7 +1,6 @@
 import { define, router, html } from "hybrids"
 import { styled } from "../common/Styled.bs.js"
 import { historyPush, beforeNavigate } from "../common/Navigation.bs.js"
-import { omitProp } from "../../utils/object.js"
 
 
 
@@ -21,7 +20,7 @@ export default define({
     get: (host, value = []) => value.map(item => {
       const url = router.url(
         host.pages[`./views/${item.view}.js`]?.default,
-        item.params.slug !== "" ? item.params : omitProp(item.params, "slug")
+        item.params
       )
       return {
         ...item,
