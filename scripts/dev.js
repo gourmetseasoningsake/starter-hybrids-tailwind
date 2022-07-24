@@ -1,14 +1,12 @@
 import { isRunningFromCli, parseArgs } from "../utils/cli.js"
 import { envFrom } from "../utils/env.js"
-import * as db from "./db.js"
 import * as vite from "./vite.js"
 
 
 
 export const run = 
   env =>
-  db.run(env)
-  .then(() => vite.run(env))
+  vite.run(env)
   .catch(console.log)
 
 
