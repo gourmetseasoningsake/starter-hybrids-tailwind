@@ -22,12 +22,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "db": "node ./scripts/db.js --mode development",
     "test": "node ./scripts/test.js --mode test",
     "test:f": "node ./scripts/test.js --mode test --group f",
     "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
-    "dev:re": "rescript build -w",
-    "build:re": "rescript",
     "dev": "node ./scripts/dev.js --mode development",
     "dev:clean": "node ./scripts/dev.js --mode development --force",
     "build:test": "vite build --mode test",
