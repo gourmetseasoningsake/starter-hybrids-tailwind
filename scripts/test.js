@@ -1,15 +1,12 @@
 import { isRunningFromCli, parseArgs } from "../utils/cli.js"
 import { envFrom } from "../utils/env.js"
-import * as db from "./db.js"
 import * as ava from "./ava.js"
 
 
 
 export const run = 
   env =>
-  db.run(env)
-  .then(db => ava.run(env, { db }))
-  .then(({ db }) => db.kill())
+  ava.run(env)
   .catch(_err => {
     process.exit(1)
   })

@@ -1,5 +1,4 @@
 import { defineConfig } from "vite"
-import createReScriptPlugin from "@jihchi/vite-plugin-rescript"
 import minifyHTML from "rollup-plugin-html-literals"
 import { createEngineLiquid, transformPluginFrom as transformHtmlPluginFrom } from "./plugins/html.js"
 
@@ -42,8 +41,7 @@ export default ({ mode }) => {
           subst: { placeholder: "%" }
         }), 
         render: ({ engine, content, data }) => engine.parseAndRender(content, data)
-      }),
-      createReScriptPlugin(),
+      })
     ]
   })
 }
