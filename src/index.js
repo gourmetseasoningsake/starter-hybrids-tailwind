@@ -3,6 +3,11 @@ import { define, router, html, store } from "hybrids"
 
 
 
+import PageHome from "./pages/home.js"
+import PageNext from "./pages/next.js"
+
+
+
 /* Config */
 
 if (import.meta.env.EXP_ROUTER_DEBUG) router.debug()
@@ -29,7 +34,8 @@ define({
 
   //   // adjust other head content here...
   // }}),
-  content: () => html`
-    hello kitty
+  view: router([PageHome, PageNext]),
+  content: ({ view }) => html`
+    ${view}
   `
 })
