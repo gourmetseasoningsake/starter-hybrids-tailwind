@@ -5,11 +5,9 @@ import styles from "../src/index.css?inline"
 
 const tryStylesFromLink = () => {
   const nos = document.querySelector("noscript#index-css")
-
   if (nos == null) return { html }
 
   const tag = nos.textContent
-  
   if (tag == null ) return { html }
 
   if (!import.meta.env.DEV) {

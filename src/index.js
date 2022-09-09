@@ -23,7 +23,7 @@ if (import.meta.hot) {
 
 define({
   tag: "the-app",
-  class: "block",
+  class: "contents",
   // view: view(pages, { onChange: (host, page) => {
   //   host.menuActive = false
 
