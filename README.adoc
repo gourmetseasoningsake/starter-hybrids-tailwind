@@ -27,7 +27,7 @@
 
 = starter-hybrids-tailwind
 
-A setup for https://hybrids.js.org[hybrids], https://tailwindcss.com[tailwindcss]. Although this setup works for me, some approaches feel wrong. With hybrids version 8.1.0 https://github.com/smalluban[smalluban], the creator and maintainer, startet to implement a neat https://hybrids.js.org/#/component-model/layout-engine[layout engine] that most likely meets your needs much better. 
+A setup for https://hybrids.js.org[hybrids] and https://tailwindcss.com[tailwindcss]. Although this setup works for me, some approaches feel wrong. With hybrids version 8.1.0 https://github.com/smalluban[smalluban], the creator and maintainer, started to implement a neat https://hybrids.js.org/#/component-model/layout-engine[layout engine] that most likely meets your needs much better. 
 {spacer-4}
 
 == Installation
