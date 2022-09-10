@@ -22,39 +22,33 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "db": "node ./scripts/db.js --mode development",
-    "test": "node ./scripts/test.js --mode test",
-    "test:f": "node ./scripts/test.js --mode test --group f",
-    "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
-    "dev:re": "rescript build -w",
-    "build:re": "rescript",
     "dev": "node ./scripts/dev.js --mode development",
     "dev:clean": "node ./scripts/dev.js --mode development --force",
     "build:test": "vite build --mode test",
     "build:staging": "vite build --mode staging",
     "build": "vite build",
-    "preview:test": "pnpm build:test && node ./scripts/dbVitePreview.js --mode test",
+    "preview:test": "pnpm build:test && node ./scripts/vitePreview.js --mode test",
     "preview:staging": "pnpm build:staging && vite preview --mode staging",
-    "preview": "pnpm build && vite preview"
+    "preview": "pnpm build && vite preview",
+    "test": "node ./scripts/test.js --mode test",
+    "test:f": "pnpm build:test && node ./scripts/test.js --mode test --group f",
+    "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js"
   },
   "devDependencies": {
-    "@jihchi/vite-plugin-rescript": "^3.0.0",
-    "autoprefixer": "^10.4.7",
-    "ava": "^4.3.1",
-    "c8": "^7.11.3",
+    "autoprefixer": "^10.4.8",
+    "ava": "^4.3.3",
+    "c8": "^7.12.0",
     "execa": "^6.1.0",
     "jsdom": "^20.0.0",
-    "json-server": "^0.17.0",
-    "liquidjs": "^9.39.0",
-    "postcss": "^8.4.14",
-    "puppeteer": "^15.3.2",
-    "rescript": "10.0.0-beta.2",
+    "liquidjs": "^9.42.0",
+    "postcss": "^8.4.16",
+    "puppeteer": "^17.1.3",
     "rollup-plugin-html-literals": "github:gourmetseasoningsake/rollup-plugin-html-literals",
     "sinon": "^14.0.0",
-    "tailwindcss": "^3.1.5",
-    "vite": "^2.9.14"
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.1.0"
   },
   "dependencies": {
-    "hybrids": "^8.0.9"
+    "hybrids": "^8.1.1"
   }
 }

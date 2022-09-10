@@ -83,7 +83,7 @@ pnpm install
 
 === Define prefixes of exposed custom environment variables
 
-In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from {link-config-js}. The prefix `EXP_` is preconfigured and used in some files of the sample app.
+In order to expose custom environment variables, they must have one of the prefixes specified in the `envPrefixes` array exported from {link-config-js}. The prefix `EXP_` is preconfigured and used in the sample app.
 
 If you plan to keep the sample app and want to change `EXP_` to something else, do a project-wide search to see where they are used.
 {spacer-2}
@@ -165,15 +165,7 @@ NOTE: The `subst` filter is not standard liquidjs. It is a little extension defi
 pnpm dev
 ----
 
-Runs `vite` in `development` mode using `db.json` as data source. `NODE_ENV` is set to `development` by default.
-{spacer-2}
-
-[source,bash]
-----
-pnpm dev:re
-----
-
-Runs Rescript watch mode.
+Runs `vite` in `development` mode. `NODE_ENV` is set to `development` by default.
 {spacer-2}
 
 === Test
@@ -225,7 +217,7 @@ Serves staging build.
 pnpm preview:test
 ----
 
-Serves test build using `db.json` as data source.
+Serves test build.
 {spacer-2}
 
 === Build
@@ -269,10 +261,6 @@ Runs `vite build` in `test` mode. `NODE_ENV` is set to `production` in link:.env
 |
 |https://github.com/avajs/ava/blob/main/docs/06-configuration.md[🔭]
 
-|{link-bsconfig-json}
-|
-|https://rescript-lang.org/docs/manual/latest/build-configuration[🔭]
-
 |{link-c8-config-json}
 |
 |https://github.com/bcoe/c8#cli-options--configuration[🔭]
@@ -284,10 +272,6 @@ Runs `vite build` in `test` mode. `NODE_ENV` is set to `production` in link:.env
 |{link-config-js}
 |Some configurations specific to this starter project.
 |
-
-|{link-db-json}
-|A data file to mimic a REST API used by the json-server package. Can be useful for development and testing. It contains sample data used for the sample app that can be completely removed, just like the app itself. If you do not plan to use fake API data, remove the json-server package and either adjust the scripts in the {link-package-json} file or the scripts in {link-scripts-dir}.
-|https://github.com/typicode/json-server#getting-started[🔭]
 
 |{link-index-html}
 |The entry point to the app with references to source files in {link-src-dir}.
@@ -310,6 +294,3 @@ Runs `vite build` in `test` mode. `NODE_ENV` is set to `production` in link:.env
 |https://vitejs.dev/config/[🔭]
 
 |===
-
-
-
