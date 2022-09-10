@@ -22,17 +22,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node ./scripts/test.js --mode test",
-    "test:f": "node ./scripts/test.js --mode test --group f",
-    "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js",
     "dev": "node ./scripts/dev.js --mode development",
     "dev:clean": "node ./scripts/dev.js --mode development --force",
     "build:test": "vite build --mode test",
     "build:staging": "vite build --mode staging",
     "build": "vite build",
-    "preview:test": "pnpm build:test && node ./scripts/dbVitePreview.js --mode test",
+    "preview:test": "pnpm build:test && node ./scripts/vitePreview.js --mode test",
     "preview:staging": "pnpm build:staging && vite preview --mode staging",
-    "preview": "pnpm build && vite preview"
+    "preview": "pnpm build && vite preview",
+    "test": "node ./scripts/test.js --mode test",
+    "test:f": "pnpm build:test && node ./scripts/test.js --mode test --group f",
+    "test:cov": "c8 --config ./c8.config.json ava --config ./ava/config.js"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

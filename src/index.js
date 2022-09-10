@@ -1,10 +1,9 @@
 import "./index.css"
-import { define, router, html, store } from "hybrids"
+import { define, router, html } from "hybrids"
 
 
 
 import PageHome from "./pages/home.js"
-import PageNext from "./pages/next.js"
 
 
 
@@ -24,17 +23,7 @@ if (import.meta.hot) {
 define({
   tag: "the-app",
   class: "contents",
-  // view: view(pages, { onChange: (host, page) => {
-  //   host.menuActive = false
-
-  //   document.title =
-  //     !(import.meta.env.MODE === "production")
-  //     ? `${(import.meta.env.MODE).toUpperCase()} ${page.title}`.trim()
-  //     : page.title
-
-  //   // adjust other head content here...
-  // }}),
-  view: router([PageHome, PageNext]),
+  view: router([PageHome]),
   content: ({ view }) => html`
     ${view}
   `
