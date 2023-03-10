@@ -11,7 +11,7 @@ const wrapLinkTagByMode =
       `<noscript id="index-css"><link rel="stylesheet" href="/src/index.css"></noscript>$&`
     )
   : html.replace(
-      /<link rel="stylesheet"(.*?)href="(.*?)\/index\.(.*?)css">/,
+      /<link rel="stylesheet"(.*?)href="(.*?)\/index-(.*?)css">/,
       `<noscript id="index-css">$&</noscript>`
     )
 
