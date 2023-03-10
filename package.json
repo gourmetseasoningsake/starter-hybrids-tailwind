@@ -44,7 +44,7 @@
     "liquidjs": "^10.6.1",
     "postcss": "^8.4.21",
     "puppeteer": "^19.7.3",
-    "rollup-plugin-minify-html-literals": "^1.2.6",
+    "rollup-plugin-html-literals": "github:gourmetseasoningsake/rollup-plugin-html-literals",
     "sinon": "^15.0.1",
     "tailwindcss": "^3.2.7",
     "vite": "^4.1.4"
